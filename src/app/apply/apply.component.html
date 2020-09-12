@@ -1,0 +1,238 @@
+ 
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+  <mat-step [stepControl]="firstFormGroup">
+    <div class="container con0 conw">
+        <h3>Let's Get Started</h3>
+        <div class="fromse">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Let's Get Started</ng-template>
+              
+              
+              <br>
+                <div *ngIf="unum">
+                  <label>Mobile Number: </label>
+                  <input style="border-bottom: 1px solid;max-width: 300px;margin-left: 20px;" matInput class="getstrin0" type="text" formControlName="number" />
+                </div>
+                 <div *ngIf="uotp">
+                   <label>Verify Your Phone number: </label>
+                   <input style="border-bottom: 1px solid;max-width: 300px;margin-left: 20px;" matInput class="getstrin0" type="text" formControlName="code" />
+                 </div>
+
+                <br>
+                   <p style="color: red;">{{mmsg}}</p>
+             
+                <p class="getstrin01"><input class="getstrin" type="checkbox"/> 
+                I authorize XYZ Bank and its representatives to Call, SMS or communicate via WhatsApp regarding my application. This consent overrides any registration for DNC / NDNC. I confirm I am in Myanmar, I am a major and a resident of Myanmar and I have read and I accept XYZ Bank's <a href="terms&conditions" >Privacy Policy</a></p><br>
+              <div>
+                
+                
+                <button id="smsbut" class="fcn subbut"  mat-button (click)="sms()" *ngIf="smsbut">Next</button>
+
+                <button id="verify" class="fcn subbut"  mat-button (click)="votp()" *ngIf="verify">verify</button>
+
+                <button id="subbut" class="fcn subbut"  mat-button matStepperNext *ngIf="subbut">Continew</button>
+              </div>
+
+              
+
+         
+
+           </form>
+
+
+        </div>
+      </div>
+      <div class="container con1 conw">
+        <div class="fromse1">
+          <h3>Speed Up the Loan Application and Disbursal of Your Loan</h3><br>
+          <a href="" class="fcn subbut0">LOGIN AS EXISTING CUSTOMER</a><br>
+        </div>
+      </div>
+  </mat-step>
+
+  <!-- part 2 -->
+
+  <!-- <mat-step [stepControl]="secondFormGroup">
+    <div class="container con0 conw">
+        <h3>Let's Get Started</h3>
+        <div class="fromse">
+          
+            <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Let's Get Started</ng-template>
+              <mat-form-field class="fild section">
+                <mat-label>Mobile Number</mat-label>
+                <input matInput placeholder="Number" formControlName="otp" required>
+              </mat-form-field>
+             
+                <p class="getstrin01"><input class="getstrin" type="checkbox"/>I authorize XYZ Bank and its representatives to Call, SMS or communicate via WhatsApp regarding my application. This consent overrides any registration for DNC / NDNC. I confirm I am in Myanmar, I am a major and a resident of Myanmar and I have read and I accept XYZ Bank's <a href="">Privacy Policy</a></p><br>
+              <div>
+                <button class="fcn subbut"  mat-button matStepperNext>Next</button>
+              </div>
+           </form>
+
+        </div>
+      </div> -->
+
+    <!-- <div class="container con1 conw">
+        <div class="fromse1">
+          <h3>Speed Up the Loan Application and Disbursal of Your Loan</h3><br>
+          <a href="" class="fcn subbut0">LOGIN AS EXISTING CUSTOMER</a><br>
+        </div>
+    </div>
+  </mat-step> -->
+
+
+
+<!-- part 3 -->
+
+  <mat-step [stepControl]="secondFormGroup">
+    <section class="se3 getstr">
+      <div class="container con0 conw">
+        <h3>Check Loan eligibility</h3>
+        <div class="fromse">
+          <form [formGroup]=" secondFormGroup">
+            <ng-template matStepLabel>Check Loan eligibility</ng-template>
+            <h4>Residence details </h4>
+            <br>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">City of residence </label>
+              <input matInput type="Text" class="form-control"  placeholder="" formControlName="city">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Residence  type</label>
+              <select matInput class="form-control"  formControlName="residencetype">
+                <option>Owner</option>
+              </select>
+            </div>
+            
+           
+            <br/>
+            
+            <br>
+            <h4>Employment and income details</h4>
+            <br>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Employment Type</label>
+              <select matInput class="form-control" id="exampleFormControlSelect1"  formControlName="employmenttype">
+                <option>Owner</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Employment Name</label>
+              <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="Employmentname">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Monthly take home salary</label>
+              <input matInput  formControlName="salary" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+            </div>
+            <div>
+              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
+              <button class="btn btn-success btnright"  matStepperNext>Next</button>
+            </div>
+     
+            
+          </form>
+          
+        </div>
+      </div>
+    </section>
+  </mat-step>
+
+
+
+<!-- part 4 -->
+  <mat-step [stepControl]="therdFormGroup">
+    <section class="se3 getstr">
+      <div class="container con0 conw">
+        <h3>Product Details</h3>
+        <div class="fromse">
+          <form [formGroup]=" therdFormGroup">
+            <ng-template matStepLabel>Product Details</ng-template>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Car model </label>
+                <input matInput  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Car  Price</label>
+                <input matInput  formControlName="carprice" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Dealer quotes Price</label>
+                <input matInput  formControlName="cardelar" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                
+                <label class="custom-control-label" for="customRadioInline1">Do you want to include RTO cost?</label>
+                <label class="switch">
+                  <input type="checkbox" >
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Tentative RTO cost</label>
+                <input matInput  formControlName="rtoin" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Tentative insurance cost</label>
+                <input matInput  formControlName="insin"  type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              </div>
+              
+             <p class="tcost">Total model cost: <span>800000</span></p>
+
+       
+             
+            <div>
+              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
+              <button class="btn btn-success btnright"  matStepperNext>Next</button>
+            </div>
+     
+            
+          </form>
+          
+        </div>
+      </div>
+    </section>
+  </mat-step>
+
+
+<!-- step 5 -->
+
+
+
+
+  <!--  
+   
+
+   <mat-list-item> <strong>car model:</strong> {{ this.forthFormGroup.value.carmodel }}</mat-list-item>
+   <mat-list-item> <strong>car price:</strong> {{ this.forthFormGroup.value.carprice }}</mat-list-item>
+   <mat-list-item> <strong>cardelar:</strong> {{ this.forthFormGroup.value.car delar }}</mat-list-item>
+   <mat-list-item> <strong>RTO:</strong> {{ this.forthFormGroup.value.rtoin }}</mat-list-item>
+   <mat-list-item> <strong>insurance:</strong> {{ this.forthFormGroup.value.insin }}</mat-list-item> -->
+
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+  
+  <mat-list>
+	 <mat-list-item> <strong>Number:</strong> {{ this.firstFormGroup.value.number }}</mat-list-item>
+   <!-- <mat-list-item> <strong>city:</strong> {{ this.secondFormGroup.value.city }}</mat-list-item>
+   <mat-list-item> <strong>residence type:</strong> {{ this.secondFormGroup.value.residencetype }}</mat-list-item>
+   <mat-list-item> <strong>employment type:</strong> {{ this.secondFormGroup.value.employmenttype }}</mat-list-item>
+   <mat-list-item> <strong>Employment name:</strong> {{ this.secondFormGroup.value.Employmentname }}</mat-list-item>
+   <mat-list-item> <strong>salary:</strong> {{ this.secondFormGroup.value.salary }}</mat-list-item> -->
+
+	</mat-list>
+  
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="submit()">Submit</button>
+    </div>
+  </mat-step>
+  
+</mat-horizontal-stepper>

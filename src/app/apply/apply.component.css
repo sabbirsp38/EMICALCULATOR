@@ -1,0 +1,15 @@
+.conw{
+	max-width: 765px;
+}
+.btnleft {
+    padding: 10px 52px;
+    margin: 0px 20px;
+}
+
+.btnright {
+    padding: 10px 51px;
+    float: right;
+    margin-right: 20px;
+}
+
+
