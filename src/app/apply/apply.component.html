@@ -1,5 +1,45 @@
+<div class="topbar">
+  <img class="img-responsive img imglogo" src="assets/images/logo.png">
+</div>
  
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+  <mat-step [stepControl]="chosecountry">
+    <div class="container con0 conw">
+        <h3>choose your country</h3>
+        <div class="fromse">
+          <form [formGroup]="chosecountry">
+            <ng-template matStepLabel>choose your country</ng-template>
+              
+              <mat-radio-group aria-label="Select an option"  formControlName="sdds">
+                <mat-radio-button value="India">India</mat-radio-button><br>
+                <mat-radio-button value="Myanmar">Myanmar</mat-radio-button>
+              </mat-radio-group>
+              <div>
+                <button id="subbut" class="fcn subbut"  mat-button matStepperNext >Continew</button>
+              </div>
+
+              
+
+         
+
+           </form>
+
+
+        </div>
+      </div>
+     
+  </mat-step>
+
+
+
+
+
+
+
+
+
+
 
   <mat-step [stepControl]="firstFormGroup">
     <div class="container con0 conw">
@@ -16,25 +56,45 @@
                 </div>
                  <div *ngIf="uotp">
                    <label>Verify Your Phone number: </label>
-                   <input style="border-bottom: 1px solid;max-width: 300px;margin-left: 20px;" matInput class="getstrin0" type="text" formControlName="code" />
+                   
                  </div>
 
                 <br>
-                   <p style="color: red;">{{mmsg}}</p>
+                  
              
                 <p class="getstrin01"><input class="getstrin" type="checkbox"/> 
                 I authorize XYZ Bank and its representatives to Call, SMS or communicate via WhatsApp regarding my application. This consent overrides any registration for DNC / NDNC. I confirm I am in Myanmar, I am a major and a resident of Myanmar and I have read and I accept XYZ Bank's <a href="terms&conditions" >Privacy Policy</a></p><br>
               <div>
                 
+                <button id="smsbut" class="fcn subbut"  mat-button (click)="sms()" *ngIf="smsbut" data-toggle="modal" data-target="#exampleModal">Next</button>
+
                 
-                <button id="smsbut" class="fcn subbut"  mat-button (click)="sms()" *ngIf="smsbut">Next</button>
-
-                <button id="verify" class="fcn subbut"  mat-button (click)="votp()" *ngIf="verify">verify</button>
-
-                <button id="subbut" class="fcn subbut"  mat-button matStepperNext *ngIf="subbut">Continew</button>
               </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="static">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content mdcon">
+                  <div class="modal-header mdhc">
+                    <p class="modaltitle" id="exampleModalLabel">Verify your Number</p>
+                  </div>
+                  <div class="modal-body">
+                      <input type="text"  class="mdin form-control" formControlName="code" maxlength="6"> <br>
+                       <p style="color: red;">{{mmsg}}</p>
+                    <p>Six digits Verification message sent to  +8801982185584</p>
+                    <button id="verify" class="fcn mdbut"  mat-button (click)="votp()" *ngIf="verify">verify</button>
 
-              
+                   <button id="subbut" class="fcn mdbut"  mat-button matStepperNext *ngIf="subbut" data-dismiss="modal">Continew</button>
+
+                    <br><p>By clicking on the Continue you agree to receive SMS call communication from XYZ bank</p>
+                  </div>
+                  <hr>
+                  <button class="fcn mdresend"   (click)="sms()"   >Resend Verification code</button>
+                  <div class="modal-footer">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
 
          
 

@@ -17,7 +17,7 @@ export class ApplyComponent implements OnInit {
   secondFormGroup: FormGroup;
   therdFormGroup: FormGroup;
   forthFormGroup: FormGroup;
-  fiveFormGroup: FormGroup;
+  chosecountry: FormGroup;
 
 mmsg;
  
@@ -32,7 +32,12 @@ gcode:any = Math.floor((Math.random() * 10000) + 99999);
 
   ngOnInit() {
      
-  	this.firstFormGroup = this._formBuilder.group({
+  	this.chosecountry = this._formBuilder.group({
+      sdds: ['', Validators.required]
+     
+     
+    });
+    this.firstFormGroup = this._formBuilder.group({
       number: ['', Validators.required],
       code: ['', Validators.required]
      

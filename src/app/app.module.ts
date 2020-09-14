@@ -15,6 +15,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { HttpClientModule } from '@angular/common/http';
 import { TncComponent } from './tnc/tnc.component';
@@ -40,6 +43,9 @@ import { TncComponent } from './tnc/tnc.component';
     MatButtonModule,
     MatListModule,
     MatDialogModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatCheckboxModule,
     HttpClientModule
   ],
   providers: [],

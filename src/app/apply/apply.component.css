@@ -11,5 +11,55 @@
     float: right;
     margin-right: 20px;
 }
+.topbar{
+	background: #eefefd;
+    padding: 10px;
+}
+.topbar img{
+	margin-left: 45%;
+	margin-top: 0;
+}
+.mdhc {
+    background: #0482cc;
+}
 
+.mdcon{
+    max-width: 340px;
+    margin-top: 175px;
+    margin-left: 142px;
+}
 
+.mdin {
+    font-size: 18px;
+}
+
+.mdbut{
+    background: #0095ff !important;
+    color: white !important;
+    font-size: 18px !important;
+    margin-left: 82px !important;
+    padding: 10px 60px !important;
+    border-radius: 10px !important;
+}
+
+.mdresend{
+    background: transparent;
+    color: black !important;
+    border: 1px solid #0095ff !important;
+    padding: 10px;
+    margin: 0px 30px;
+}
+
+.mdresend:hover{
+    background: #0095ff !important;
+}
+.modaltitle{
+  font-size: 18px;
+    text-align: center;
+    margin-left: 48px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    margin-top: 5px;
+    margin-bottom: 0px;  
+}
