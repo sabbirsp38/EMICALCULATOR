@@ -41,6 +41,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 // app.use('/api/fileUpload/',fileUpload);
 let port = process.env.port;
 
-app.listen(port, () => {
-    console.log('Server is up and running on port number ' + port);
-});
+// app.listen(port, () => {
+//     console.log('Server is up and running on port number ' + port);
+// });
+const https = require('https');
+const fs = require('fs');
+https.createServer({key: fs.readFileSync('private.key'),
+  cert: fs.readFileSync('certificate.crt'),
+  ca: fs.readFileSync('ca_bundle.crt')}, app).listen(port, () => {
+  console.log('Listening... on port number ' + port)
+})

@@ -8,6 +8,9 @@ import { HomeComponent } from './home/home.component';
 import { ApplyComponent } from './apply/apply.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TncComponent } from './tnc/tnc.component';
+import { TestComponent } from './test/test.component';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -19,8 +22,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
-import { HttpClientModule } from '@angular/common/http';
-import { TncComponent } from './tnc/tnc.component';
+
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -30,7 +34,8 @@ import { TncComponent } from './tnc/tnc.component';
     ApplyComponent,
     HeaderComponent,
     FooterComponent,
-    TncComponent
+    TncComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,12 @@ import { TncComponent } from './tnc/tnc.component';
     MatRadioModule,
     MatSelectModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    GooglePlaceModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAcL7jXUnRiHYJUinnKyDAKpkZTQXWHxvU',
+      libraries: ['places']
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -81,8 +81,8 @@ p {
 }
 
 img.img-responsive.img.imglogo {
-    max-width: 72px;
-    margin-top: -6px;
+    max-width: 200px;
+   
 }
 
 
@@ -366,7 +366,8 @@ background: #80808014;
 }
 
 .con0 h3{
-    color: blue;
+   
+   
 }
 
 .fromse {
@@ -389,12 +390,12 @@ input.getstrin  {
 }
 
 .subbut {
-    background: #0095ff !important;
-    color: white !important;
-    font-size: 18px !important;
-    margin-left: 200px !important;
-    padding: 10px 60px !important;
+    background: #0095ff;
+    color: white;
+    font-size: 18px;
+    padding: 5px 40px !important;
     border-radius: 10px !important;
+    text-transform: uppercase !important;
 }
 .mat-form-field-wrapper {
     margin-left: 200px;

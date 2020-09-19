@@ -13,16 +13,11 @@ export class GlobalService {
       'Authorization': 'jwt-token'
     })
   };
-  data = [
-    'body=thi hbuh jnj jnj',
-    'to= +8801982185584', 
-    'from= +18472428244'
-  ];
 
   masters = {};
   branchData = {};
  
-   url="http://18.138.204.195:9000"; //Sabbir
+   url="https://api.bigbyteintl.net:9000"; //Sabbir
   //url="http://localhost:3000";
   // url = "http://los.sitecare.org";
  // url="https://api.gotoaya.com"; //los bank infra
@@ -68,12 +63,7 @@ export class GlobalService {
   getDealerstatus(id) {
     return this.http.get(`${this.url}/api/application/dealerStatus/${id}`);
   }
-  send(toNumber: any, message: any)
-  {
-  	 var vv= this.http.post<any>(`https://api.twilio.com/2010-04-01/Accounts/ACedec8d6fee66c93735b2fd80d9279b50/Messages.json`, this.data , this.httpOptions);
-  	 console.log(vv);
-  	 return vv;
-  }
+  
 
   // public sms(toNumber: string, message: string): ng.IPromise {
   //       var authData = btoa(this.twilio.value);

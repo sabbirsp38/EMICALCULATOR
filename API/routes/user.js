@@ -44,18 +44,25 @@ router.post('/number',async function(req,res){
 router.post('/sms',async function(req,res){
    var msg = req.body.msg;
    var number = req.body.number;
-var accountSid = 'ACedec8d6fee66c93735b2fd80d9279b50'; // Your Account SID from www.twilio.com/console
-var authToken = '36f912675aa4a000f10dd17cc0c80888';   // Your Auth Token from www.twilio.com/console
+ var accountSid = 'ACc2457caf1e3757f22384c337fa3b0d53'; // Your Account SID from www.twilio.com/console
 
+ var authToken = 'ad174bcfa65a399200677a21f6b1a1f7';   // Your Auth Token from www.twilio.com/console
+//test start here
+// var accountSid = 'ACedec8d6fee66c93735b2fd80d9279b50'; // Your Account SID from www.twilio.com/console
+// var authToken = '36f912675aa4a000f10dd17cc0c80888';   // Your Auth Token from www.twilio.com/console
+//from:'+18472428244' // From a valid Twilio number                                 
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
-
+console.log(msg + number);
 client.messages.create({
-    body: msg,
-    to: number,  // Text this number
-    from: '+18472428244' // From a valid Twilio number
+    body:msg,
+    to:number,  // Text this number
+    from:'+16084806725' // From a valid Twilio number
 })
-.then((message) => console.log(message.sid));
+.then((message) => {
+
+    console.log(message.sid)
+});
 });
 
 

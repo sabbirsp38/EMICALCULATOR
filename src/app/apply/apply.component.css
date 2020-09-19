@@ -1,5 +1,6 @@
 .conw{
 	max-width: 765px;
+    margin-top: 2%;
 }
 .btnleft {
     padding: 10px 52px;
@@ -37,9 +38,9 @@
     background: #0095ff !important;
     color: white !important;
     font-size: 18px !important;
-    margin-left: 82px !important;
-    padding: 10px 60px !important;
+    padding: 5px 40px !important;
     border-radius: 10px !important;
+    text-transform: uppercase !important;
 }
 
 .mdresend{
@@ -62,4 +63,54 @@
     text-transform: uppercase;
     margin-top: 5px;
     margin-bottom: 0px;  
+}
+
+.matitm{
+    text-align: center;
+}
+
+.mdcmsg{
+    max-width: 413px;
+    margin-top: 175px;
+   
+}
+
+
+.con0  h3{
+    
+    font-size: 22px;
+    text-align: center;
+ 
+}
+.mrned{
+    max-width: 765px;
+    margin-top: 7%;
+    margin-bottom: 100px;
+}
+.bt1 {
+    margin-left: 38% !important;
+}
+.bt2 {
+    margin-left: 24% !important
+}
+.bt3 {
+    margin-left: 38% !important;
+}
+.bt4 {
+    margin-left: 26% !important;
+}
+.bt5 {
+    margin-left: 26% !important;
+}
+.bt6 {
+    margin-left: 20% !important;
+}
+.bt7 {
+    margin-left: 38% !important;
+}
+.bt8 {
+    margin-left: 38% !important;
+}
+.bt9 {
+    margin-left: 38% !important;
 }
