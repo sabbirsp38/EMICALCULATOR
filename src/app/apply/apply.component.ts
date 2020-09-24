@@ -40,6 +40,16 @@ finalemi;
 totalamount;
 finalinterest;
 
+
+delarprice;
+rtocost;
+insurensecost;
+preapproveamount;
+preapproveamountforuser;
+totalcarprice;
+valueInString;
+
+
  
 subbut:any=false;
 smsbut:any=true;
@@ -104,9 +114,9 @@ componentForm = {
     this.therdFormGroup = this._formBuilder.group({
       carmodel: [''],
       carprice: [''],
-      cardelar: [''],
-      rtoin:    [''],
-      insin:    ['']
+      cardelarprice: [''],
+      rtocost:    [''],
+      insucost:    ['']
     });
     this.Congratulation = this._formBuilder.group({
       loanamount: [''],
@@ -255,9 +265,7 @@ componentForm = {
        
      }
 
-kycoptionc(){
 
-}
 
 ctes(){
   let fmvalu = this.secondFormGroup.value;
@@ -300,25 +308,53 @@ emaicalculator() {
     let congvalu = this.Congratulation.value;
     // let countryname = congvalu.loanamount;
     var loanAmount = congvalu.loanamount ;
-    var numberOfMonths = congvalu.yearreturn*12;
-    var rateOfInterest = 7;
-    var monthlyInterestRatio = (rateOfInterest / 100) / 12;
+    if(loanAmount >= this.valueInString){
+     alert("The loan amount exceeds the maximum limit");
+    }else{
+      var numberOfMonths = congvalu.yearreturn*12;
+      var rateOfInterest = 7;
+      var monthlyInterestRatio = (rateOfInterest / 100) / 12;
 
 
-    var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
-    var bottom = top - 1;
-    var sp = top / bottom;
-    var emi = ((loanAmount * monthlyInterestRatio) * sp);
-    var full = numberOfMonths * emi;
-    var interest = full - loanAmount;
-    var int_pge = (interest / full) * 100;
-     this.finalemi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-     this.totalamount = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-     this.finalinterest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
+      var bottom = top - 1;
+      var sp = top / bottom;
+      var emi = ((loanAmount * monthlyInterestRatio) * sp);
+      var full = numberOfMonths * emi;
+      var interest = full - loanAmount;
+      var int_pge = (interest / full) * 100;
+      this.finalemi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.totalamount = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.finalinterest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+    }
+
+    
 
   }
+
+  preapprovecalcolator(){
+    let approvalu = this.therdFormGroup.value;
+    this.delarprice = approvalu.cardelarprice;
+    this.rtocost = approvalu.rtocost;
+    this.insurensecost = approvalu.insucost;
+
+    if(this.delarprice==="" || this.rtocost===""|| this.insurensecost===""){
+          
+    }else{
+      // var totalcarprice2=delarprice  + rtocost  +  insurensecost;
+      this.valueInString =parseInt(this.delarprice)  + parseInt(this.rtocost)  +  parseInt(this.insurensecost);
+      var num = parseFloat(this.valueInString);
+      this.preapproveamount = num - (num * .20);
+      this.preapproveamountforuser =this.preapproveamount.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.totalcarprice = this.valueInString.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      console.log(this.preapproveamountforuser);
+    }
+
+    
+
+}
 
 
   submit(){

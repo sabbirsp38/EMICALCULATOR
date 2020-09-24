@@ -63,6 +63,7 @@
 
 
 
+
   <mat-step [stepControl]="chosecountry" >
     <div class="container con0 conw mrned">
       <p class="toptitle">Choose your country</p>  
@@ -552,9 +553,6 @@
 
 
 
-
-
-
 <!-- part 4 -->
  <mat-step [stepControl]="therdFormGroup">
     <section class="se3 getstr">
@@ -565,35 +563,35 @@
             <ng-template matStepLabel>Product Details</ng-template>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Car Model </label>
-                <input matInput  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <input   formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Car  Price</label>
-                <input matInput  formControlName="carprice" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <input   formControlName="carprice" type="Text" class="form-control"  placeholder="10,000000" disabled="true" value="10,000000" >
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Dealer Quoted Price</label>
-                <input matInput  formControlName="cardelar" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <input (change)="preapprovecalcolator()"  formControlName="cardelarprice" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
               </div>
-              <div class="custom-control custom-radio custom-control-inline">
+<!--               <div class="custom-control custom-radio custom-control-inline">
                 
                 <label class="custom-control-label" for="customRadioInline1">Do you want to include RTO cost?</label>
                 <label class="switch">
                   <input type="checkbox" >
                   <span class="slider round"></span>
                 </label>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Tentative RTO cost</label>
-                <input matInput  formControlName="rtoin" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <input (change)="preapprovecalcolator()"  formControlName="rtocost" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
               </div>
               
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Tentative Insurance Cost</label>
-                <input matInput  formControlName="insin"  type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <input (change)="preapprovecalcolator()"  formControlName="insucost"  type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
               </div>
               
-             <p class="tcost">Total Car Cost: <span>80,0000 MMK</span></p>
+             <p class="tcost">Total Car Cost: <span>{{totalcarprice}} {{courency}}</span></p>
 
        
              
@@ -621,7 +619,7 @@
         <div class="fromse">
           <form [formGroup]=" Congratulation">
             <ng-template matStepLabel>Pre-Approved Offer</ng-template>
-              <h5>You have  pre-approved offer up to <span>1000000</span></h5>
+              <h5>You have  pre-approved offer up to <span>{{preapproveamountforuser}}</span></h5>
               <p>Car Model: <b><span>BMW i7</span></b></p>
               <p>Car Price: <b><span>100000</span></b></p>
               <div class="form-group">
@@ -658,6 +656,8 @@
       </div>
     </section>
   </mat-step>
+
+
 
 
 
