@@ -36,6 +36,9 @@ alartmsg;
 displaynumber;
 trams;
 otpdeclaration;
+finalemi;
+totalamount;
+finalinterest;
 
  
 subbut:any=false;
@@ -54,8 +57,14 @@ countryrestic:any= false;
 gcode:any = Math.floor((Math.random() * 10000) + 99999);
 
 componentForm = {
-  locality: "long_name"
+  street_number: "short_name",
+  route: "long_name",
+  locality: "long_name",
+  administrative_area_level_1: "short_name",
+  country: "long_name",
+  postal_code: "short_name"
 };
+
 
   constructor(private _formBuilder: FormBuilder,private gs: GlobalService,private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) { }
@@ -63,13 +72,14 @@ componentForm = {
   ngOnInit() {
      
   	this.chosecountry = this._formBuilder.group({
-      cname: ['', Validators.required]
+      cname: ['']
+      // cname: ['', Validators.required]
     });
     this.firstFormGroup = this._formBuilder.group({
-      number: ['', Validators.required],
-      numdic:['', Validators.required],
-      code: ['', Validators.required],
-      trams: ['', Validators.required]
+      number: [''],
+      numdic:[''],
+      code: [''],
+      trams: ['']
      
     });
     this.kycgroup = this._formBuilder.group({
@@ -99,7 +109,8 @@ componentForm = {
       insin:    ['']
     });
     this.Congratulation = this._formBuilder.group({
-      lamount: ['']
+      loanamount: [''],
+      yearreturn:    ['']
       
     });
 
@@ -147,6 +158,11 @@ componentForm = {
 
 
 
+
+
+
+
+
   }
 
     cmsg(){
@@ -156,27 +172,27 @@ componentForm = {
      if (countryname ===""){
       this.umsg="You have to choose a country.";
    } else if(countryname ==="India"){
-    this.umsg="Loan Pre-qualification from credit agency is applicable for your country";
+    this.umsg="Loan Pre-Qualification from credit agency is applicable for your country";
     this.countryrestic= true;
     this.courency="INR";
     this.numcode="+91";
    } else if(countryname ==="Myanmar"){
-    this.umsg="Loan Pre-qualification from credit agency is applicable for your country";
+    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
     this.countryrestic= false;
     this.courency="MMK";
     this.numcode="+95";
    } else if(countryname ==="Vietnam"){
-    this.umsg="Loan Pre-qualification from credit agency is applicable for your country";
+    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
     this.countryrestic= false;
     this.courency="VND";
     this.numcode="+84";
    } else if(countryname ==="Phillipines"){
-    this.umsg="Loan Pre-qualification from credit agency is applicable for your country";
+    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
     this.countryrestic= false;
     this.courency="PESO";
     this.numcode="+63";
    }else {
-    this.umsg="Loan Pre-qualification from credit agency is not applicable for your country";
+    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
    }
 
  } 
@@ -279,6 +295,30 @@ ctes(){
 
    }
 }
+
+emaicalculator() {
+    let congvalu = this.Congratulation.value;
+    // let countryname = congvalu.loanamount;
+    var loanAmount = congvalu.loanamount ;
+    var numberOfMonths = congvalu.yearreturn*12;
+    var rateOfInterest = 7;
+    var monthlyInterestRatio = (rateOfInterest / 100) / 12;
+
+
+    var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
+    var bottom = top - 1;
+    var sp = top / bottom;
+    var emi = ((loanAmount * monthlyInterestRatio) * sp);
+    var full = numberOfMonths * emi;
+    var interest = full - loanAmount;
+    var int_pge = (interest / full) * 100;
+     this.finalemi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     this.totalamount = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     this.finalinterest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+  }
 
 
   submit(){

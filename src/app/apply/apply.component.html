@@ -2,6 +2,10 @@
   <img class="img-responsive img imglogo" src="assets/images/logo.png">
 </div>
  
+
+
+<div style="background: red;">
+
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
 
 
@@ -41,9 +45,27 @@
 
 
 
-  <mat-step [stepControl]="chosecountry">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <mat-step [stepControl]="chosecountry" >
     <div class="container con0 conw mrned">
-        <h3>Choose your country</h3>
+      <p class="toptitle">Choose your country</p>  
         <div class="fromse">
           <form [formGroup]="chosecountry">
             <ng-template matStepLabel>Choose your country</ng-template>
@@ -95,44 +117,74 @@
      
   </mat-step>
 
+  <!-- 1 end here -->
+
+
+
+
+
 
 
 
   <mat-step [stepControl]="firstFormGroup">
-    <div class="container con0 conw">
-        <h3>Let's Get Started</h3>
+
+    <section class="se0 getstr">
+  <div class="container con0 conw">
+    <p class="toptitle">Let's Get Started</p>
+    <div class="row">
+      <div class="col-md-9 col-lg-9 col-sm-9">
         <div class="fromse">
           <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Let's Get Started</ng-template>
-              
-              
-              <br>
-                <div *ngIf="unum">
-                  <label>Mobile Number: </label>
-                  <input [style.border-bottom] = "eamply ? '2px solid red' : '2px solid black'" style="max-width: 300px;margin-left: 20px;" matInput class="getstrin0" type="text" formControlName="number" placeholder="{{numcode}}XXXXXXXXXXX" />
-                </div>
-                 <div *ngIf="uotp">
-                   <label>Verify Your Phone number: </label>
-                   
-                 </div>
+             <ng-template matStepLabel>Let's Get Started</ng-template>
+          
+            <div *ngIf="unum">
+              <label>Mobile Number: </label>
+              <input [style.border-bottom] = "eamply ? '2px solid red' : '2px solid black'" style="max-width: 300px;margin-left: 20px;" matInput class="getstrin0" type="text" formControlName="number" placeholder="{{numcode}}XXXXXXXXXXX" />
+            </div>
+          
+            <div class="alartse0">
+              <small *ngIf="eamply" style="color: red;">*This need to be fill</small><br>
+              <input class="getstrin" type="checkbox"  formControlName="numdic"/><p class="getstrin01">I agree that the number mentioned above belongs to me.</p>
 
-                <br>
+             <small *ngIf="eamply" style="color: red;">*This need to be fill <br></small> 
+              <input  class="getstrin" type="checkbox" formControlName="trams" [style.border-bottom] = "eamply ? '2px solid red' : '2px solid black'"/><p class="getstrin01">I authorize XYZ Bank and its representatives to Call, SMS or communicate via WhatsApp regarding my application. This consent overrides any registration for DNC / NDNC. I confirm I am in Myanmar, I am a major and a resident of Myanmar and I have read and I accept XYZ Bank's <a href="">Privacy Policy</a></p>
+            </div>
 
-                <p class="getstrin01">
-                  <small *ngIf="eamply" style="color: red;">*This need to be fill</small><br>
-                  <input   class="getstrin" type="checkbox"  formControlName="numdic" /> I agree that the number mentioned above belongs to me.</p>
-                  
-             
-                <p class="getstrin01">
-                   <small *ngIf="eamply" style="color: red;">*This need to be fill</small><br>
-                  <input  class="getstrin" type="checkbox" formControlName="trams" [style.border-bottom] = "eamply ? '2px solid red' : '2px solid black'"/> 
-                I authorize XYZ Bank and its representatives to Call, SMS or communicate via WhatsApp regarding my application. This consent overrides any registration for DNC / NDNC. I confirm I am in Myanmar, I am a major and a resident of Myanmar and I have read and I accept XYZ Bank's <a href="terms&conditions" >Privacy Policy</a></p><br>
               <div>
                 
                 <button id="smsbut" class="fcn subbut bt3"  mat-button (click)="sms()" *ngIf="smsbut">Next</button>
 
                 
               </div>
+
+              <!-- Modal -->
+                <div class="modal fade" id="tndalart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="static">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content mdcmsg">
+                      <div class="modal-header mdhc">
+                      </div>
+                      <div class="modal-body">
+                          
+                           <p style="color: red; text-align: center; font-size: 18px;">{{alartmsg}}</p>
+                        
+                       
+
+                       <button id="subbut" class="fcn mdbut bt5"  mat-button   data-dismiss="modal" matStepperNext>Continue</button>
+
+                       
+                      </div>
+                      
+                      <div class="modal-footer">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                  
+                  
+             
+             
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="static">
               <div class="modal-dialog" role="document">
@@ -158,38 +210,40 @@
                 </div>
               </div>
             </div>
-                        
-          <!-- Modal -->
-            <div class="modal fade" id="tndalart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="static">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content mdcmsg">
-                  <div class="modal-header mdhc">
-                  </div>
-                  <div class="modal-body">
-                      
-                       <p style="color: red; text-align: center; font-size: 18px;">{{alartmsg}}</p>
-                    
-                   
-
-                   <button id="subbut" class="fcn mdbut bt5"  mat-button   data-dismiss="modal" matStepperNext>Continue</button>
-
-                   
-                  </div>
-                  
-                  <div class="modal-footer">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-         
-
-           </form>
-
-
+          </form>
         </div>
       </div>
-  </mat-step>
+      <div class="col-md-3 col-lg-3 col-sm-3"  style="border: 1px solid silver;">
+        <img class="img-responsive siderimg" src="/assets/images/AL_Sidebar.png">
+
+       <ul class="siedlist">
+         <li>Get <b>up to 90% finance for the car you want</b></li><br>
+         <li>Relax with <b>flexible EMIs</b> - choose repayment duration upto 7 years</li>
+       </ul>
+       <hr>
+       <button class="viewbut"    >View more</button>
+
+
+
+
+      </div>
+      
+    </div>
+
+  </div>
+
+</section>
+    
+</mat-step>
+
+
+
+
+
+
+
+
+
 
   <!-- part 2 -->
 
@@ -209,7 +263,7 @@
               </mat-radio-group> 
             </div> --> 
             <div>
-              <h3>Your current mobile number is not linked to any account with us , please start the kyc process.</h3>
+              <h3>Your current mobile number is not linked to any account with us , please start the KYC process.</h3>
               
             </div>
 
@@ -247,14 +301,14 @@
             <form [formGroup]="kycoption">
             <ng-template matStepLabel>KYC option</ng-template>
              <div>
-              <h5>Select KYC option</h5>
+              <p class="toptitle">Select KYC option</p> 
               <mat-radio-group aria-label="Select an option"  formControlName="kycop">
                 <mat-radio-button class="matitm" value="doc">Upload official valid documents </mat-radio-button><br>
                  <mat-radio-button class="matitm" value="doc">Voluntary Aadhaar(Only In india)</mat-radio-button> 
               </mat-radio-group>
             </div> 
               <div>
-                <button class="fcn subbut bt3" (click)="kycoption()" mat-button   data-toggle="modal" data-target="#kyccon">Next</button>
+                <button class="fcn subbut bt3"  mat-button   data-toggle="modal" data-target="#kyccon">Next</button>
               </div>
 
               <!-- Modal -->
@@ -304,14 +358,14 @@
         <div class="fromse">
           <form [formGroup]=" secondFormGroup">
             <ng-template matStepLabel>Check Loan Eligibility</ng-template>
-            <h4>Residence details </h4>
+            <h4>Residence Details </h4>
             <br>
             <div class="form-group">
-              <label for="exampleFormControlInput1">City of residence </label>
+              <label for="exampleFormControlInput1">City of Residence </label>
               <input class="field" id="locality" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text"  formControlName="city">
             </div>
             <div class="form-group">
-              <label for="exampleFormControlSelect1">Residence  type</label>
+              <label for="exampleFormControlSelect1">Residence  Type</label>
               <select  class="form-control"  formControlName="residencetype" >
                 <option value="India">Company provided </option>
                 <option value="Dhaka">Hostel</option>
@@ -502,10 +556,10 @@
 
 
 <!-- part 4 -->
-  <mat-step [stepControl]="therdFormGroup">
+ <mat-step [stepControl]="therdFormGroup">
     <section class="se3 getstr">
       <div class="container con0 conw">
-        <h3>Product Details</h3>
+        <p class="toptitle">Product Details</p> 
         <div class="fromse">
           <form [formGroup]=" therdFormGroup">
             <ng-template matStepLabel>Product Details</ng-template>
@@ -535,11 +589,11 @@
               </div>
               
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Tentative insurance cost</label>
+                <label for="exampleFormControlSelect1">Tentative Insurance Cost</label>
                 <input matInput  formControlName="insin"  type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
               </div>
               
-             <p class="tcost">Total car cost: <span>80,0000 MMK</span></p>
+             <p class="tcost">Total Car Cost: <span>80,0000 MMK</span></p>
 
        
              
@@ -554,36 +608,41 @@
         </div>
       </div>
     </section>
-  </mat-step>
-
+  </mat-step> 
 
 <!-- step 5 -->
+
 
 
   <mat-step [stepControl]="Congratulation">
     <section class="se3 getstr">
       <div class="container con0 conw">
-        <h3> Congratulation</h3>
+        <p class="toptitle">Congratulation</p>
         <div class="fromse">
           <form [formGroup]=" Congratulation">
-            <ng-template matStepLabel>Pre-approved offer</ng-template>
-              <h3>Congratulation Sabbir</h3>
+            <ng-template matStepLabel>Pre-Approved Offer</ng-template>
               <h5>You have  pre-approved offer up to <span>1000000</span></h5>
-              <p>Car model <b><span>BMW i7</span></b></p>
-              <p>Car Price <b><span>100000</span></b></p>
+              <p>Car Model: <b><span>BMW i7</span></b></p>
+              <p>Car Price: <b><span>100000</span></b></p>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Loan Amount</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="lamount">
+                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="loanamount" (change)="emaicalculator()">
               </div>
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Returning In years</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                <label for="exampleFormControlSelect1">Loan Tenure </label>
+                <select  class="form-control"  (change)="emaicalculator()" formControlName="yearreturn" >
+                  <option value="1">1 Years</option>
+                  <option value="2">2 Years</option>
+                  <option value="3">3 Years</option>
+                  <option value="4">4 Years</option>
+                  <option value="5">5 Years</option>   
+                </select>
+               
               </div>
 
-              <p>Monthly EMI <b><span>5000</span></b></p>
-              <p>RIO <b><span>10%</span></b></p>
-              <p>Total to replay<b><span>1064654564</span></b></p>
-              <p>Prosessing fee <b><span>1024</span></b></p> 
+              <p>Monthly EMI = <b><span>{{finalemi}}</span></b></p>
+              <p>Total to replay = <b><span>{{totalamount}}</span></b></p>
+              <p>Total interest to pay = <b><span>{{finalinterest}}</span></b></p> 
 
        
              
@@ -599,6 +658,8 @@
       </div>
     </section>
   </mat-step>
+
+
 
 
 
@@ -609,14 +670,14 @@
   <mat-step [stepControl]="AddressDetails">
     <section class="se3 getstr">
       <div class="container con0 conw">
-        <h3>Address Details</h3>
+        <p class="toptitle">Address Details</p>
         <div class="fromse">
           <form [formGroup]=" AddressDetails">
             <ng-template matStepLabel>Address Details</ng-template>
  
               <div class="form-group">
               <label for="exampleFormControlSelect1">Address line 1</label>
-              <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder=""  formControlName="hadd1">
+              <input class="field locality" id="locality2" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"   formControlName="hadd1">
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Address line 2</label>
@@ -686,7 +747,7 @@
   <mat-step [stepControl]="OfficeAddress">
     <section class="se3 getstr">
       <div class="container con0 conw">
-        <h3>Office Address</h3>
+         <p class="toptitle">Office Address</p>
         <div class="fromse">
           <form [formGroup]=" OfficeAddress">
             <ng-template matStepLabel>Office Address</ng-template>
@@ -730,12 +791,18 @@
     </section>
   </mat-step>
 
+
+
+
+
+
+
 <!-- step 7 -->
 
   <mat-step [stepControl]="fileupload" *ngIf="countryrestic">
     <section class="se3 getstr">
       <div class="container con0 conw mrned">
-        <h3>Upload Document</h3>
+        <p class="toptitle">Upload Document</p>
         <div class="fromse">
           <form [formGroup]=" fileupload">
             <ng-template matStepLabel>Upload Document</ng-template>
@@ -798,3 +865,4 @@
   </mat-step>
   
 </mat-horizontal-stepper>
+</div>

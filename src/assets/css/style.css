@@ -477,3 +477,18 @@ input:checked + .slider:before {
 mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color.ng-star-inserted {
     display: none;
 }
+
+.mat-icon {
+    background-repeat: no-repeat;
+    display: none !important;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+}
+.mat-step-icon .mat-icon, .mat-step-icon-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none !important;
+}

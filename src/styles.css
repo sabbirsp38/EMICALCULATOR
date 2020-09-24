@@ -10,10 +10,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 body {
-    overflow-x: hidden;
-    font-family: 'Roboto Slab', serif;
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important;
+    font-family: 'Open Sans Regular',sans-serif;
+    background: #F3F3F3;
+    font-size: 14px;
+    color: #444;
 }
 
 a {
@@ -355,12 +355,18 @@ background: #80808014;
 }
 
 /*From start*/
-.conw{
-   width: 700px;
+.toptitle {
+    margin-bottom: 30px;
+    font-size: 25px;
+    color: #1789ea;
+}
+.conw {
+    width: 66%;
+    margin-left: 17%;
 }
 .con0 {
     
-    background: #f8f8f8;
+   
     padding-bottom: 30px;
     margin-bottom: 10px;
 }
@@ -371,8 +377,9 @@ background: #80808014;
 }
 
 .fromse {
-    padding: 10px;
+    padding: 50px;
     background: white;
+    border: 1px solid silver;
 }
 
 .getstrin0 {
@@ -382,11 +389,15 @@ background: #80808014;
     border-bottom: 1px solid;
     height: 35px;
 }
+.alartse0 {
+    margin: 20px 0px 20px 10px;
+}
 input.getstrin  {
-    margin-right: 20px;
+        margin-top: 10px;
 }
 .getstrin01{
-    margin-top: 20px;
+    margin-top: -21px;
+    margin-left: 30px;
 }
 
 .subbut {
@@ -403,7 +414,7 @@ input.getstrin  {
     font-size: 20px;
 }
 .conw {
-    background: #ddeefa;
+    
     margin-bottom: 20px;
     padding: 19px;
 }
@@ -480,6 +491,9 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color.ng-star-inserted {
-    display: none;
+.mat-step-icon .mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    display: none !important;
 }

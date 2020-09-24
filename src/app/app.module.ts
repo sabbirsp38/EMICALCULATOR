@@ -25,6 +25,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { AgmCoreModule } from '@agm/core';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { AgmCoreModule } from '@agm/core';
     MatCheckboxModule,
     HttpClientModule,
     GooglePlaceModule,
+    Ng5SliderModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAcL7jXUnRiHYJUinnKyDAKpkZTQXWHxvU',
       libraries: ['places']

@@ -18,7 +18,6 @@ var asyncLoop = require('node-async-loop');
             number: req
 
         }).save();
-        delete newUser._doc['password'];
         return newUser;
     }
 
