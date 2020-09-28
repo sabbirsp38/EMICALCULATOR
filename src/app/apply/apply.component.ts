@@ -49,6 +49,12 @@ preapproveamountforuser;
 totalcarprice;
 valueInString;
 
+disprice;
+disrto;
+disinsu;
+disamount;
+
+
 
  
 subbut:any=false;
@@ -304,15 +310,52 @@ ctes(){
    }
 }
 
+
+
+preapprovecalcolator(){
+    let approvalu = this.therdFormGroup.value;
+    this.delarprice = approvalu.cardelarprice;
+    this.rtocost = approvalu.rtocost;
+    this.insurensecost = approvalu.insucost;
+    
+    this.disprice = Number(this.delarprice).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.disrto = Number(this.rtocost).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.disinsu = Number(this.insurensecost).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+
+    if(this.delarprice==="" || this.rtocost===""|| this.insurensecost===""){
+          
+    }else{
+      // var totalcarprice2=delarprice  + rtocost  +  insurensecost;
+      this.valueInString =parseInt(this.delarprice)  + parseInt(this.rtocost)  +  parseInt(this.insurensecost);
+      var num = parseFloat(this.valueInString);
+      this.preapproveamount = num - (num * .20);
+      this.preapproveamountforuser =this.preapproveamount.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.totalcarprice = this.valueInString.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      console.log(this.preapproveamountforuser);
+    }
+
+    
+
+}
+
+
+
+
 emaicalculator() {
     let congvalu = this.Congratulation.value;
     // let countryname = congvalu.loanamount;
     var loanAmount = congvalu.loanamount ;
-    if(loanAmount >= this.valueInString){
+    this.disamount = Number(loanAmount).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+
+
+    if(loanAmount > this.valueInString){
      alert("The loan amount exceeds the maximum limit");
     }else{
       var numberOfMonths = congvalu.yearreturn*12;
-      var rateOfInterest = 7;
+      var rateOfInterest = 9.5;
       var monthlyInterestRatio = (rateOfInterest / 100) / 12;
 
 
@@ -334,27 +377,7 @@ emaicalculator() {
 
   }
 
-  preapprovecalcolator(){
-    let approvalu = this.therdFormGroup.value;
-    this.delarprice = approvalu.cardelarprice;
-    this.rtocost = approvalu.rtocost;
-    this.insurensecost = approvalu.insucost;
 
-    if(this.delarprice==="" || this.rtocost===""|| this.insurensecost===""){
-          
-    }else{
-      // var totalcarprice2=delarprice  + rtocost  +  insurensecost;
-      this.valueInString =parseInt(this.delarprice)  + parseInt(this.rtocost)  +  parseInt(this.insurensecost);
-      var num = parseFloat(this.valueInString);
-      this.preapproveamount = num - (num * .20);
-      this.preapproveamountforuser =this.preapproveamount.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.totalcarprice = this.valueInString.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      console.log(this.preapproveamountforuser);
-    }
-
-    
-
-}
 
 
   submit(){

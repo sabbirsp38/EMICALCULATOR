@@ -11,12 +11,132 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- part 4 -->
+ <mat-step [stepControl]="therdFormGroup">
+    <section class="se3 getstr">
+      <div class="container con0 conw">
+        <p class="toptitle">Product Details</p> 
+        <div class="fromse">
+          <form [formGroup]=" therdFormGroup">
+            <ng-template matStepLabel>Product Details</ng-template>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Car Model </label>
+                <input   formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Car  Price</label>
+                <input   formControlName="carprice" type="Text" class="form-control"  placeholder="10,000000" disabled="true" value="10,000000" >
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Dealer Quoted Price</label>
+                <input (change)="preapprovecalcolator()"  formControlName="cardelarprice" type="Text" class="form-control" id="exampleFormControlInput1" value="{{disprice}}">
+              </div>
+<!--               <div class="custom-control custom-radio custom-control-inline">
+                
+                <label class="custom-control-label" for="customRadioInline1">Do you want to include RTO cost?</label>
+                <label class="switch">
+                  <input type="checkbox" >
+                  <span class="slider round"></span>
+                </label>
+              </div> -->
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Tentative RTO cost</label>
+                <input (change)="preapprovecalcolator()"  formControlName="rtocost" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{disrto}}">
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Tentative Insurance Cost</label>
+                <input (change)="preapprovecalcolator()"  formControlName="insucost"  type="Text" class="form-control" id="exampleFormControlInput1" value="{{disinsu}}">
+              </div>
+              
+             <p class="tcost">Total Car Cost: <span>{{totalcarprice}} {{courency}}</span></p><br>
+             <p class="tcost">
+               Additional Document charges and Post Disbursement charges as applicable. Stamp duty at actuals.
+             </p>
+
+       
+             
+            <div>
+              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
+              <button class="btn btn-success btnright"  matStepperNext>Next</button>
+            </div>
+     
+            
+          </form>
+          
+        </div>
+      </div>
+    </section>
+  </mat-step> 
  
 
 
 
+<!-- step 5 -->
 
 
+
+  <mat-step [stepControl]="Congratulation">
+    <section class="se3 getstr">
+      <div class="container con0 conw">
+        <p class="toptitle">Congratulation</p>
+        <div class="fromse">
+          <form [formGroup]=" Congratulation">
+            <ng-template matStepLabel>Pre-Approved Offer</ng-template>
+              <h5>You have  pre-approved offer up to <span>{{preapproveamountforuser}}</span></h5>
+              <p>Car Model: <b><span>BMW i7</span></b></p>
+              <p>Car Price: <b><span>100000</span></b></p>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Loan Amount</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="loanamount" (change)="emaicalculator()" value="{{disamount}}">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Loan Tenure </label>
+                <select  class="form-control"  (change)="emaicalculator()" formControlName="yearreturn" >
+                  <option value="1">1 Years</option>
+                  <option value="2">2 Years</option>
+                  <option value="3">3 Years</option>
+                  <option value="4">4 Years</option>
+                  <option value="5">5 Years</option>   
+                </select>
+               
+              </div>
+
+
+              <p>Interest Rate:  <b><span>9.5 % per annum</span></b></p>
+              <p>Monthly EMI: <b><span>{{finalemi}}</span></b></p>
+              <p>Total To Repay: <b><span>{{totalamount}}</span></b></p>
+              <p>Total Interest To Pay:<b><span>{{finalinterest}}</span></b></p> 
+
+       
+             
+            <div>
+              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
+              <button class="btn btn-success btnright"  matStepperNext>Next</button>
+            </div>
+     
+            
+          </form>
+          
+        </div>
+      </div>
+    </section>
+  </mat-step>
 
 
 
@@ -66,7 +186,7 @@
 
   <mat-step [stepControl]="chosecountry" >
     <div class="container con0 conw mrned">
-      <p class="toptitle">Choose your country</p>  
+      <p class="toptitle">Choose Your Country</p>  
         <div class="fromse">
           <form [formGroup]="chosecountry">
             <ng-template matStepLabel>Choose your country</ng-template>
@@ -148,7 +268,7 @@
               <input class="getstrin" type="checkbox"  formControlName="numdic"/><p class="getstrin01">I agree that the number mentioned above belongs to me.</p>
 
              <small *ngIf="eamply" style="color: red;">*This need to be fill <br></small> 
-              <input  class="getstrin" type="checkbox" formControlName="trams" [style.border-bottom] = "eamply ? '2px solid red' : '2px solid black'"/><p class="getstrin01">I authorize XYZ Bank and its representatives to Call, SMS or communicate via WhatsApp regarding my application. This consent overrides any registration for DNC / NDNC. I confirm I am in Myanmar, I am a major and a resident of Myanmar and I have read and I accept XYZ Bank's <a href="">Privacy Policy</a></p>
+              <input  class="getstrin" type="checkbox" formControlName="trams" [style.border-bottom] = "eamply ? '2px solid red' : '2px solid black'"/><p class="getstrin01">I authorize XYZ Bank and its representatives to Call, SMS or communicate via WhatsApp regarding my application. This consent overrides any registration for DNC / NDNC. I confirm that I am in Myanmar, I am a major and a resident of Myanmar and I have read and I accept XYZ Bank's <a href="">Privacy Policy</a></p>
             </div>
 
               <div>
@@ -257,12 +377,12 @@
           
             <form [formGroup]="kycgroup">
             <ng-template matStepLabel>Select an account</ng-template>
-             <!-- <div>
+              <div>
               <h3>We found this account registered with your number. So do you want to continue with that?</h3>
                <mat-radio-group aria-label="Select an option"  formControlName="existingaccount">
                 <mat-radio-button class="matitm" value="India">xxx-xxx-xxx89</mat-radio-button>
               </mat-radio-group> 
-            </div> --> 
+            </div> 
             <div>
               <h3>Your current mobile number is not linked to any account with us , please start the KYC process.</h3>
               
@@ -296,16 +416,18 @@
 
   <mat-step [stepControl]="kycoption" *ngIf="countryrestic">
     <div class="container con0 conw mrned">
-        
+      <p class="toptitle">Select KYC option</p>  
         <div class="fromse">
           
             <form [formGroup]="kycoption">
             <ng-template matStepLabel>KYC option</ng-template>
              <div>
-              <p class="toptitle">Select KYC option</p> 
+              <p>For Proceeding further,you can voluntarily at your discretion choose,one of the following KYC options.If you choose the Aadhaar e-KYC as an option the same can be effected online during this session and it is faster.If you choose the physical OVD KYC Option,either the bank's representative may get in touch with you or may have to visit the Bank's Branch.</p> 
               <mat-radio-group aria-label="Select an option"  formControlName="kycop">
-                <mat-radio-button class="matitm" value="doc">Upload official valid documents </mat-radio-button><br>
-                 <mat-radio-button class="matitm" value="doc">Voluntary Aadhaar(Only In india)</mat-radio-button> 
+                <mat-radio-button class="matitm" value="doc">Upload official valid documents </mat-radio-button>
+                <p>Upload required documents and get a loan post verification</p>
+                <br>
+                 <mat-radio-button class="matitm" value="doc">Voluntary Aadhaar(Only In india)</mat-radio-button><p>Simple way to apply for an appropriate product</p> 
               </mat-radio-group>
             </div> 
               <div>
@@ -320,7 +442,7 @@
                   </div>
                   <div class="modal-body">
                       
-                       <p style="color: green; text-align: center; font-size: 18px;">Thanks for choosing the OVD based KYC option.The bank representative might get back to you for verification. However you can still check your loan eligibility.</p>
+                       <p style="color: green; text-align: center; font-size: 18px;">Thank you for choosing the physical OVD based KYC option. The Bank's representative may get in touch with you to complete the KYC or you may visit the Bank's branch for the same. However, you can still fill in your application here.</p>
                     
                    
 
@@ -402,7 +524,7 @@
                 <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="Employmentname">
               </div>
               <div class="form-group">
-                <label for="exampleFormControlInput1">Monthly take home salary</label>
+                <label for="exampleFormControlInput1">Monthly Take Home Salary</label>
                 <input matInput  formControlName="salary" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}" >
               </div>
               
@@ -428,7 +550,7 @@
                
               </div>
               <div class="form-group">
-                <label for="exampleFormControlInput1">Monthly take home salary</label>
+                <label for="exampleFormControlInput1">Monthly Take Home Salary</label>
                 <input matInput  formControlName="salary" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}" >
               </div>
             </div>
@@ -553,109 +675,8 @@
 
 
 
-<!-- part 4 -->
- <mat-step [stepControl]="therdFormGroup">
-    <section class="se3 getstr">
-      <div class="container con0 conw">
-        <p class="toptitle">Product Details</p> 
-        <div class="fromse">
-          <form [formGroup]=" therdFormGroup">
-            <ng-template matStepLabel>Product Details</ng-template>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Car Model </label>
-                <input   formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Car  Price</label>
-                <input   formControlName="carprice" type="Text" class="form-control"  placeholder="10,000000" disabled="true" value="10,000000" >
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Dealer Quoted Price</label>
-                <input (change)="preapprovecalcolator()"  formControlName="cardelarprice" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-<!--               <div class="custom-control custom-radio custom-control-inline">
-                
-                <label class="custom-control-label" for="customRadioInline1">Do you want to include RTO cost?</label>
-                <label class="switch">
-                  <input type="checkbox" >
-                  <span class="slider round"></span>
-                </label>
-              </div> -->
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Tentative RTO cost</label>
-                <input (change)="preapprovecalcolator()"  formControlName="rtocost" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-              
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Tentative Insurance Cost</label>
-                <input (change)="preapprovecalcolator()"  formControlName="insucost"  type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-              
-             <p class="tcost">Total Car Cost: <span>{{totalcarprice}} {{courency}}</span></p>
-
-       
-             
-            <div>
-              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright"  matStepperNext>Next</button>
-            </div>
-     
-            
-          </form>
-          
-        </div>
-      </div>
-    </section>
-  </mat-step> 
-
-<!-- step 5 -->
 
 
-
-  <mat-step [stepControl]="Congratulation">
-    <section class="se3 getstr">
-      <div class="container con0 conw">
-        <p class="toptitle">Congratulation</p>
-        <div class="fromse">
-          <form [formGroup]=" Congratulation">
-            <ng-template matStepLabel>Pre-Approved Offer</ng-template>
-              <h5>You have  pre-approved offer up to <span>{{preapproveamountforuser}}</span></h5>
-              <p>Car Model: <b><span>BMW i7</span></b></p>
-              <p>Car Price: <b><span>100000</span></b></p>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Loan Amount</label>
-                <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="loanamount" (change)="emaicalculator()">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Loan Tenure </label>
-                <select  class="form-control"  (change)="emaicalculator()" formControlName="yearreturn" >
-                  <option value="1">1 Years</option>
-                  <option value="2">2 Years</option>
-                  <option value="3">3 Years</option>
-                  <option value="4">4 Years</option>
-                  <option value="5">5 Years</option>   
-                </select>
-               
-              </div>
-
-              <p>Monthly EMI = <b><span>{{finalemi}}</span></b></p>
-              <p>Total to replay = <b><span>{{totalamount}}</span></b></p>
-              <p>Total interest to pay = <b><span>{{finalinterest}}</span></b></p> 
-
-       
-             
-            <div>
-              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright"  matStepperNext>Next</button>
-            </div>
-     
-            
-          </form>
-          
-        </div>
-      </div>
-    </section>
-  </mat-step>
 
 
 
@@ -674,7 +695,7 @@
         <div class="fromse">
           <form [formGroup]=" AddressDetails">
             <ng-template matStepLabel>Address Details</ng-template>
- 
+              <h5>Residential Address</h5>
               <div class="form-group">
               <label for="exampleFormControlSelect1">Address line 1</label>
               <input class="field locality" id="locality2" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"   formControlName="hadd1">
@@ -700,7 +721,9 @@
               <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
             </div>
 
-            <h5>Residential Address</h5>
+            
+            <br><h5>Office Address</h5>
+
              <div class="form-group">
               <label for="exampleFormControlSelect1">Address line 1</label>
               <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
@@ -725,6 +748,21 @@
               <label for="exampleFormControlSelect1">Phone Number</label>
               <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
             </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Which address you want to use for verification purposes?</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  Residential Address
+                </label><br>
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  Office Address
+                </label>
+              </div>
+            </div>
+
+
        
        
              
@@ -742,55 +780,6 @@
   </mat-step>
 
 
-<!-- step 7 -->
-
-  <mat-step [stepControl]="OfficeAddress">
-    <section class="se3 getstr">
-      <div class="container con0 conw">
-         <p class="toptitle">Office Address</p>
-        <div class="fromse">
-          <form [formGroup]=" OfficeAddress">
-            <ng-template matStepLabel>Office Address</ng-template>
-           
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Address line 1</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="oadd1">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Address line 2</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">State</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">City </label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Post Code</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Phone Number</label>
-                <input type="Text" class="form-control" id="exampleFormControlInput1" placeholder="">
-              </div>
-             
-             
-            <div>
-              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright"  matStepperNext>Next</button>
-            </div>
-     
-            
-          </form>
-          
-        </div>
-      </div>
-    </section>
-  </mat-step>
-
 
 
 
@@ -799,7 +788,7 @@
 
 <!-- step 7 -->
 
-  <mat-step [stepControl]="fileupload" *ngIf="countryrestic">
+  <mat-step [stepControl]="fileupload" >
     <section class="se3 getstr">
       <div class="container con0 conw mrned">
         <p class="toptitle">Upload Document</p>
@@ -828,41 +817,72 @@
 
 
 
-
-
-
-  <!--  
-   
-
-   <mat-list-item> <strong>car model:</strong> {{ this.forthFormGroup.value.carmodel }}</mat-list-item>
-   <mat-list-item> <strong>car price:</strong> {{ this.forthFormGroup.value.carprice }}</mat-list-item>
-   <mat-list-item> <strong>cardelar:</strong> {{ this.forthFormGroup.value.car delar }}</mat-list-item>
-   <mat-list-item> <strong>RTO:</strong> {{ this.forthFormGroup.value.rtoin }}</mat-list-item>
-   <mat-list-item> <strong>insurance:</strong> {{ this.forthFormGroup.value.insin }}</mat-list-item> -->
-
-
-
+  <!-- step 8 -->
 
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-  
-  <mat-list>
-	 <mat-list-item> <strong>Number:</strong> {{ this.firstFormGroup.value.number }}</mat-list-item>
-   <!-- <mat-list-item> <strong>city:</strong> {{ this.secondFormGroup.value.city }}</mat-list-item>
-   <mat-list-item> <strong>residence type:</strong> {{ this.secondFormGroup.value.residencetype }}</mat-list-item>
-   <mat-list-item> <strong>employment type:</strong> {{ this.secondFormGroup.value.employmenttype }}</mat-list-item>
-   <mat-list-item> <strong>Employment name:</strong> {{ this.secondFormGroup.value.Employmentname }}</mat-list-item>
-   <mat-list-item> <strong>salary:</strong> {{ this.secondFormGroup.value.salary }}</mat-list-item> -->
+    <section class="done0 ">
+      <div class="container done1">
+       
+         <div class="done2">
+          
+          <img class="img-responsive toptik" src="/assets/images/gt.png">
+         <p class="lp textc"><b>Loan application successful!</b></p><br>
+         <p class="lp">Congratulations Sabbir! You have successfully applied for a car loan with Loan amount of {{totalamount}} on 25/09/2020</p><br>
+         
+         <p class="lp">We will contact you on your registered mobile number {{displaynumber}} shortly.</p><br>
+         <hr>
+         <p class="lp"> You can also check the status of your application by <a href="">Tracking using mobile number</a></p>
+           
+         </div>
+         <div class="done2 dmarg">
+         <p class="lp textc"><b>Loan Details</b></p><br>
 
-	</mat-list>
-  
-    <div>
-      <button class="btn btn-success btnleft" matStepperPrevious>Back</button>
-      <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
-      <button class="btn btn-success btnright" (click)="submit()">Submit</button>
-    </div>
+          <table class="table table-borderless">
+
+            <tbody>
+              <tr class="trcls">
+                <td class="titletd lp">Application Ref. No.</td>
+                <td class="datatd lp" >DAL063198771</td>
+              </tr>
+              <tr class="trcls">
+                <td class="titletd lp">Loan Amount</td>
+                <td class="datatd lp" >{{totalamount}}</td>
+              </tr>
+              <tr class="trcls">
+                <td class="titletd lp">Interest Rate</td>
+                <td class="datatd lp" >9.5 % per annum</td>
+              </tr>
+              <tr class="trcls">
+                <td class="titletd lp">Duration of Loan</td>
+                <td class="datatd lp" >{{ this.Congratulation.value.yearreturn }} Years</td>
+              </tr>
+              <tr class="trcls">
+                <td class="titletd lp">EMI</td>
+                <td class="datatd lp" >{{finalemi}}</td>
+              </tr>
+              <tr class="trcls">
+                <td class="titletd lp">Processing Fee</td>
+                <td class="datatd lp" >1500</td>
+              </tr>
+
+            </tbody>
+          </table>
+           
+         </div>
+       
+      </div>
+    </section>
   </mat-step>
+
+
+
+
+
+
+
+
+  
   
 </mat-horizontal-stepper>
 </div>

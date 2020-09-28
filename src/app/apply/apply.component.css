@@ -20,7 +20,7 @@
     padding: 10px;
 }
 .topbar img{
-	margin-left: 45%;
+	margin-left: 5%;
 	margin-top: 0;
 }
 .mdhc {
@@ -143,4 +143,34 @@
     border: none;
     margin-left: 29%;
     text-transform: uppercase;
+}
+.done0{
+
+}
+.done1{
+
+}
+.done2{
+    border: 1px solid #838383;
+    padding: 10px;
+}
+.lp{
+    font-size: 20px;
+}
+.textc{
+    text-align: center;
+}
+.dmarg{
+    margin-top: 50px;
+}
+
+.toptik{
+    max-width: 100px;
+    margin-left: 44%;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+ .mat-step-icon-state-edit {
+    background-color: #1789ea !important;
+    color: #fff;
 }
