@@ -21,6 +21,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
@@ -52,6 +53,7 @@ import { Ng5SliderModule } from 'ng5-slider';
     MatRadioModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatIconModule,
     HttpClientModule,
     GooglePlaceModule,
     Ng5SliderModule,

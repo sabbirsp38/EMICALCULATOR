@@ -32,7 +32,6 @@ h1,
 h2,
 h4 {
     font-family: 'PT Sans Narrow', Arial, sans-serif;
-    text-transform: uppercase;
     font-weight: 700;
 }
 
@@ -408,6 +407,9 @@ input.getstrin  {
     border-radius: 10px !important;
     text-transform: uppercase !important;
 }
+.subbut:hover{
+        background: #39739d;
+}
 .mat-form-field-wrapper {
     margin-left: 200px;
     margin-top: 46px;
@@ -426,6 +428,9 @@ input.getstrin  {
     padding: 10px 30px;
     border-radius: 10px;
     border: 2px solid #0996fa;
+}
+.subbut0:hover{
+        background: #39739d;
 }
 /* The switch - the box around the slider */
 .switch {
@@ -496,4 +501,51 @@ input:checked + .slider:before {
     height: 16px;
     width: 16px;
     display: none !important;
+}
+.fotterp {
+    margin-top: -34px;
+    float: right;
+}
+
+
+@media only screen and (max-width: 720px) {
+.fm0 {
+    padding: 15px 20px !important;
+     min-height: 315px;
+}
+.applybut {
+    margin-left: 16%;
+    padding: 10px 39px;
+
+}
+.applybut::after{
+    content: "\a";
+    white-space: pre;
+}
+.konwbut{
+    margin-left: 12%;
+    position: absolute;
+    margin-top: 15px;
+    padding: 8px 41px;
+}
+.fotterp {
+    margin-left: 30%;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+    display: none;
+}
+
+.bt1{
+    margin-left: -16% !important;
+    margin-top: 24px;
+}
+#numlavel {
+    margin-left: 24%;
+}
+.mdcon{
+
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+}
 }

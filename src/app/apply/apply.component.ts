@@ -41,6 +41,10 @@ totalamount;
 finalinterest;
 
 
+showsalary;
+getsalary2;
+
+
 delarprice;
 rtocost;
 insurensecost;
@@ -55,6 +59,10 @@ disinsu;
 disamount;
 
 
+disfileName;
+upbuttext="Upload";
+
+
 
  
 subbut:any=false;
@@ -63,11 +71,22 @@ unum:any=true;
 uotp:any= false;
 verify:any= false;
 eamply:any= false;
+eamply2:any= false;
+eamply3:any= false;
+eamply4:any= false;
+
 employmentsec1:any= false;
 employmentsec2:any= false;
 employmentsec3:any= false;
 employmentsec4:any= false;
 countryrestic:any= false;
+uploadonce:any=false;
+checkednow:any = false;
+msgcolor:any = false;
+
+
+scalolation:any = false;
+
 
 
 gcode:any = Math.floor((Math.random() * 10000) + 99999);
@@ -88,61 +107,67 @@ componentForm = {
   ngOnInit() {
      
   	this.chosecountry = this._formBuilder.group({
-      cname: ['']
+      cname: ['', Validators.required]
       // cname: ['', Validators.required]
     });
     this.firstFormGroup = this._formBuilder.group({
-      number: [''],
+      number: ['', Validators.required],
       numdic:[''],
-      code: [''],
+      code: ['', Validators.required],
       trams: ['']
      
     });
     this.kycgroup = this._formBuilder.group({
-      existingaccount: ['']
-     
-     
+      existingaccount: ['']   
     });
     this.kycoption = this._formBuilder.group({
       kycop: ['']
-     
-     
     });
    
-    this. secondFormGroup = this._formBuilder.group({
+    this.secondFormGroup = this._formBuilder.group({
       
-      city: [''],
-      residencetype: [''],
-      employmenttype: [''],
+      city: ['', Validators.required],
+      residencetype: ['', Validators.required],
+      employmenttype: ['', Validators.required],
       Employmentname: [''],
       salary: ['']
+
     });
     this.therdFormGroup = this._formBuilder.group({
-      carmodel: [''],
+      carmodel: ['', Validators.required],
       carprice: [''],
-      cardelarprice: [''],
-      rtocost:    [''],
-      insucost:    ['']
+      cardelarprice: ['', Validators.required],
+      rtocost:    ['', Validators.required],
+      insucost:    ['', Validators.required]
     });
     this.Congratulation = this._formBuilder.group({
-      loanamount: [''],
-      yearreturn:    ['']
+      loanamount: ['', Validators.required],
+      yearreturn:    ['', Validators.required]
       
     });
 
     this.AddressDetails = this._formBuilder.group({
-      hadd1: ['']
+      hadd1: ['', Validators.required],
+      hadd2: ['', Validators.required],
+      hstate: ['', Validators.required],
+      hcity: ['', Validators.required],
+      hpcode: ['', Validators.required],
+      hpnumber: ['', Validators.required],
+      oadd1: ['', Validators.required],
+      oadd2: ['', Validators.required],
+      ostate: ['', Validators.required],
+      ocity: ['', Validators.required],
+      opcode: ['', Validators.required],
+      opnumber: ['', Validators.required],
+      contactaddress: ['', Validators.required]
     });
-    this.OfficeAddress = this._formBuilder.group({
-      oadd1: ['']
-     
-    });
+   
     this.fileupload = this._formBuilder.group({
       ufile: ['']
       
     });
     
-    
+     
    
     this.mapsAPILoader.load().then(() => {
     this.geoCoder = new google.maps.Geocoder;
@@ -181,7 +206,7 @@ componentForm = {
 
   }
 
-    cmsg(){
+  cmsg(){
     let fmvalu = this.chosecountry.value;
     let countryname = fmvalu.cname.toString();
     console.log(countryname);
@@ -212,26 +237,49 @@ componentForm = {
    }
 
  } 
-    sms(){
-       let obj3= "Verification code for your application is "+ this.gcode +".This code only for your identity verification purposes.";
+
+
+
+ otppagevarification(){
        let obj2 = this.firstFormGroup.value;
        this.displaynumber=obj2.number;
        this.trams=obj2.trams;
        this.otpdeclaration=obj2.numdic;
-       if(this.otpdeclaration===""){
-         $('#tndalart').modal('show');
-         this.eamply = true;
-         this.alartmsg="You have to declare that this number belongs to you by selecting the checkbox.";
-
-       }else if(this.trams===""){
-        $('#tndalart').modal('show');
-        this.eamply = true;
-        this.alartmsg="Please accept the  Privacy Policy and Terms and Conditions by selecting the check box.";
-       }else if(this.displaynumber===""){
+       this.alartmsg="Please accept the Mobile, DNC/NDNC, Privacy Policy and Terms and Conditions by selecting the check box.";
+       if(this.displaynumber===""){
          
           this.eamply = true;
+          this.eamply2 = false;
+          this.eamply3 = false;
+          this.eamply4 = false;
+       }else if(this.otpdeclaration===""){
+         this.eamply = false;
+         this.eamply2 = true;
+         this.eamply3 = false;
+         this.eamply4 = true;
+         $('#tndalart').modal('show');
+         
+       } 
+       else if(this.trams===""){
+        $('#tndalart').modal('show');
+         this.eamply = false;
+         this.eamply2 = false;
+         this.eamply3 = true;
+         this.eamply4 = true;
+  
        }
        else{
+       
+            this.sms();
+           
+           }
+
+ }
+  sms(){
+
+       let obj3= "Verification code for your application is "+ this.gcode +".This code only for your identity verification purposes.";
+       let obj2 = this.firstFormGroup.value;
+       this.displaynumber=obj2.number;
        let obj = {
             number:obj2.number,
             msg:obj3
@@ -245,9 +293,8 @@ componentForm = {
            this.unum=false;
            this.uotp=true;
            $('#exampleModal').modal('show');
-           
-           
-           }
+
+       
       
        
     } 
@@ -262,6 +309,7 @@ componentForm = {
           console.log(this.mmsg);
           this.verify = false;
           this.subbut = true;
+          this.msgcolor= true;
         } else {
           this.mmsg="Can't verify your number Please try again.";
           console.log(this.mmsg);
@@ -271,13 +319,19 @@ componentForm = {
        
      }
 
-
+ comasec(){
+   let getsalary=this.secondFormGroup.value;
+   this.getsalary2=getsalary.salary;
+   this.showsalary=Number(this.getsalary2).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   console.log(this.showsalary); 
+ }
 
 ctes(){
   let fmvalu = this.secondFormGroup.value;
     let employmenttype = fmvalu.employmenttype.toString();
     console.log(employmenttype);
      if (employmenttype ==="Salaried"){
+
       this.employmentsec1=true;
       this.employmentsec2=false;
       this.employmentsec3=false;
@@ -309,6 +363,9 @@ ctes(){
 
    }
 }
+
+
+
 
 
 
@@ -345,13 +402,15 @@ preapprovecalcolator(){
 emaicalculator() {
     let congvalu = this.Congratulation.value;
     // let countryname = congvalu.loanamount;
-    var loanAmount = congvalu.loanamount ;
+    var loanAmount = Number(congvalu.loanamount) ;
+    var yearreturn = congvalu.yearreturn;
     this.disamount = Number(loanAmount).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    console.log(loanAmount);
+    console.log(yearreturn);
+   if(loanAmount!==0 && yearreturn!==0){
+    
 
-
-
-
-    if(loanAmount > this.valueInString){
+    if(loanAmount > this.preapproveamount){
      alert("The loan amount exceeds the maximum limit");
     }else{
       var numberOfMonths = congvalu.yearreturn*12;
@@ -370,12 +429,39 @@ emaicalculator() {
       var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.totalamount = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.finalinterest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
+       this.scalolation=true;
+     }
+       
+   }else{
+       this.scalolation=false;
     }
 
     
 
+    
+
   }
+
+getfilename(){
+  let fromfile = this.fileupload.value;
+  let disfileName2=fromfile.ufile;
+  if(disfileName2===""){
+
+  }else{
+       this.disfileName = disfileName2.replace(/.*[\/\\]/, '');
+       this.upbuttext="Reupload";
+       this.uploadonce=true;
+  }
+  
+}
+
+
+
+
+ get f() { return this.secondFormGroup.controls; }  
+ oktocheck(){
+  this.checkednow=true;
+ }
 
 
 

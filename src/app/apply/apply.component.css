@@ -8,12 +8,22 @@
 .btnleft {
     padding: 10px 52px;
     margin: 0px 20px;
+    background: #1789ea;
+}
+.btnleft:hover{
+        background: #39739d !important;
+        color: white!important;
 }
 
 .btnright {
     padding: 10px 51px;
     float: right;
     margin-right: 20px;
+    background: #1789ea;
+}
+.btnright:hover{
+        background: #39739d !important;
+        color: white!important;
 }
 .topbar{
 	background: #eefefd;
@@ -24,7 +34,10 @@
 	margin-top: 0;
 }
 .mdhc {
-    background: #0482cc;
+    background: #eefefd;
+}
+.modal-footer {
+    background: #eefefd;
 }
 
 .mdcon{
@@ -45,6 +58,9 @@
     border-radius: 10px !important;
     text-transform: uppercase !important;
 }
+.mdbut:hover{
+        background: #39739d !important;
+}
 
 .mdresend{
     background: transparent;
@@ -55,14 +71,14 @@
 }
 
 .mdresend:hover{
-    background: #0095ff !important;
+    background: #0095ff ;
 }
 .modaltitle{
   font-size: 18px;
     text-align: center;
     margin-left: 48px;
     font-weight: bold;
-    color: white;
+    color: black;
     text-transform: uppercase;
     margin-top: 5px;
     margin-bottom: 0px;  
@@ -74,7 +90,7 @@
 
 .mdcmsg{
     max-width: 413px;
-    margin-top: 319px;
+    margin-top: 242px;
     margin-left: 66px;
    
 }
@@ -173,4 +189,159 @@
  .mat-step-icon-state-edit {
     background-color: #1789ea !important;
     color: #fff;
+}
+
+input[type="file"] {
+    position: absolute;
+    right: -9999px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.filelabel{
+    position: relative;
+    padding: 10px 22px;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 10px;
+    color: white;
+    margin-top: -11px;
+}
+.filelabel:hover {
+        
+    }
+
+.doctyep{
+
+}
+.doctyep label {
+    margin-left: 20px;
+    margin-right: 15px;
+}
+.docupload{
+    margin-left: 27%;
+}
+
+.doctyep select {
+    word-wrap: normal;
+    padding: 5px;
+}
+input[type=checkbox]:checked:before {
+
+    color: red !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 720px) {
+.fm0 {
+    padding: 15px 20px !important;
+     min-height: 315px;
+}
+.applybut {
+    margin-left: 23%;
+
+}
+.applybut::after{
+    content: "\a";
+    white-space: pre;
+}
+.konwbut{
+    margin-left: 18%;
+    position: absolute;
+    margin-top: 15px;
+}
+.fotterp {
+    margin-left: 30%;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+    display: none;
+}
+
+.bt1{
+    margin-left: -11% !important;
+    margin-top: 24px;
+}
+
+.subbut {
+    font-size: 16px;
+    padding: 1px 30px !important;
+}
+.mdcmsg{
+    margin-top: 0px;
+     margin-left: 0px; 
+}
+.bt2{
+   margin-left: 22% !important;
+}
+.mdbut{
+    font-size: 16px !important;
+    padding: 1px 30px !important;
+}
+.conw{
+    max-width: 100%;
+
+}
+.fromsepad {
+     padding: 0px !important; 
+
+}
+.getstrin0 {
+     min-width: 0px; 
+     margin-left: 0px; 
+     
+
+}
+.viewmsec{
+    display: none;
+}
+.bt3{
+    margin-left: 31% !important;
+}
 }

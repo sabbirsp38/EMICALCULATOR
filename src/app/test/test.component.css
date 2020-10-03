@@ -76,3 +76,95 @@ span.file-size {
     color: #999;
     padding-left: 0.5rem;
 }
+
+
+.row {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+    padding: 0;
+}
+.col-2 {
+    position: relative;
+    float: left;
+    width: 16%;
+    max-width: 16%;
+    padding: 0 10px;
+}
+.imgMask {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.imgMask-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+}
+.imgg{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#blah{
+  position: absolute;
+    width: 202px;
+    height: 200px;
+    top: 0;
+    z-index: -1;
+}
+
+
+.row {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+    padding: 0;
+}
+.col-2 {
+    position: relative;
+    float: left;
+    width: 16%;
+    max-width: 16%;
+    padding: 0 10px;
+}
+.imgMask {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.imgMask-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+}
+.imgg{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#blah{
+  position: absolute;
+    width: 202px;
+    height: 200px;
+    top: 0;
+    z-index: -1;
+}
