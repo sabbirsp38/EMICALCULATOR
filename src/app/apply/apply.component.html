@@ -84,8 +84,6 @@
 
 
 
-
-
   <mat-step [stepControl]="chosecountry" >
     <div class="container con0 conw mrned">
       <p class="toptitle">Choose Your Country</p> 
@@ -237,19 +235,8 @@
           </form>
         </div>
       </div>
-      <div class="col-md-3 col-lg-3 col-sm-3 viewmsec"  style="border: 1px solid silver;">
-        <img class="img-responsive siderimg" src="/assets/images/AL_Sidebar.png">
-
-       <ul class="siedlist">
-         <li>Get <b>up to 90% finance for the car you want</b></li><br>
-         <li>Relax with <b>flexible EMIs</b> - choose repayment duration upto 7 years</li>
-       </ul>
-       <hr>
-       <button class="viewbut"    >View more</button>
-
-
-
-
+      <div class="col-sm-3 col-lg-3 col-md-3">
+        <img src="/assets/images/let.jpg" class="img-responsive sideimg">
       </div>
       
     </div>
@@ -388,6 +375,13 @@
             <h4>Residence Details </h4>
             <br>
             <div class="form-group">
+              <label for="exampleFormControlInput1">Name</label>
+              <input class="form-control" type="text"  formControlName="personneame" [ngClass]="{ 'is-invalid': checkednow && f.personneame.errors }">
+              <div *ngIf="checkednow && f.personneame.errors" class="invalid-feedback">
+                <div *ngIf="f.personneame.errors.required">Name is required</div>
+              </div>
+            </div>
+            <div class="form-group">
               <label for="exampleFormControlInput1">City of Residence </label>
               <input class="field" id="locality" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text"  formControlName="city" [ngClass]="{ 'is-invalid': checkednow && f.city.errors }">
               <div *ngIf="checkednow && f.city.errors" class="invalid-feedback">
@@ -417,7 +411,7 @@
             <br/>
             
             <br>
-            <h4>Employment and income details</h4>
+            <h4>Employment and Income Details</h4>
             <br>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Employment Type</label>
@@ -607,11 +601,11 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Car  Price</label>
-                <input   formControlName="carprice" type="Text" class="form-control"  placeholder="10,000000" disabled="true" value="10000000"  >
+                <input   formControlName="carprice" type="Text" class="form-control"  placeholder="1,000,000" disabled="true" value="1,000,000"  >
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Dealer Quoted Price</label>
-                <input (change)="preapprovecalcolator()"  formControlName="cardelarprice" type="Text" class="form-control" id="exampleFormControlInput1" value="{{disprice}}"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.cardelarprice.errors }">
+                <input (change)="preapprovecalcolator()"  formControlName="cardelarprice" type="Text" class="form-control" id="exampleFormControlInput1" value="{{disprice}}"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.cardelarprice.errors }" placeholder="{{courency}}">
                 <div *ngIf="checkednow && this.therdFormGroup.controls.cardelarprice.errors" class="invalid-feedback">
                 <div *ngIf="this.therdFormGroup.controls.cardelarprice.errors.required">Dealer Quoted Price is required</div>
                 </div>
@@ -625,16 +619,16 @@
                 </label>
               </div> -->
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Tentative RTO cost</label>
-                <input (change)="preapprovecalcolator()"  formControlName="rtocost" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{disrto}}"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.rtocost.errors }">
+                <label for="exampleFormControlSelect1">Registration Cost</label>
+                <input (change)="preapprovecalcolator()"  formControlName="rtocost" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{disrto}}"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.rtocost.errors }" placeholder="{{courency}}">
                 <div *ngIf="checkednow && this.therdFormGroup.controls.rtocost.errors" class="invalid-feedback">
-                <div *ngIf="this.therdFormGroup.controls.rtocost.errors.required">Tentative RTO cost is required</div>
+                <div *ngIf="this.therdFormGroup.controls.rtocost.errors.required">Registration Cost is required</div>
               </div>
               </div>
               
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Tentative Insurance Cost</label>
-                <input (change)="preapprovecalcolator()"  formControlName="insucost"  type="Text" class="form-control" id="exampleFormControlInput1" value="{{disinsu}}" [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.insucost.errors }">
+                <input (change)="preapprovecalcolator()"  formControlName="insucost"  type="Text" class="form-control" id="exampleFormControlInput1" value="{{disinsu}}" [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.insucost.errors }" placeholder="{{courency}}">
                 <div *ngIf="checkednow && this.therdFormGroup.controls.insucost.errors" class="invalid-feedback">
                 <div *ngIf="this.therdFormGroup.controls.insucost.errors.required">Tentative Insurance Cost is required</div>
               </div>
@@ -672,13 +666,13 @@
         <div class="fromse">
           <form [formGroup]=" Congratulation">
             <ng-template matStepLabel>Eligibility Result</ng-template>
-              <h5>You are eligible for a Auto Loan up to <span>{{preapproveamountforuser}}</span></h5>
+              <h5>You are eligible for a Auto Loan up to <span>{{preapproveamountforuser}}{{courency}}</span></h5>
               <p>Loan will be approved once your documents are verified.</p>
               <p>Car Model: <b><span>{{ this.therdFormGroup.value.carmodel }}</span></b></p>
-              <p>Car Price: <b><span>10,0000</span></b></p>
+              <p>Car Price: <b><span>1,000,000 {{courency}}</span></b></p>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Loan Amount</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="loanamount" (change)="emaicalculator()" value="{{disamount}}"[ngClass]="{ 'is-invalid': checkednow && this.Congratulation.controls.loanamount.errors }">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}" formControlName="loanamount" (change)="emaicalculator()" value="{{disamount}}"[ngClass]="{ 'is-invalid': checkednow && this.Congratulation.controls.loanamount.errors }">
                 <div *ngIf="checkednow && this.Congratulation.controls.loanamount.errors" class="invalid-feedback">
                 <div *ngIf="this.Congratulation.controls.loanamount.errors.required">Loan Amount is required</div>
               </div>
@@ -702,9 +696,9 @@
               <p >Interest Rate:  <b><span>9.5 % per annum</span></b></p>
 
               <div *ngIf="scalolation">
-              <p>Monthly EMI: <b><span>{{finalemi}}</span></b></p>
-              <p>Total To Repay: <b><span>{{totalamount}}</span></b></p>
-              <p>Total Interest To Pay:<b><span>{{finalinterest}}</span></b></p> 
+              <p>Monthly EMI: <b><span>{{finalemi}}{{courency}}</span></b></p>
+              <p>Total To Repay: <b><span>{{totalamount}}{{courency}}</span></b></p>
+              <p>Total Interest To Pay:<b><span>{{finalinterest}}{{courency}}</span></b></p> 
               </div>
 
        
@@ -723,7 +717,6 @@
   </mat-step>
 
 
-
 <!-- step 6 -->
 
   <mat-step [stepControl]="AddressDetails">
@@ -738,7 +731,7 @@
                 <label for="exampleFormControlSelect1">Address line 1</label>
                 <input class="form-control"   formControlName="hadd1"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hadd1.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.hadd1.errors" class="invalid-feedback">
-                  <div *ngIf="this.AddressDetails.controls.hadd1.errors.required">Loan Address line is required</div>
+                  <div *ngIf="this.AddressDetails.controls.hadd1.errors.required"> Address line is required</div>
                 </div>
               </div>
             <div class="form-group">
@@ -757,21 +750,21 @@
               </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">City </label>
-              <input type="Text" class="field locality" id="locality2" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" formControlName="hcity"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hcity.errors }">
+              <input class="field" id="locality" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text"  formControlName="city" formControlName="hcity"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hcity.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.hcity.errors" class="invalid-feedback">
                   <div *ngIf="this.AddressDetails.controls.hcity.errors.required">City is required</div>
                 </div>
               </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Post Code</label>
-              <input type="Text" class="form-control" formControlName="hpcode"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hpcode.errors }">
+              <input type="number" min="0" class="form-control" formControlName="hpcode"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hpcode.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.hpcode.errors" class="invalid-feedback">
                   <div *ngIf="this.AddressDetails.controls.hpcode.errors.required">Post Code is required</div>
                 </div>
               </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Phone Number</label>
-              <input type="Text" class="form-control" formControlName="hpnumber"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hpnumber.errors }">
+              <input type="number" min="0" class="form-control" formControlName="hpnumber"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hpnumber.errors }" >
                 <div *ngIf="checkednow && this.AddressDetails.controls.hpnumber.errors" class="invalid-feedback">
                   <div *ngIf="this.AddressDetails.controls.hpnumber.errors.required">Phone Number is required</div>
                 </div>
@@ -803,21 +796,21 @@
               </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">City </label>
-              <input type="Text" class="form-control" formControlName="ocity"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.ocity.errors }">
+              <input class="field" id="locality" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text"  formControlName="city" formControlName="ocity"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.ocity.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.ocity.errors" class="invalid-feedback">
                   <div *ngIf="this.AddressDetails.controls.ocity.errors.required">City is required</div>
                 </div>
               </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Post Code</label>
-              <input type="Text" class="form-control" formControlName="opcode"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.opcode.errors }">
+              <input type="number" min="0" class="form-control" formControlName="opcode"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.opcode.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.opcode.errors" class="invalid-feedback">
                   <div *ngIf="this.AddressDetails.controls.opcode.errors.required">Post Code is required</div>
                 </div>
               </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Phone Number</label>
-              <input type="Number" class="form-control" formControlName="opnumber"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.opnumber.errors }">
+              <input type="number" min="0" class="form-control" formControlName="opnumber"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.opnumber.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.opnumber.errors" class="invalid-feedback">
                   <div *ngIf="this.AddressDetails.controls.opnumber.errors.required">Phone Number is required</div>
                 </div>
@@ -853,6 +846,8 @@
   </mat-step>
 
 
+
+
 <!-- step 7 -->
 
   <mat-step [stepControl]="fileupload" >
@@ -876,38 +871,43 @@
               
               
 
-                       <table class="table table-borderless">
+              <table class="table table-borderless">
 
-            <tbody>
-              <tr class="trcls">
-                <td class="titletd lp">
+                <tbody>
+                  <tr class="trcls">
+                    <td class="titletd lp">
+                      
+                      <select style="margin-left: 34%;">
+                        <option value="1">Driving License</option>
+                        <option value="2">Passport</option>
+                        <option value="3">National ID Card</option>   
+                      </select>
+                    </td>
+                  </tr>
+                  <tr class="trcls">
+                    <td class="datatd lp" >
+                      <label for="upload" class="filelabel" style="margin-left: 39%;">
+                        <input type="file" id="upload" formControlName="ufile" (change)="getfilename()" multiple>
+                       <i style="color: #1789ea;margin-left: 32%;" class="fa fa-plus fa-2x"></i>
+                      </label>
+                    </td>
+                  </tr>
                   
-                  <select>
-                    <option value="1">Driving License</option>
-                    <option value="2">Passport</option>
-                    <option value="3">National ID Card</option>   
-                  </select>
-                </td>
-                <td class="datatd lp" >
-                  <label for="upload" class="filelabel">
-                    <input type="file" id="upload" formControlName="ufile" (change)="getfilename()" multiple>
-                   <i style="color: #1789ea;margin-left: 32%;" class="fa fa-plus fa-2x"></i>
-                  </label>
-                </td>
-                <td class="datatd lp" >
-                  <button class="subbut" style="margin-left: 150px;">{{upbuttext}}</button>
-                </td>
-              </tr>
-              <tr>
-                <div *ngIf="uploadonce" class="updoc">
-                  <p><b>Selected Document</b></p>
-                  <p>{{disfileName}}</p>
-                 </div>
-              </tr>
-              
+                  <tr>
+                    <div *ngIf="uploadonce" class="updoc">
+                      <p><b>Selected Document</b></p>
+                      <p>{{disfileName}}</p>
+                     </div>
+                  </tr>
+                  <tr class="trcls">
+                    <td class="datatd lp" >
+                      <button class="subbut" style="margin-left: 34%;">{{upbuttext}}</button>
+                    </td>
+                  </tr>
+                  
 
-            </tbody>
-          </table>
+                </tbody>
+              </table>
               
               
 
@@ -935,6 +935,7 @@
 
 
 
+
   <!-- step 8 -->
 
   <mat-step>
@@ -946,11 +947,11 @@
           
           <img class="img-responsive toptik" src="/assets/images/gt.png">
          <p class="lp textc"><b>Loan application successful!</b></p><br>
-         <p class="lp">Congratulations Sabbir! You have successfully applied for a car loan with Loan amount of {{totalamount}} on 1/10/2020</p><br>
+         <p class="lp">Congratulations Sabbir! You have successfully applied for a car loan with Loan amount of {{disamount}}{{courency}} on 5/10/2020</p><br>
          
          <p class="lp">We will contact you on your registered mobile number {{displaynumber}} shortly.</p><br>
-         <hr>
-         <p class="lp"> You can also check the status of your application by <a href="">Tracking using mobile number</a></p>
+         <!-- <hr>
+         <p class="lp"> You can also check the status of your application by <a href="">Tracking using mobile number</a></p> -->
            
          </div>
          <div class="done2 dmarg">
@@ -965,7 +966,7 @@
               </tr>
               <tr class="trcls">
                 <td class="titletd lp">Loan Amount</td>
-                <td class="datatd lp" >{{totalamount}}</td>
+                <td class="datatd lp" >{{totalamount}}{{courency}}</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd lp">Interest Rate</td>
@@ -977,11 +978,11 @@
               </tr>
               <tr class="trcls">
                 <td class="titletd lp">EMI</td>
-                <td class="datatd lp" >{{finalemi}}</td>
+                <td class="datatd lp" >{{finalemi}}{{courency}}</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd lp">Processing Fee</td>
-                <td class="datatd lp" >1500</td>
+                <td class="datatd lp" >1500{{courency}}</td>
               </tr>
 
             </tbody>

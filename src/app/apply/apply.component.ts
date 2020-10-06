@@ -126,6 +126,7 @@ componentForm = {
    
     this.secondFormGroup = this._formBuilder.group({
       
+      personneame: ['', Validators.required],
       city: ['', Validators.required],
       residencetype: ['', Validators.required],
       employmenttype: ['', Validators.required],

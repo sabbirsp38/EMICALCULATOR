@@ -231,7 +231,11 @@ input[type=checkbox]:checked:before {
 
     color: red !important;
 }
-
+.sideimg {
+    max-width: 130%;
+    height: 380px;
+    margin-left: -20px;
+}
 
 
 
