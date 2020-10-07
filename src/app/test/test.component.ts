@@ -12,96 +12,149 @@ declare var $: any ;
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements OnInit {
-// private geoCoder;
+export class TestComponent implements AfterViewInit {
+  filters: any;
+  pemi = {
+    value: "1"
+  }
+  remi = {
+    value: "9.5"
+  }
+  temi = {
+    value: "5"
+  }
+  memi = {
+    value: "240"
+  }
 
-// componentForm = {
-//   street_number: "short_name",
-//   route: "long_name",
-//   locality: "long_name",
-//   administrative_area_level_1: "short_name",
-//   country: "long_name",
-//   postal_code: "short_name"
-// };
-registerForm: FormGroup;
-    submitted = false;
+  query = {
+    amount: "",
+    interest: "",
+    tenureYr: "",
+    tenureMo: ""
+  }
+
+  result = {
+    emi: "",
+    interest: "",
+    total: ""
+  }
+  yrToggel: boolean;
+  poptions: Options = {
+    floor: 1,
+    ceil: 100,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>L</b>';
+        case LabelType.High:
+          return value + '<b>L</b>';
+        default:
+          return value + '<b>L</b>';
+      }
+    }
+  };
+  roptions: Options = {
+    floor: 5,
+    ceil: 20,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>%</b>';
+        case LabelType.High:
+          return value + '<b>%</b>';
+        default:
+          return value + '<b>%</b>';
+      }
+    }
+  };
+  toptions: Options = {
+    floor: 1,
+    ceil: 5,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>Yr</b>';
+        case LabelType.High:
+          return value + '<b>Yr</b>';
+        default:
+          return value + '<b>Yr</b>';
+      }
+    }
+  };
+  moptions: Options = {
+    floor: 1,
+    ceil: 360,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>Mo</b>';
+        case LabelType.High:
+          return value + '<b>Mo</b>';
+        default:
+          return value + '<b>Mo</b>';
+      }
+    }
+  };
 
   constructor(private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone,private formBuilder: FormBuilder) { }
+    private ngZone: NgZone,private formBuilder: FormBuilder) {
+     this.yrToggel = true;
+     }
 
-  ngOnInit() {
-
-
-    // this.mapsAPILoader.load().then(() => {
-    //   this.geoCoder = new google.maps.Geocoder;
-    //   let autocomplete = new google.maps.places.Autocomplete(document.getElementById('search') as HTMLInputElement,
-    // { types: ["geocode"] }); 
-    //   autocomplete.setFields(["address_component"]);
-    //   autocomplete.addListener("place_changed", () => {
-    //     this.ngZone.run(() => {
-    //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-     
-    //        for (const component in this.componentForm) {
-    //         (document.getElementById(component) as HTMLInputElement).value = "";
-    //         (document.getElementById(component) as HTMLInputElement).disabled = false;
-    //       }
-    //       for (const component of place.address_components as google.maps.GeocoderAddressComponent[]) {
-    //         const addressType = component.types[0];
-    //          console.log(addressType);
-    //         if (this.componentForm[addressType]) {
-    //           const val = component[this.componentForm[addressType]];
-    //           (document.getElementById(addressType) as HTMLInputElement).value = val;
-    //         }
-    //       }
-                  
-    //     });
-    //   });
-    // });
-
-
-   this.registerForm = this.formBuilder.group({
-            nasdasdae: ['', Validators.required],
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            confirmPassword: ['', Validators.required],
-            acceptTerms: [false, Validators.requiredTrue]
-        });
+   ngAfterViewInit() {
+    this.update();
+  }
 
 
 
 
 
+  tbupdate(id) {
+    if (id == 0) {
+      this.pemi.value = (Number(this.query.amount) / 100000).toString();
+    }
+    else if (id == 1) {
+      this.remi.value = this.query.interest;
+    }
+    else if (id == 2) {
+      this.temi.value = this.query.tenureYr;
+    }
+    else if (id == 3) {
+      this.memi.value = this.query.tenureMo;
+    }
+    this.update();
+  }
 
-}
+  update() {
 
+    var loanAmount = Number(this.pemi.value) * 100000;
+    var numberOfMonths = (this.yrToggel) ? (Number(this.temi.value) * 12) : Number(this.memi.value);
+    var rateOfInterest = Number(this.remi.value);
+    var monthlyInterestRatio = (rateOfInterest / 100) / 12;
 
-
-
- // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
-
-    onSubmit() {
-        this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-
-        // display form values on success
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    this.query.amount = loanAmount.toString();
+    this.query.interest = rateOfInterest.toString();
+    if (this.yrToggel) {
+      this.query.tenureYr = this.temi.value.toString();
+    }
+    else {
+      this.query.tenureMo = this.memi.value.toString();
     }
 
-    onReset() {
-        this.submitted = false;
-        this.registerForm.reset();
-    }
+    var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
+    var bottom = top - 1;
+    var sp = top / bottom;
+    var emi = ((loanAmount * monthlyInterestRatio) * sp);
+    var full = numberOfMonths * emi;
+    var interest = full - loanAmount;
+    var int_pge = (interest / full) * 100;
 
-
-
-
+    this.result.emi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.result.total = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.result.interest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
 
 

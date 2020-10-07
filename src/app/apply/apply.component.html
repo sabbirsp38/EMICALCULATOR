@@ -4,9 +4,9 @@
  
 
 
-<div style="background: red;">
+<div>
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper labelPosition="bottom">
+<mat-horizontal-stepper [linear]="isLinear"  labelPosition="bottom" #stepper>
 
 
 
@@ -19,7 +19,6 @@
 
 
 
- 
 
 
 
@@ -67,86 +66,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <mat-step [stepControl]="chosecountry" >
-    <div class="container con0 conw mrned">
-      <p class="toptitle">Choose Your Country</p> 
-      <div style="background-image: url(./assets/images/bacc.jpg);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-position-x: center;
-    background-size: cover;
-">
-        <div class="fromse" style="background:transparent; ">
-          <form [formGroup]="chosecountry">
-            <ng-template matStepLabel>Choose your country</ng-template>
-              
-              <mat-radio-group aria-label="Select an option"  formControlName="cname">
-
-                <mat-radio-button class="matitm" value="India">India</mat-radio-button><br>
-                <mat-radio-button class="matitm" value="Myanmar">Myanmar</mat-radio-button><br>
-                <mat-radio-button class="matitm" value="Vietnam">Vietnam</mat-radio-button><br>
-                <mat-radio-button class="matitm" value="Phillipines">Phillipines</mat-radio-button>
-              </mat-radio-group>
-              <div>
-                <button id="subbut" class="fcn subbut bt1"  mat-button  data-toggle="modal" data-target="#Country" (click)="cmsg()" >Continue</button>
-              </div>
-
-
-          <!-- Modal -->
-            <div class="modal fade" id="Country" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-backdrop="static">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content mdcmsg">
-                  <div class="modal-header mdhc">
-                  </div>
-                  <div class="modal-body">
-                      
-                       <p style="text-align: center; font-size: 16px;">{{umsg}}</p>
-                    
-                   
-
-                   <button id="subbut" class="fcn mdbut bt2"  mat-button   data-dismiss="modal" matStepperNext>Continue</button>
-
-                   
-                  </div>
-                  
-                  <div class="modal-footer">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-
-              
-
-         
-
-           </form>
-
-
-        </div>
-      </div>
-      </div>
-     
-  </mat-step>
-
-  <!-- 1 end here -->
 
 
 
@@ -364,15 +283,14 @@
 
 
 <!-- part 3 -->
-
-  <mat-step [stepControl]="secondFormGroup">
+<mat-step [stepControl]="secondFormGroup">
     <section class="se3 getstr">
       <div class="container con0 conw">
        
         <div class="fromse">
           <form [formGroup]=" secondFormGroup">
             <ng-template matStepLabel>Check Loan Eligibility</ng-template>
-            <h4>Residence Details </h4>
+            <h4>Personal Details</h4>
             <br>
             <div class="form-group">
               <label for="exampleFormControlInput1">Name</label>
@@ -383,7 +301,7 @@
             </div>
             <div class="form-group">
               <label for="exampleFormControlInput1">City of Residence </label>
-              <input class="field" id="locality" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text"  formControlName="city" [ngClass]="{ 'is-invalid': checkednow && f.city.errors }">
+              <input class="field" id="locality" type="text" class="form-control" (keydown.enter)="$event.preventDefault()"  autocorrect="off" autocapitalize="off" spellcheck="off" type="text"  formControlName="city" [ngClass]="{ 'is-invalid': checkednow && f.city.errors }" placeholder="Enter City">
               <div *ngIf="checkednow && f.city.errors" class="invalid-feedback">
                 <div *ngIf="f.city.errors.required">City is required</div>
               </div>
@@ -391,15 +309,15 @@
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Residence  Type</label>
-              <select  class="form-control"  formControlName="residencetype" [ngClass]="{ 'is-invalid': checkednow && f.residencetype.errors }">
-                <option value="India">Company provided </option>
-                <option value="Dhaka">Hostel</option>
-                <option value="Dhaka">Owned by parent/ sibling</option>
-                <option value="Dhaka">Owned by self/ spouse</option>
-                <option value="Dhaka">Paying guest</option>
-                <option value="Dhaka">Rented staying alone</option>
-                <option value="Dhaka">Rented with family</option>
-                <option value="Dhaka">Rented with friends</option>
+              <select  class="form-control"  formControlName="residencetype" [ngClass]="{ 'is-invalid': checkednow && f.residencetype.errors }" (change)="cresidencetype()">
+                <option value="Companyprovided">Company Provided </option>
+                <option value="Hostel">Hostel</option>
+                <option value="Ownedbyparent">Owned By Parent/ sibling</option>
+                <option value="Ownedbyself">Owned By Self/ spouse</option>
+                <option value="Payingguest">Paying Guest</option>
+                <option value="Rentedstayingalone">Rented Staying alone</option>
+                <option value="entedwithfamily">Rented With Family</option>
+                <option value="Rentedwithsfriends">Rented With Friends</option>
               </select>
               <div *ngIf="checkednow && f.residencetype.errors" class="invalid-feedback">
                 <div *ngIf="f.residencetype.errors.required">Residence  Type is required</div>
@@ -417,15 +335,16 @@
               <label for="exampleFormControlSelect1">Employment Type</label>
               <select matInput class="form-control" id="exampleFormControlSelect1"  formControlName="employmenttype" (change)="ctes()" [ngClass]="{ 'is-invalid': checkednow && f.employmenttype.errors }">
                 <option value="Salaried" class="form-control">Salaried</option>
-                <option value="SalariedDoctor" class="form-control">Salaried Doctor</option>
-                <option value="SelfEmployedbusiness" class="form-control">Self Employed business</option>
-                <option value="SelfEmployedProfessional" class="form-control">Self Employed professional</option>
+                <option value="SelfEmployedbusiness" class="form-control">Self Employed Business</option>
+                <option value="SelfEmployedProfessional" class="form-control">Self Employed Professional</option>
               </select>
 
               <div *ngIf="checkednow && f.employmenttype.errors" class="invalid-feedback">
                 <div *ngIf="f.employmenttype.errors.required">Employment and income details is required</div>
               </div>
             </div >
+
+
              
             <div *ngIf="employmentsec1">
               <div class="form-group">
@@ -434,35 +353,14 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Monthly Take Home Salary</label>
-                <input matInput  formControlName="salary" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}"  (change)="comasec()" value="{{showsalary}}">
+                <input matInput  formControlName="takehomeselary" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}"  (change)="comasec(); disposableincome();" value="{{showsalary}}">
               </div>
               
             </div>
 
 
 
-            <div *ngIf="employmentsec2">
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Employer Name </label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Total Work Experience</label>
-                <select  class="form-control"   >
-                  <option value="India">1</option>
-                  <option value="Dhaka">2</option>
-                  <option value="Dhaka">3</option>
-                  <option value="Dhaka">4</option>
-                  <option value="Dhaka">>5</option>
-                  
-                </select>
-               
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Monthly Take Home Salary</label>
-                <input  formControlName="salary" type="Text" class="form-control"   value="" placeholder="{{courency}}">
-              </div>
-            </div>
+
             
 
             <div *ngIf="employmentsec3">
@@ -513,7 +411,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Latest Year's Profit After Tax</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1"placeholder="{{courency}}" formControlName="takehomeselarybuseness" (change)="disposableincome()">
               </div>
             </div>
 
@@ -566,7 +464,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Latest Year's Profit After Tax</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}" formControlName="takehomeselaryprofesonal" (change)="disposableincome()">
               </div>
             </div>
             <div>
@@ -580,17 +478,111 @@
         </div>
       </div>
     </section>
+  </mat-step>  
+
+ 
+
+<!-- step 5 -->
+ <mat-step [stepControl]="monthlycost">
+    <section class="se3 getstr">
+      <div class="container con0 conw">
+        <p class="toptitle">Loan and Expenditure Details</p> 
+        <div class="fromse">
+          <form [formGroup]="monthlycost">
+            <ng-template matStepLabel>Loan and Expenditure Details</ng-template>
+
+
+
+              <fieldset class="form-group">
+                  <label>Whether Any Loans Running Currently ?</label><br>
+
+                <mat-radio-group aria-label="Select an option" (change)="getloninfo()"  formControlName="lonarunning"[ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.lonarunning.errors }">
+                  <mat-radio-button class="matitm" value="Yes">Yes</mat-radio-button><br>
+                  <mat-radio-button class="matitm" value="No">No</mat-radio-button><br>
+                </mat-radio-group>
+
+                <div *ngIf="checkednow && this.monthlycost.controls.lonarunning.errors" class="invalid-feedback">
+                  <div *ngIf="this.monthlycost.controls.lonarunning.errors.required">This field is required</div>
+                </div>
+              </fieldset>
+
+            
+              <div  *ngIf="yeslon"  >
+                <div class="form-group" >
+                  <label for="exampleFormControlSelect1">Total Outstanding Amount</label>
+                  <input formControlName="currentloan" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.currentloan.errors }" placeholder="{{courency}}">
+                  <div *ngIf="checkednow && this.monthlycost.controls.currentloan.errors" class="invalid-feedback">
+                  <div *ngIf="this.monthlycost.controls.currentloan.errors.required">Dealer Quoted Price is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Total Number of EMI</label>
+                  <input  formControlName="numberofemi" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.numberofemi.errors }" >
+                  <div *ngIf="checkednow && this.monthlycost.controls.numberofemi.errors" class="invalid-feedback">
+                  <div *ngIf="this.monthlycost.controls.numberofemi.errors.required">Dealer Quoted Price is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Total Amount of EMI</label>
+                  <input  formControlName="emiamount" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.emiamount.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
+                  <div *ngIf="checkednow && this.monthlycost.controls.emiamount.errors" class="invalid-feedback">
+                  <div *ngIf="this.monthlycost.controls.emiamount.errors.required">Dealer Quoted Price is required</div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Monthly Expenses</label>
+                <input  formControlName="mexpense" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.mexpense.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
+                <div *ngIf="checkednow && this.monthlycost.controls.mexpense.errors" class="invalid-feedback">
+                <div *ngIf="this.monthlycost.controls.mexpense.errors.required">Dealer Quoted Price is required</div>
+                </div>
+              </div>
+
+              <div class="form-group" *ngIf="renthome">
+                <label for="exampleFormControlSelect1">Monthly Rent</label>
+                <input   formControlName="mrent" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.mrent.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
+                <div *ngIf="checkednow && this.monthlycost.controls.mrent.errors" class="invalid-feedback">
+                <div *ngIf="this.monthlycost.controls.mrent.errors.required">Dealer Quoted Price is required</div>
+                </div>
+              </div>
+              <p *ngIf="totalcostshow">Total Monthly Obligation: <span>{{monthlysendamountdispaly}}</span> {{courency}}</p>
+
+               <div class="alartse0">
+              
+                <input  class="getstrin" type="checkbox"  /><p class="getstrin01">I declare that the Information I have provided above is accurate and complete to the best of my knowledge. I authorise XYZ Bank and its representative to call or sms me with reference to my loan application.</p>
+
+               </div>
+              
+
+
+       
+             
+            <div>
+              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
+              <button class="btn btn-success btnright" (click)="oktocheck()"  matStepperNext>Next</button>
+            </div>
+     
+            
+          </form>
+          
+        </div>
+      </div>
+    </section>
   </mat-step>
+
+
+
 
 
 <!-- part 4 -->
  <mat-step [stepControl]="therdFormGroup">
     <section class="se3 getstr">
       <div class="container con0 conw">
-        <p class="toptitle">Product Details</p> 
+        <p class="toptitle">Vehicle Details</p> 
         <div class="fromse">
           <form [formGroup]=" therdFormGroup">
-            <ng-template matStepLabel>Product Details</ng-template>
+            <ng-template matStepLabel>Vehicle Details</ng-template>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Car Model </label>
                 <input   formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
@@ -610,14 +602,7 @@
                 <div *ngIf="this.therdFormGroup.controls.cardelarprice.errors.required">Dealer Quoted Price is required</div>
                 </div>
               </div>
-<!--               <div class="custom-control custom-radio custom-control-inline">
-                
-                <label class="custom-control-label" for="customRadioInline1">Do you want to include RTO cost?</label>
-                <label class="switch">
-                  <input type="checkbox" >
-                  <span class="slider round"></span>
-                </label>
-              </div> -->
+
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Registration Cost</label>
                 <input (change)="preapprovecalcolator()"  formControlName="rtocost" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" value="{{disrto}}"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.rtocost.errors }" placeholder="{{courency}}">
@@ -655,7 +640,8 @@
   </mat-step> 
 
 
-<!-- step 5 -->
+
+
 
 
 
@@ -666,39 +652,75 @@
         <div class="fromse">
           <form [formGroup]=" Congratulation">
             <ng-template matStepLabel>Eligibility Result</ng-template>
-              <h5>You are eligible for a Auto Loan up to <span>{{preapproveamountforuser}}{{courency}}</span></h5>
-              <p>Loan will be approved once your documents are verified.</p>
-              <p>Car Model: <b><span>{{ this.therdFormGroup.value.carmodel }}</span></b></p>
-              <p>Car Price: <b><span>1,000,000 {{courency}}</span></b></p>
+              <h5> Loan will be approved once your documents are verified.</h5>
+              
+              <p>Car Model: <span>{{ this.therdFormGroup.value.carmodel }}</span></p>
+              <p>Dealer Offered Price: <span>{{disprice}} </span> {{courency}}</p>
+
+
+                <fieldset class="form-group">
+                  <label><b>Loan Tenure</b></label><br>
+
+                  <mat-radio-group aria-label="Select an option" (change)="emaicalculator()" formControlName="yearreturn" [ngClass]="{ 'is-invalid': checkednow && this.Congratulation.controls.yearreturn.errors }">
+                    <mat-radio-button class="matitm" style="margin-left: 10px;" value="1" >1 Year</mat-radio-button>
+                    <mat-radio-button class="matitm" style="margin-left: 10px;" value="2">2 Years</mat-radio-button>
+                    <mat-radio-button class="matitm" style="margin-left: 10px;" value="3">3 Years</mat-radio-button>
+                    <mat-radio-button class="matitm" style="margin-left: 10px;" value="4">4 Years</mat-radio-button>
+                    <mat-radio-button class="matitm" style="margin-left: 10px;" value="5">5 Years</mat-radio-button>
+                  </mat-radio-group>
+
+                  <div *ngIf="checkednow && this.Congratulation.controls.yearreturn.errors" class="invalid-feedback">
+                    <div *ngIf="this.Congratulation.controls.yearreturn.errors.required">Loan Tenure is required</div>
+                  </div>
+                </fieldset>
+
+
+
+
+
+              <p>Based on the information submitted, the maximum permissible loan amount is<span> {{preapproveamountforuser}} </span> {{courency}}</p>
+
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Loan Amount</label>
+                <label for="exampleFormControlSelect1"><b>Loan Requested Amount</b></label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}" formControlName="loanamount" (change)="emaicalculator()" value="{{disamount}}"[ngClass]="{ 'is-invalid': checkednow && this.Congratulation.controls.loanamount.errors }">
                 <div *ngIf="checkednow && this.Congratulation.controls.loanamount.errors" class="invalid-feedback">
-                <div *ngIf="this.Congratulation.controls.loanamount.errors.required">Loan Amount is required</div>
+                <div *ngIf="this.Congratulation.controls.loanamount.errors.required">Loan Requested Amount is required</div>
               </div>
 
               </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Loan Tenure </label>
-                <select  class="form-control"  (change)="emaicalculator()" formControlName="yearreturn" [ngClass]="{ 'is-invalid': checkednow && this.Congratulation.controls.yearreturn.errors }">
-                  <option value="1" selected="true">1 Years</option>
-                  <option value="2">2 Years</option>
-                  <option value="3">3 Years</option>
-                  <option value="4">4 Years</option>
-                  <option value="5">5 Years</option>   
-                </select>
-                <div *ngIf="checkednow && this.Congratulation.controls.yearreturn.errors" class="invalid-feedback">
-                <div *ngIf="this.Congratulation.controls.yearreturn.errors.required">Loan Tenure is required</div>
-              </div>
-               
-              </div>
+              
 
-              <p >Interest Rate:  <b><span>9.5 % per annum</span></b></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <p >Interest Rate: <span>9.5 % per annum</span></p>
 
               <div *ngIf="scalolation">
-              <p>Monthly EMI: <b><span>{{finalemi}}{{courency}}</span></b></p>
-              <p>Total To Repay: <b><span>{{totalamount}}{{courency}}</span></b></p>
-              <p>Total Interest To Pay:<b><span>{{finalinterest}}{{courency}}</span></b></p> 
+              <p>Monthly EMI: <span>{{finalemi}}</span> {{courency}}</p>
+              <p>Total To Repay: <span>{{totalamount}}</span> {{courency}}</p>
+              <p>Total Interest To Pay: <span>{{finalinterest}}</span> {{courency}}<br>
+              <small>Registration cost + a insurance cost to be borne by the applicant</small>
+              </p> 
+
               </div>
 
        
@@ -714,7 +736,172 @@
         </div>
       </div>
     </section>
+
+
+
+<!--     <form [formGroup]=" Congratulation">
+      <ng-template matStepLabel>Eligibility Result</ng-template>
+      <div class="fullcalcoltor container" >
+
+         <h5>You are eligible for a Auto Loan up to <span>{{preapproveamountforuser}}{{courency}}</span></h5>
+              <p>Loan will be approved once your documents are verified.</p>
+              <p>Car Model: <b><span>{{ this.therdFormGroup.value.carmodel }}</span></b></p>
+              <p>Car Price: <b><span>1,000,000 {{courency}}</span></b></p>
+
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8" style=" border: 2px solid grey; padding: 10px;">
+                  <div class="row">
+                    <div class="col-lg-7 col-md-7 col-sm-7">
+                      <div class="fastinput inputforcal">
+                        <div class="form-group">
+                          <div class="col-md-12">
+                            <label><b>Loan Amount (MMK)</b></label>
+                            <input formControlName="loanamount" type="text" class="calfiled" (blur)="tbupdate(0)"
+                              [(ngModel)]="query.amount" placeholder="Loan Amount" name="pemi.highValue"  style="float: right;" />
+                          </div>
+                          <ng5-slider [(value)]="pemi.value" [options]="poptions" (userChangeEnd)="update()">
+                          </ng5-slider>
+                        </div>
+                        
+                      </div>
+                      <div class="fastinput inputforcal">
+                        <div class="form-group">
+                          <div class="col-md-12">
+                            <label><b>Interest Rate (p.a)</b></label>
+                            <input type="text" class="calfiled" value="9.5"  style="float: right;" disabled="true" />
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="fastinput inputforcal">
+                        <div class="form-group">
+                          <div class="col-md-12">
+                            <label><b>Tenure (years)</b></label>
+                            <input type="text" *ngIf="yrToggel"  (blur)="tbupdate(2)"
+                              placeholder="Loan Tenure in Yr" [(ngModel)]="query.tenureYr"  style="float: right;" >
+                            <input type="text" *ngIf="!yrToggel"  (blur)="tbupdate(3)"
+                              placeholder="Loan Tenure in Mo" [(ngModel)]="query.tenureMo"  style="float: right;" formControlName="yearreturn">
+                          </div>
+                          <ng5-slider *ngIf="yrToggel" [(value)]="temi.value" [options]="toptions" (userChangeEnd)="update()">
+                          </ng5-slider>
+                          <ng5-slider *ngIf="!yrToggel" [(value)]="memi.value" [options]="moptions" (userChangeEnd)="update()">
+                          </ng5-slider>
+                        </div>
+                        
+                      </div>
+                      
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-lg-5">
+                              <div class="well">
+
+                <div class="jusify-center">
+                  <h5>
+                    Loan EMI
+                  </h5>
+                  <span class="result">
+                    {{result.emi || "--"}}
+                  </span>
+                </div>
+
+                <hr />
+
+                <div>
+                  <h5>
+                    Total Interest Payable
+                  </h5>
+                  <span class="result">
+                    {{result.interest || "--"}}
+                  </span>
+                </div>
+
+                <hr />
+                <div>
+                  <h5>
+                    Total Payment
+                  </h5>
+                  <h6>
+                    (Principal + Interest)
+                  </h6>
+                  <span class="result">
+                    {{result.total || "--"}}
+                  </span>
+                </div>
+
+
+
+              </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4" style=" border: 2px solid grey; padding: 10px;">
+                          <div class="well">
+
+                <div class="jusify-center">
+                  <h5>
+                    Loan EMI
+                  </h5>
+                  <span class="result">
+                    {{result.emi || "--"}}
+                  </span>
+                </div>
+
+                <hr />
+
+                <div>
+                  <h5>
+                    Total Interest Payable
+                  </h5>
+                  <span class="result">
+                    {{result.interest || "--"}}
+                  </span>
+                </div>
+
+                <hr />
+                <div>
+                  <h5>
+                    Total Payment
+                  </h5>
+                  <h6>
+                    (Principal + Interest)
+                  </h6>
+                  <span class="result">
+                    {{result.total || "--"}}
+                  </span>
+                </div>
+
+
+
+              </div>
+                </div>
+                
+              </div>
+            <div>
+              <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
+              <button class="btn btn-success btnright" (click)="oktocheck()"  matStepperNext>Next</button>
+            </div>
+
+        
+      </div> 
+    </form> -->
   </mat-step>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- step 6 -->
@@ -756,10 +943,10 @@
                 </div>
               </div>
             <div class="form-group">
-              <label for="exampleFormControlSelect1">Post Code</label>
+              <label for="exampleFormControlSelect1">Postal Code</label>
               <input type="number" min="0" class="form-control" formControlName="hpcode"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.hpcode.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.hpcode.errors" class="invalid-feedback">
-                  <div *ngIf="this.AddressDetails.controls.hpcode.errors.required">Post Code is required</div>
+                  <div *ngIf="this.AddressDetails.controls.hpcode.errors.required">Postal Code is required</div>
                 </div>
               </div>
             <div class="form-group">
@@ -802,10 +989,10 @@
                 </div>
               </div>
             <div class="form-group">
-              <label for="exampleFormControlSelect1">Post Code</label>
+              <label for="exampleFormControlSelect1">Postal Code</label>
               <input type="number" min="0" class="form-control" formControlName="opcode"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.opcode.errors }">
                 <div *ngIf="checkednow && this.AddressDetails.controls.opcode.errors" class="invalid-feedback">
-                  <div *ngIf="this.AddressDetails.controls.opcode.errors.required">Post Code is required</div>
+                  <div *ngIf="this.AddressDetails.controls.opcode.errors.required">Postal Code is required</div>
                 </div>
               </div>
             <div class="form-group">
@@ -848,6 +1035,8 @@
 
 
 
+
+
 <!-- step 7 -->
 
   <mat-step [stepControl]="fileupload" >
@@ -875,23 +1064,25 @@
 
                 <tbody>
                   <tr class="trcls">
-                    <td class="titletd lp">
+                    <td class="titletd tc lp">
                       
-                      <select style="margin-left: 34%;">
+                      <select style="margin-left: -22%;font-size: 15px;padding: 5px;">
                         <option value="1">Driving License</option>
                         <option value="2">Passport</option>
                         <option value="3">National ID Card</option>   
                       </select>
                     </td>
-                  </tr>
-                  <tr class="trcls">
-                    <td class="datatd lp" >
-                      <label for="upload" class="filelabel" style="margin-left: 39%;">
+                    <td class="datatd tc lp" >
+                      <label for="upload" class="filelabel" style="">
                         <input type="file" id="upload" formControlName="ufile" (change)="getfilename()" multiple>
                        <i style="color: #1789ea;margin-left: 32%;" class="fa fa-plus fa-2x"></i>
                       </label>
                     </td>
+                    <td class="datatd tc lp" >
+                      <button class="uplodbut" >{{upbuttext}}</button>
+                    </td>
                   </tr>
+                  
                   
                   <tr>
                     <div *ngIf="uploadonce" class="updoc">
@@ -899,16 +1090,78 @@
                       <p>{{disfileName}}</p>
                      </div>
                   </tr>
+                  
+
+                </tbody>
+              </table>
+                            <table class="table table-borderless">
+
+                <tbody>
                   <tr class="trcls">
-                    <td class="datatd lp" >
-                      <button class="subbut" style="margin-left: 34%;">{{upbuttext}}</button>
+                    <td class="titletd tc lp">
+                      
+                      <select style="margin-left: -22%;font-size: 15px;padding: 5px;">
+                        <option value="1">Driving License</option>
+                        <option value="2">Passport</option>
+                        <option value="3">National ID Card</option>   
+                      </select>
                     </td>
+                    <td class="datatd tc lp" >
+                      <label for="upload" class="filelabel" style="">
+                        <input type="file" id="upload" formControlName="ufile" (change)="getfilename()" multiple>
+                       <i style="color: #1789ea;margin-left: 32%;" class="fa fa-plus fa-2x"></i>
+                      </label>
+                    </td>
+                    <td class="datatd tc lp" >
+                      <button class="uplodbut" >{{upbuttext}}</button>
+                    </td>
+                  </tr>
+                  
+                  
+                  <tr>
+                    <div *ngIf="uploadonce" class="updoc">
+                      <p><b>Selected Document</b></p>
+                      <p>{{disfileName}}</p>
+                     </div>
                   </tr>
                   
 
                 </tbody>
               </table>
-              
+                            <table class="table table-borderless">
+
+                <tbody>
+                  <tr class="trcls">
+                    <td class="titletd tc lp">
+                      
+                      <select style="margin-left: -22%;font-size: 15px;padding: 5px;">
+                        <option value="1">Driving License</option>
+                        <option value="2">Passport</option>
+                        <option value="3">National ID Card</option>   
+                      </select>
+                    </td>
+                    <td class="datatd tc lp" >
+                      <label for="upload" class="filelabel" style="">
+                        <input type="file" id="upload" formControlName="ufile" (change)="getfilename()" multiple>
+                       <i style="color: #1789ea;margin-left: 32%;" class="fa fa-plus fa-2x"></i>
+                      </label>
+                    </td>
+                    <td class="datatd tc lp" >
+                      <button class="uplodbut" >{{upbuttext}}</button>
+                    </td>
+                  </tr>
+                  
+                  
+                  <tr>
+                    <div *ngIf="uploadonce" class="updoc">
+                      <p><b>Selected Document</b></p>
+                      <p>{{disfileName}}</p>
+                     </div>
+                  </tr>
+                  
+
+                </tbody>
+              </table>
               
 
 
@@ -936,6 +1189,10 @@
 
 
 
+
+
+
+
   <!-- step 8 -->
 
   <mat-step>
@@ -946,43 +1203,43 @@
          <div class="done2">
           
           <img class="img-responsive toptik" src="/assets/images/gt.png">
-         <p class="lp textc"><b>Loan application successful!</b></p><br>
-         <p class="lp">Congratulations Sabbir! You have successfully applied for a car loan with Loan amount of {{disamount}}{{courency}} on 5/10/2020</p><br>
+         <p class="tc lp textc"><b>Vehicle Loan Application Successful!</b></p><br>
+         <p class="tc lp">Congratulations {{this.secondFormGroup.value.personneame}} ! You have successfully applied for a car loan with Loan amount of {{disamount}} {{courency}} on {{todayDate | date:'shortDate'}}</p>
          
-         <p class="lp">We will contact you on your registered mobile number {{displaynumber}} shortly.</p><br>
+         <p class="tc lp">We will contact you on your registered mobile number {{displaynumber}} shortly.</p>
          <!-- <hr>
-         <p class="lp"> You can also check the status of your application by <a href="">Tracking using mobile number</a></p> -->
+         <p class="tc lp"> You can also check the status of your application by <a href="">Tracking using mobile number</a></p> -->
            
          </div>
-         <div class="done2 dmarg">
-         <p class="lp textc"><b>Loan Details</b></p><br>
+         <div class="done2 ">
+         <p class="tc lp textc"><b>Loan Details</b></p><br>
 
-          <table class="table table-borderless">
+          <table class="table table-striped">
 
             <tbody>
               <tr class="trcls">
-                <td class="titletd lp">Application Ref. No.</td>
-                <td class="datatd lp" >DAL063198771</td>
+                <td class="titletd tc lp">Application Ref. No.</td>
+                <td class="datat lp" >DAL063198771</td>
               </tr>
               <tr class="trcls">
-                <td class="titletd lp">Loan Amount</td>
-                <td class="datatd lp" >{{totalamount}}{{courency}}</td>
+                <td class="titletd tc lp">Loan Amount</td>
+                <td class="datatd  lp" >{{totalamount}} {{courency}}</td>
               </tr>
               <tr class="trcls">
-                <td class="titletd lp">Interest Rate</td>
-                <td class="datatd lp" >9.5 % per annum</td>
+                <td class="titletd tc lp">Interest Rate</td>
+                <td class="datatd  lp" >9.5 % per annum</td>
               </tr>
               <tr class="trcls">
-                <td class="titletd lp">Duration of Loan</td>
-                <td class="datatd lp" >{{ this.Congratulation.value.yearreturn }} Years</td>
+                <td class="titletd tc lp">Duration of Loan</td>
+                <td class="datatd  lp" >{{ this.Congratulation.value.yearreturn }} Years</td>
               </tr>
               <tr class="trcls">
-                <td class="titletd lp">EMI</td>
-                <td class="datatd lp" >{{finalemi}}{{courency}}</td>
+                <td class="titletd tc lp">EMI</td>
+                <td class="datatd  lp" >{{finalemi}} {{courency}}</td>
               </tr>
               <tr class="trcls">
-                <td class="titletd lp">Processing Fee</td>
-                <td class="datatd lp" >1500{{courency}}</td>
+                <td class="titletd tc lp">Processing Fee</td>
+                <td class="datatd  lp" >1500 {{courency}}</td>
               </tr>
 
             </tbody>
@@ -993,6 +1250,10 @@
       </div>
     </section>
   </mat-step>
+
+
+
+
 
 
 

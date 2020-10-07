@@ -27,6 +27,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { AgmCoreModule } from '@agm/core';
 import { Ng5SliderModule } from 'ng5-slider';
+import { CodestoreComponent } from './codestore/codestore.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { Ng5SliderModule } from 'ng5-slider';
     HeaderComponent,
     FooterComponent,
     TncComponent,
-    TestComponent
+    TestComponent,
+    CodestoreComponent
   ],
   imports: [
     BrowserModule,

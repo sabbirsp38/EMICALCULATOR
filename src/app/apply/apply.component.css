@@ -27,11 +27,11 @@
 }
 .topbar{
 	background: #eefefd;
-    padding: 10px;
 }
 .topbar img{
 	margin-left: 5%;
 	margin-top: 0;
+    max-height: 58px;
 }
 .mdhc {
     background: #eefefd;
@@ -171,7 +171,11 @@
     padding: 10px;
 }
 .lp{
-    font-size: 20px;
+    font-size: 14px;
+    
+}
+.tc{
+   text-align: center; 
 }
 .textc{
     text-align: center;
@@ -181,8 +185,8 @@
 }
 
 .toptik{
-    max-width: 100px;
-    margin-left: 44%;
+    max-width: 79px;
+    margin-left: 47%;
     margin-top: 10px;
     margin-bottom: 25px;
 }
@@ -206,7 +210,16 @@ input[type="file"] {
     overflow: hidden;
     border-radius: 10px;
     color: white;
-    margin-top: -11px;
+    margin-top: -6px;
+    margin-left: -200px;
+}
+.uplodbut{
+    margin-left: -132%;
+    margin-top: 2px;
+    padding: 4px 20px;
+    background: #1789ea;
+    border: none;
+    color: white;
 }
 .filelabel:hover {
         

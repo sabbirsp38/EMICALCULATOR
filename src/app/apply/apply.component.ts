@@ -4,6 +4,7 @@ import {GlobalService} from '../service.service';
 import * as $AB from 'jquery';
 declare var $: any ;
 import { MapsAPILoader } from '@agm/core';
+ import { Options, LabelType } from 'ng5-slider';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { MapsAPILoader } from '@agm/core';
 })
 
 export class ApplyComponent implements OnInit {
+
+
   
   private geoCoder;   
   isLinear = true;
@@ -23,13 +26,14 @@ export class ApplyComponent implements OnInit {
   chosecountry: FormGroup;
   kycgroup: FormGroup;
   kycoption: FormGroup;
+  monthlycost: FormGroup;
   Congratulation: FormGroup;
   AddressDetails: FormGroup;
   OfficeAddress: FormGroup;
   fileupload: FormGroup;
 
-courency;
-numcode;
+courency="MMK";
+numcode="+95";
 mmsg;
 umsg;
 alartmsg;
@@ -62,6 +66,13 @@ disamount;
 disfileName;
 upbuttext="Upload";
 
+monthlysendamount;
+monthlysendamountdispaly;
+
+monthlysalary;
+monthlyemiapprovelimit;
+
+
 
 
  
@@ -75,7 +86,8 @@ eamply2:any= false;
 eamply3:any= false;
 eamply4:any= false;
 
-employmentsec1:any= false;
+
+employmentsec1:any= true;
 employmentsec2:any= false;
 employmentsec3:any= false;
 employmentsec4:any= false;
@@ -83,9 +95,14 @@ countryrestic:any= false;
 uploadonce:any=false;
 checkednow:any = false;
 msgcolor:any = false;
+renthome:any = false;
+ownehome:any = false;
 
 
 scalolation:any = false;
+yeslon:any = false;
+nolona:any = false;
+totalcostshow:any = false;
 
 
 
@@ -101,15 +118,105 @@ componentForm = {
 };
 
 
+
+
+
+
+// emical start here
+
+filters: any;
+  pemi = {
+    value: "25"
+  }
+  remi = {
+    value: "9.5"
+  }
+  temi = {
+    value: "20"
+  }
+  memi = {
+    value: "240"
+  }
+
+  query = {
+    amount: "",
+    interest: "",
+    tenureYr: "",
+    tenureMo: ""
+  }
+
+  result = {
+    emi: "",
+    interest: "",
+    total: ""
+  }
+  yrToggel: boolean;
+  poptions: Options = {
+    floor: 1,
+    ceil: 100,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>L</b>';
+        case LabelType.High:
+          return value + '<b>L</b>';
+        default:
+          return value + '<b>L</b>';
+      }
+    }
+  };
+  roptions: Options = {
+    floor: 5,
+    ceil: 20,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>%</b>';
+        case LabelType.High:
+          return value + '<b>%</b>';
+        default:
+          return value + '<b>%</b>';
+      }
+    }
+  };
+  toptions: Options = {
+    floor: 1,
+    ceil: 30,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>Yr</b>';
+        case LabelType.High:
+          return value + '<b>Yr</b>';
+        default:
+          return value + '<b>Yr</b>';
+      }
+    }
+  };
+  moptions: Options = {
+    floor: 1,
+    ceil: 360,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return value + '<b>Mo</b>';
+        case LabelType.High:
+          return value + '<b>Mo</b>';
+        default:
+          return value + '<b>Mo</b>';
+      }
+    }
+  };
+
   constructor(private _formBuilder: FormBuilder,private gs: GlobalService,private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) { }
+    private ngZone: NgZone) { 
+
+   this.yrToggel = true;  
+  }
 
   ngOnInit() {
      
-  	this.chosecountry = this._formBuilder.group({
-      cname: ['', Validators.required]
-      // cname: ['', Validators.required]
-    });
+
     this.firstFormGroup = this._formBuilder.group({
       number: ['', Validators.required],
       numdic:[''],
@@ -126,24 +233,37 @@ componentForm = {
    
     this.secondFormGroup = this._formBuilder.group({
       
-      personneame: ['', Validators.required],
-      city: ['', Validators.required],
-      residencetype: ['', Validators.required],
-      employmenttype: ['', Validators.required],
+      personneame: [''],
+      city: [''],
+      residencetype: [''],
+      employmenttype: [''],
       Employmentname: [''],
-      salary: ['']
+      takehomeselary: [''],
+      takehomeselarybuseness: [''],
+      takehomeselaryprofesonal: [''],
+
 
     });
     this.therdFormGroup = this._formBuilder.group({
-      carmodel: ['', Validators.required],
+      carmodel: [''],
       carprice: [''],
-      cardelarprice: ['', Validators.required],
-      rtocost:    ['', Validators.required],
-      insucost:    ['', Validators.required]
+      cardelarprice: [''],
+      rtocost:    [''],
+      insucost:    ['']
+    });
+    this.monthlycost = this._formBuilder.group({
+
+      lonarunning: [''],
+      currentloan: [''],
+      emiamount: [''],
+      mrent: [''],
+      mexpense: [''],
+      numberofemi: [''],
+      
     });
     this.Congratulation = this._formBuilder.group({
       loanamount: ['', Validators.required],
-      yearreturn:    ['', Validators.required]
+      yearreturn: ['', Validators.required]
       
     });
 
@@ -196,7 +316,7 @@ componentForm = {
       });
     });
 
-
+    this.update();
 
 
 
@@ -207,37 +327,6 @@ componentForm = {
 
   }
 
-  cmsg(){
-    let fmvalu = this.chosecountry.value;
-    let countryname = fmvalu.cname.toString();
-    console.log(countryname);
-     if (countryname ===""){
-      this.umsg="You have to choose a country.";
-   } else if(countryname ==="India"){
-    this.umsg="Loan Pre-Qualification from credit agency is applicable for your country";
-    this.countryrestic= true;
-    this.courency="INR";
-    this.numcode="+91";
-   } else if(countryname ==="Myanmar"){
-    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
-    this.countryrestic= false;
-    this.courency="MMK";
-    this.numcode="+95";
-   } else if(countryname ==="Vietnam"){
-    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
-    this.countryrestic= false;
-    this.courency="VND";
-    this.numcode="+84";
-   } else if(countryname ==="Phillipines"){
-    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
-    this.countryrestic= false;
-    this.courency="PESO";
-    this.numcode="+63";
-   }else {
-    this.umsg="Loan Pre-Qualification from credit agency is not applicable for your country";
-   }
-
- } 
 
 
 
@@ -322,25 +411,19 @@ componentForm = {
 
  comasec(){
    let getsalary=this.secondFormGroup.value;
-   this.getsalary2=getsalary.salary;
+   this.getsalary2=getsalary.takehomeselary;
    this.showsalary=Number(this.getsalary2).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-   console.log(this.showsalary); 
  }
 
 ctes(){
   let fmvalu = this.secondFormGroup.value;
     let employmenttype = fmvalu.employmenttype.toString();
-    console.log(employmenttype);
+    
+
      if (employmenttype ==="Salaried"){
 
       this.employmentsec1=true;
       this.employmentsec2=false;
-      this.employmentsec3=false;
-      this.employmentsec4=false;
-
-   }else if (employmenttype ==="SalariedDoctor"){
-      this.employmentsec1=false;
-      this.employmentsec2=true;
       this.employmentsec3=false;
       this.employmentsec4=false;
 
@@ -363,11 +446,121 @@ ctes(){
       this.employmentsec4=false;
 
    }
+
+
+
+   
 }
 
+disposableincome(){
+  let fmvalu = this.secondFormGroup.value;
+  let employmenttype = fmvalu.employmenttype.toString();
+
+  let takehomeselary = fmvalu.takehomeselary;
+  let takehomeselarybuseness = fmvalu.takehomeselarybuseness;
+  let takehomeselaryprofesonal = fmvalu.takehomeselaryprofesonal;
+  
 
 
+     if (employmenttype ==="Salaried"){
+          this.monthlysalary=Number(takehomeselary);
+         
 
+   }else if (employmenttype ==="SelfEmployedbusiness"){
+         let ysalary=takehomeselarybuseness/12;
+          this.monthlysalary=Number(ysalary);
+
+          
+
+   }else if (employmenttype ==="SelfEmployedProfessional"){
+          let ysalary=takehomeselaryprofesonal/12;
+          this.monthlysalary=Number(ysalary);
+
+    }else{
+      this.monthlysalary=Number(takehomeselary);
+    }
+
+    console.log(this.monthlysalary);
+         
+
+
+}
+cresidencetype(){
+  let fmvalu = this.secondFormGroup.value;
+  let residencetype = fmvalu.residencetype.toString();
+  if(residencetype==="Companyprovided" || residencetype==="Ownedbyself" || residencetype==="Ownedbyparent"){
+    this.renthome = false;
+    this.ownehome = false;
+   }else if(residencetype==="Hostel" || residencetype==="Payingguest" ||residencetype==="Rentedstayingalone" ||residencetype==="entedwithfamily" || residencetype==="Rentedwithsfriends"){
+    this.renthome = true;
+    this.ownehome = false;
+   }
+   else{
+    this.renthome = false;
+    this.ownehome = false;
+   }
+
+}
+
+getloninfo(){
+   let loaninfo = this.monthlycost.value;
+   let loanstutas = loaninfo.lonarunning.toString();
+
+  
+
+   if(loanstutas==="No"){
+    
+      this.yeslon= false;
+      this.nolona= true;
+      
+   }else if(loanstutas==="Yes"){
+      
+       this.yeslon= true;
+      this.nolona= false;
+     
+   }else{
+      
+       this.yeslon= false;
+      this.nolona= false;
+     
+   }
+
+  
+
+   
+}
+
+monthlyexpencess(){
+  let loaninfo = this.monthlycost.value;
+  let emiamount = loaninfo.emiamount;
+  let mexpense = loaninfo.mexpense;
+  let mrent = loaninfo.mrent;
+
+  if(emiamount==="" && mrent===""){
+    this.monthlysendamount=parseInt(mexpense);
+    this.totalcostshow= true ;
+  }else if(mexpense==="" && mrent===""){
+    this.monthlysendamount=parseInt(emiamount);
+    this.totalcostshow=true;
+  }else if(emiamount===""){
+    this.monthlysendamount=parseInt(mexpense)  +parseInt(mrent);
+    this.totalcostshow=true;
+  }else if(mrent===""){
+    this.monthlysendamount=parseInt(emiamount)  +parseInt(mexpense);
+    this.totalcostshow=true;
+  }else{
+    this.monthlysendamount=parseInt(emiamount)  +parseInt(mexpense)  +parseInt(mrent);
+    this.totalcostshow=true;
+  }
+
+
+  
+  this.monthlysendamountdispaly = Number(this.monthlysendamount).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+ 
+    
+}
 
 
 preapprovecalcolator(){
@@ -387,34 +580,44 @@ preapprovecalcolator(){
       // var totalcarprice2=delarprice  + rtocost  +  insurensecost;
       this.valueInString =parseInt(this.delarprice)  + parseInt(this.rtocost)  +  parseInt(this.insurensecost);
       var num = parseFloat(this.valueInString);
-      this.preapproveamount = num - (num * .20);
-      this.preapproveamountforuser =this.preapproveamount.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      
       this.totalcarprice = this.valueInString.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      console.log(this.preapproveamountforuser);
+      
     }
 
     
 
 }
 
-
+getemilimit(){
+  
+   let monthyincome= this.monthlysalary - this.monthlysendamount;
+   this.monthlyemiapprovelimit = monthyincome - (monthyincome * .20);
+   console.log(this.monthlyemiapprovelimit);
+}
 
 
 emaicalculator() {
+    this.getemilimit();
     let congvalu = this.Congratulation.value;
     // let countryname = congvalu.loanamount;
     var loanAmount = Number(congvalu.loanamount) ;
     var yearreturn = congvalu.yearreturn;
-    this.disamount = Number(loanAmount).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    console.log(loanAmount);
-    console.log(yearreturn);
+    var numberOfMonths = congvalu.yearreturn*12;
+    
+     this.disamount = Number(loanAmount).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     this.preapproveamount = this.monthlyemiapprovelimit * numberOfMonths;
+     this.preapproveamountforuser =this.preapproveamount.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+
    if(loanAmount!==0 && yearreturn!==0){
     
 
     if(loanAmount > this.preapproveamount){
-     alert("The loan amount exceeds the maximum limit");
+     alert("The Loan amount exceeds the permissible limit.");
     }else{
-      var numberOfMonths = congvalu.yearreturn*12;
+      
       var rateOfInterest = 9.5;
       var monthlyInterestRatio = (rateOfInterest / 100) / 12;
 
@@ -430,7 +633,12 @@ emaicalculator() {
       var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.totalamount = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.finalinterest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       this.scalolation=true;
+      this.scalolation=true;
+      
+
+
+
+      
      }
        
    }else{
@@ -442,6 +650,59 @@ emaicalculator() {
     
 
   }
+
+
+
+
+
+  tbupdate(id) {
+    if (id == 0) {
+      this.pemi.value = (Number(this.query.amount) / 100000).toString();
+    }
+    else if (id == 1) {
+      this.remi.value = this.query.interest;
+    }
+    else if (id == 2) {
+      this.temi.value = this.query.tenureYr;
+    }
+    else if (id == 3) {
+      this.memi.value = this.query.tenureMo;
+    }
+    this.update();
+  }
+
+  update() {
+
+    var loanAmount = Number(this.pemi.value) * 100000;
+    var numberOfMonths = (this.yrToggel) ? (Number(this.temi.value) * 12) : Number(this.memi.value);
+    var rateOfInterest = Number(this.remi.value);
+    var monthlyInterestRatio = (rateOfInterest / 100) / 12;
+
+    this.query.amount = loanAmount.toString();
+    this.query.interest = rateOfInterest.toString();
+    if (this.yrToggel) {
+      this.query.tenureYr = this.temi.value.toString();
+    }
+    else {
+      this.query.tenureMo = this.memi.value.toString();
+    }
+
+    var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
+    var bottom = top - 1;
+    var sp = top / bottom;
+    var emi = ((loanAmount * monthlyInterestRatio) * sp);
+    var full = numberOfMonths * emi;
+    var interest = full - loanAmount;
+    var int_pge = (interest / full) * 100;
+
+    this.result.emi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.result.total = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.result.interest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+
+
 
 getfilename(){
   let fromfile = this.fileupload.value;
