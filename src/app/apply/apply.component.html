@@ -71,6 +71,7 @@
 
 
 
+
   <mat-step [stepControl]="firstFormGroup">
 
     <section class="se0 getstr">
@@ -512,21 +513,21 @@
                   <label for="exampleFormControlSelect1">Total Outstanding Amount</label>
                   <input formControlName="currentloan" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.currentloan.errors }" placeholder="{{courency}}">
                   <div *ngIf="checkednow && this.monthlycost.controls.currentloan.errors" class="invalid-feedback">
-                  <div *ngIf="this.monthlycost.controls.currentloan.errors.required">Dealer Quoted Price is required</div>
+                  <div *ngIf="this.monthlycost.controls.currentloan.errors.required">This field is required</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Total Number of EMI</label>
                   <input  formControlName="numberofemi" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.numberofemi.errors }" >
                   <div *ngIf="checkednow && this.monthlycost.controls.numberofemi.errors" class="invalid-feedback">
-                  <div *ngIf="this.monthlycost.controls.numberofemi.errors.required">Dealer Quoted Price is required</div>
+                  <div *ngIf="this.monthlycost.controls.numberofemi.errors.required">This field is required</div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Total Amount of EMI</label>
                   <input  formControlName="emiamount" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.emiamount.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
                   <div *ngIf="checkednow && this.monthlycost.controls.emiamount.errors" class="invalid-feedback">
-                  <div *ngIf="this.monthlycost.controls.emiamount.errors.required">Dealer Quoted Price is required</div>
+                  <div *ngIf="this.monthlycost.controls.emiamount.errors.required">This field is required</div>
                   </div>
                 </div>
 
@@ -535,7 +536,7 @@
                 <label for="exampleFormControlSelect1">Monthly Expenses</label>
                 <input  formControlName="mexpense" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.mexpense.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
                 <div *ngIf="checkednow && this.monthlycost.controls.mexpense.errors" class="invalid-feedback">
-                <div *ngIf="this.monthlycost.controls.mexpense.errors.required">Dealer Quoted Price is required</div>
+                <div *ngIf="this.monthlycost.controls.mexpense.errors.required">This field is required</div>
                 </div>
               </div>
 
@@ -543,14 +544,17 @@
                 <label for="exampleFormControlSelect1">Monthly Rent</label>
                 <input   formControlName="mrent" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.mrent.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
                 <div *ngIf="checkednow && this.monthlycost.controls.mrent.errors" class="invalid-feedback">
-                <div *ngIf="this.monthlycost.controls.mrent.errors.required">Dealer Quoted Price is required</div>
+                <div *ngIf="this.monthlycost.controls.mrent.errors.required">This field is required</div>
                 </div>
               </div>
               <p *ngIf="totalcostshow">Total Monthly Obligation: <span>{{monthlysendamountdispaly}}</span> {{courency}}</p>
 
                <div class="alartse0">
               
-                <input  class="getstrin" type="checkbox"  /><p class="getstrin01">I declare that the Information I have provided above is accurate and complete to the best of my knowledge. I authorise XYZ Bank and its representative to call or sms me with reference to my loan application.</p>
+                <input  class="getstrin" type="checkbox" formControlName="dilaration" [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.dilaration.errors }"/><p class="getstrin01">I declare that the Information I have provided above is accurate and complete to the best of my knowledge. I authorise XYZ Bank and its representative to call or sms me with reference to my loan application.</p>
+                <div *ngIf="checkednow && this.monthlycost.controls.dilaration.errors" class="invalid-feedback">
+                <div *ngIf="this.monthlycost.controls.dilaration.errors.required">This field is required</div>
+                </div>
 
                </div>
               
@@ -644,7 +648,6 @@
 
 
 
-
   <mat-step [stepControl]="Congratulation">
     <section class="se3 getstr">
       <div class="container con0 conw">
@@ -715,19 +718,20 @@
               <p >Interest Rate: <span>9.5 % per annum</span></p>
 
               <div *ngIf="scalolation">
+              <p>Total Interest To Pay: <span>{{finalinterest}}</span> {{courency}}<br></p>
               <p>Monthly EMI: <span>{{finalemi}}</span> {{courency}}</p>
               <p>Total To Repay: <span>{{totalamount}}</span> {{courency}}</p>
-              <p>Total Interest To Pay: <span>{{finalinterest}}</span> {{courency}}<br>
-              <small>Registration cost + a insurance cost to be borne by the applicant</small>
-              </p> 
+             
+              <small>Registration cost + Insurance cost to be borne by the applicant</small> 
+               
 
-              </div>
+              </div><br>
 
        
              
             <div>
               <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright" (click)="oktocheck()"  matStepperNext>Next</button>
+              <button *ngIf="oktogo" class="btn btn-success btnright" (click)="oktocheck(); finalamountcheck()"  >Next</button>
             </div>
      
             
@@ -904,6 +908,7 @@
 
 
 
+
 <!-- step 6 -->
 
   <mat-step [stepControl]="AddressDetails">
@@ -1031,8 +1036,6 @@
       </div>
     </section>
   </mat-step>
-
-
 
 
 
@@ -1204,7 +1207,7 @@
           
           <img class="img-responsive toptik" src="/assets/images/gt.png">
          <p class="tc lp textc"><b>Vehicle Loan Application Successful!</b></p><br>
-         <p class="tc lp">Congratulations {{this.secondFormGroup.value.personneame}} ! You have successfully applied for a car loan with Loan amount of {{disamount}} {{courency}} on {{todayDate | date:'shortDate'}}</p>
+         <p class="tc lp">Congratulations {{this.secondFormGroup.value.personneame}} ! You have successfully applied for a car loan with Loan amount of {{disamount}} {{courency}} .</p>
          
          <p class="tc lp">We will contact you on your registered mobile number {{displaynumber}} shortly.</p>
          <!-- <hr>
@@ -1219,27 +1222,27 @@
             <tbody>
               <tr class="trcls">
                 <td class="titletd tc lp">Application Ref. No.</td>
-                <td class="datat lp" >DAL063198771</td>
+                <td class="datat lp tc" >DAL063198771</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd tc lp">Loan Amount</td>
-                <td class="datatd  lp" >{{totalamount}} {{courency}}</td>
+                <td class="datatd  lp tc" >{{totalamount}} {{courency}}</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd tc lp">Interest Rate</td>
-                <td class="datatd  lp" >9.5 % per annum</td>
+                <td class="datatd  lp tc" >9.5 % per annum</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd tc lp">Duration of Loan</td>
-                <td class="datatd  lp" >{{ this.Congratulation.value.yearreturn }} Years</td>
+                <td class="datatd  lp tc" >{{ this.Congratulation.value.yearreturn }} Years</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd tc lp">EMI</td>
-                <td class="datatd  lp" >{{finalemi}} {{courency}}</td>
+                <td class="datatd  lp tc" >{{finalemi}} {{courency}}</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd tc lp">Processing Fee</td>
-                <td class="datatd  lp" >1500 {{courency}}</td>
+                <td class="datatd  lp tc" >1500 {{courency}}</td>
               </tr>
 
             </tbody>
@@ -1250,6 +1253,7 @@
       </div>
     </section>
   </mat-step>
+
 
 
 

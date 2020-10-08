@@ -1,10 +1,13 @@
-import { Component, OnInit,ViewChild, ElementRef, NgZone,AfterViewInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef, NgZone,AfterViewInit,VERSION } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GlobalService} from '../service.service';
 import * as $AB from 'jquery';
 declare var $: any ;
 import { MapsAPILoader } from '@agm/core';
  import { Options, LabelType } from 'ng5-slider';
+
+ import { MatHorizontalStepper, MatStep } from '@angular/material';
+
 
 
 @Component({
@@ -15,7 +18,7 @@ import { MapsAPILoader } from '@agm/core';
 
 export class ApplyComponent implements OnInit {
 
-
+  @ViewChild(MatHorizontalStepper, {static: true} ) stepper: MatHorizontalStepper;
   
   private geoCoder;   
   isLinear = true;
@@ -61,9 +64,11 @@ disprice;
 disrto;
 disinsu;
 disamount;
-
+loanfinal;
 
 disfileName;
+disfileName2;
+disfileName3;
 upbuttext="Upload";
 
 monthlysendamount;
@@ -71,7 +76,7 @@ monthlysendamountdispaly;
 
 monthlysalary;
 monthlyemiapprovelimit;
-
+oktogo:any=true;
 
 
 
@@ -85,6 +90,7 @@ eamply:any= false;
 eamply2:any= false;
 eamply3:any= false;
 eamply4:any= false;
+
 
 
 employmentsec1:any= true;
@@ -216,6 +222,7 @@ filters: any;
 
   ngOnInit() {
      
+    
 
     this.firstFormGroup = this._formBuilder.group({
       number: ['', Validators.required],
@@ -233,10 +240,10 @@ filters: any;
    
     this.secondFormGroup = this._formBuilder.group({
       
-      personneame: [''],
-      city: [''],
-      residencetype: [''],
-      employmenttype: [''],
+      personneame: ['', Validators.required],
+      city: ['', Validators.required],
+      residencetype: ['', Validators.required],
+      employmenttype: ['', Validators.required],
       Employmentname: [''],
       takehomeselary: [''],
       takehomeselarybuseness: [''],
@@ -245,20 +252,21 @@ filters: any;
 
     });
     this.therdFormGroup = this._formBuilder.group({
-      carmodel: [''],
+      carmodel: ['', Validators.required],
       carprice: [''],
-      cardelarprice: [''],
-      rtocost:    [''],
-      insucost:    ['']
+      cardelarprice: ['', Validators.required],
+      rtocost:    ['', Validators.required],
+      insucost:    ['', Validators.required]
     });
     this.monthlycost = this._formBuilder.group({
 
-      lonarunning: [''],
+      lonarunning: ['', Validators.required],
       currentloan: [''],
       emiamount: [''],
       mrent: [''],
-      mexpense: [''],
+      mexpense: ['', Validators.required],
       numberofemi: [''],
+      dilaration:  ['', Validators.required],
       
     });
     this.Congratulation = this._formBuilder.group({
@@ -480,7 +488,6 @@ disposableincome(){
       this.monthlysalary=Number(takehomeselary);
     }
 
-    console.log(this.monthlysalary);
          
 
 
@@ -602,6 +609,7 @@ emaicalculator() {
     let congvalu = this.Congratulation.value;
     // let countryname = congvalu.loanamount;
     var loanAmount = Number(congvalu.loanamount) ;
+    this.loanfinal= Number(congvalu.loanamount) ;
     var yearreturn = congvalu.yearreturn;
     var numberOfMonths = congvalu.yearreturn*12;
     
@@ -616,6 +624,8 @@ emaicalculator() {
 
     if(loanAmount > this.preapproveamount){
      alert("The Loan amount exceeds the permissible limit.");
+
+
     }else{
       
       var rateOfInterest = 9.5;
@@ -635,25 +645,33 @@ emaicalculator() {
       this.finalinterest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.scalolation=true;
       
-
-
-
-      
      }
        
    }else{
+
        this.scalolation=false;
     }
+
 
     
 
     
 
   }
+finalamountcheck(){
+  if(this.loanfinal > this.preapproveamount){
+     alert("The Loan amount exceeds the permissible limit.");
+      
+  }else{
+    console.log("kjbkjbk");
+     this.next();
+    }
+  
+}
 
-
-
-
+next(){
+  this.stepper.next();
+}
 
   tbupdate(id) {
     if (id == 0) {
