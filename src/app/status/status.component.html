@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<div style="margin-left: 50px">
+	<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>CREATED</ng-template>
+      <p>Message space If there is any update or anything required from the customer.</p>
+    
+  </mat-step>
+  <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>PHONE VERIFIED</ng-template>
+	  <p>Message space If there is any update or anything required from the customer.</p>
+      
+  </mat-step>
+   
+   <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>IN REVIEW</ng-template>
+	  <p>Message space If there is any update or anything required from the customer.</p>
+    
+  </mat-step>
+  <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>DOCS VERIFIED</ng-template>
+	  <p>Message space If there is any update or anything required from the customer.</p>
+    
+  </mat-step>
+  <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>LOGGED</ng-template>
+	  <p>Message space If there is any update or anything required from the customer.</p>
+    
+  </mat-step>
+  <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>APPROVED</ng-template>
+	  <p>Message space If there is any update or anything required from the customer.</p>
+    
+  </mat-step>
+   
+   
+</mat-vertical-stepper>
+</div>

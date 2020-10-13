@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { ApplyComponent } from './apply/apply.component';
 import { TncComponent } from './tnc/tnc.component';
 import { TestComponent } from './test/test.component';
+import { StatusComponent } from './status/status.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
 },
 {
 	path:'t',component:TestComponent
+}
+,
+{
+	path:'status',component:StatusComponent
 }
 
 
