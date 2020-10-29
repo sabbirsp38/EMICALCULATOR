@@ -3,7 +3,6 @@
 </div>
  
 
-
 <div>
 
 <mat-horizontal-stepper [linear]="isLinear"  labelPosition="bottom" #stepper>
@@ -575,7 +574,10 @@
             <ng-template matStepLabel>Vehicle Details</ng-template>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Car Model </label>
-                <input   formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
+                <input list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)">
+                <datalist id="carmodel">
+                  <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.name}}" value="{{keys?.name}}">
+                </datalist>
 
                 <div *ngIf="checkednow && this.therdFormGroup.controls.carmodel.errors" class="invalid-feedback">
                 <div *ngIf="this.therdFormGroup.controls.carmodel.errors.required">Car Model</div>
@@ -1166,7 +1168,7 @@
              
             <div>
               <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright"  matStepperNext>Next</button>
+              <button class="btn btn-success btnright" (click)="submit()" matStepperNext>Next</button>
             </div>
      
             

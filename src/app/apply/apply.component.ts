@@ -34,7 +34,7 @@ export class ApplyComponent implements OnInit {
   AddressDetails: FormGroup;
   OfficeAddress: FormGroup;
   fileupload: FormGroup;
-
+brandVal:any;
 courency="MMK";
 numcode="+95";
 mmsg;
@@ -279,8 +279,14 @@ componentForm = {
 
 
   }
-
-
+ 
+ searchBrand(value)
+ {
+   console.log(value);
+  this.gs.getCarBrand(value).subscribe((res)=>{
+     this.brandVal=res;
+  })
+ }
 
 
  otppagevarification(){
@@ -918,14 +924,17 @@ getfilename(){
 
 
   submit(){
-      
+       let finalData = {};
        let obj2 = this.firstFormGroup.value;
-       
-      let obj = {
-        number:obj2.number
-      }
+       finalData['personalDetails'] =this.secondFormGroup.value;
+       finalData['expenditureDetails'] =this.monthlycost.value;
+       finalData['vehicleDetails'] =this.therdFormGroup.value;
+       finalData['eligibilityResult'] =this.Congratulation.value;
+       finalData['addressDetails'] =this.AddressDetails.value;
+       finalData['number'] =obj2.number;
       
-      this.gs.apply(obj).subscribe((res)=>{
+      console.log(finalData);
+      this.gs.apply(finalData).subscribe((res)=>{
         console.log(res);
       });
       
