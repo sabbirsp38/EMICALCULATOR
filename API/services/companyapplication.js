@@ -11,9 +11,9 @@ var moment = require('moment-timezone');
 
 this.createCompanyApplication = async function(req){
 		 
-		console.log("req.body:=",req.body);	
+		
 		let refApplicationNumber = await getRandomInt(999999);
-	    console.log("refApplicationNumber:=",refApplicationNumber);
+	  
 		let date = new Date(); 
 		let day = (date.getDate() < 10 ? '0' : '') + date.getDate()
 		let year = date.getFullYear().toString();
@@ -51,7 +51,7 @@ this.createCompanyApplication = async function(req){
 			previousStatusDate:new Date(),
 			currentStatus: req.body.currentStatus,
 			currentStatusDate: new Date(),
-			applicationStatus:'Pending',
+			applicationStatus:'Pending for Documents',
 			submissionDate:timedata,
 			companyapplicant:req.body.companyapplicant
 			
@@ -71,23 +71,16 @@ let getRandomInt = async (maxnum) => {
 let companyapplicatiomemail = async (applicationDetails) => {
 	
 		 let userdata = await getuserDataById(applicationDetails.user);
-		   console.log("userdata=====",userdata);
+		  
 		 let siteurl = process.env.siteurl;
 		 let transporter = nodemailer.createTransport({
-			  service: 'gmail',
-    host: "smtp.gmail.com",
-    //host: "smtp.mail.eu-west-1.awsapps.com",
-    //     port: 465,
-    //    secure: true,
-    port: 25,
-    secure: false, // true for 465, false for other ports
-    //     auth: {
-    //    user: 'applications@gotoaya.com',
-    //    pass: 'm9nKXFAZ7DQ9N5kK'
-    // }
-    auth: {
-      user: 'msaddekhosain@gmail.com',
-      pass: 'M028243m'
+			 host: "smtp.mail.eu-west-1.awsapps.com",
+        port: 465,
+       secure: true,
+    
+        auth: {
+       user: 'applications@gotoaya.com',
+       pass: 'm9nKXFAZ7DQ9N5kK'
     }
 		  });
 		 
@@ -98,7 +91,7 @@ let companyapplicatiomemail = async (applicationDetails) => {
 				subject: "Application Request", // Subject line
 				html: `<table width="90%" border="0" cellspacing="5" cellpadding="5" align="center"  bgcolor="#e5e5e5">
 				 <tr>
-				  <td align="center"><img src="${siteurl}/assets/images/logo.png" /></td>
+				  <td align="center"><img src="${siteurl}/assets/images/logo.png" alt="Company Logo" /></td>
 				 </tr>
 				 <tr>
 				  <td align="center"><h3>Hi ${userdata.name}</h3>
@@ -106,7 +99,7 @@ let companyapplicatiomemail = async (applicationDetails) => {
 					<p> Application Number: ${applicationDetails.applicationNumber}</p>
 					<p> Please click the below button to upload the documents:</p>
 					<p><a href="${siteurl}" style='color: #fff; background-color: #a11c20; text-decoration:none; border-radius: 5px; padding:10px; margin:20px; font-size: 18px;'>Upload Documents</a></p>
-				    <p>Sincerely ,<br>Loan Department</p>
+				    <p>Sincerely ,<br>Loan Dept.</p>
 				  </td>
 				 </tr>
 				</table>`
