@@ -3,21 +3,9 @@
 </div>
  
 
-
 <div>
 
 <mat-horizontal-stepper [linear]="isLinear"  labelPosition="bottom" #stepper>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -116,7 +104,7 @@
                         
                        
 
-                       <button id="subbut" class="fcn mdbut bt5"  mat-button   data-dismiss="modal" matStepperNext>Continue</button>
+                       <button id="subbut" class="fcn mdbut bt5"  mat-button   data-dismiss="modal" matStepperNext >Continue</button>
 
                        
                       </div>
@@ -206,7 +194,7 @@
              
              
               <div>
-                <button class="fcn subbut bt3"  mat-button matStepperNext>Next</button>
+                <button class="fcn subbut bt3"  mat-button matStepperNext >Next</button>
               </div>
            </form>
 
@@ -283,6 +271,12 @@
   </mat-step> 
 
 
+
+
+
+
+
+
 <!-- part 3 -->
 <mat-step [stepControl]="secondFormGroup">
     <section class="se3 getstr">
@@ -346,18 +340,22 @@
             </div >
 
 
+
              
             <div *ngIf="employmentsec1">
               <div class="form-group">
                 <label for="exampleFormControlInput1">Employer Name </label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="Employmentname">
+                <input  type="Text" class="form-control" id="" placeholder="" formControlName="employmentnamees1">
+                
+                <div style="color: red;" *ngIf="requerask">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Monthly Take Home Salary</label>
                 <input matInput  formControlName="takehomeselary" type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}"  (change)="comasec(); disposableincome();" value="{{showsalary}}">
-              </div>
+                <div style="color: red;" *ngIf="requerask2">This field is required.</div>
               
             </div>
+          </div>
 
 
 
@@ -367,11 +365,12 @@
             <div *ngIf="employmentsec3">
               <div class="form-group">
                 <label for="exampleFormControlInput1">Employer Name</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="emlomentnamees3"[ngClass]="{ 'is-invalid': checkednow && f.emlomentnamees3.errors }">
+                <div style="color: red;" *ngIf="requerask3">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Total Work Experience</label>
-                <select  class="form-control"   >
+                <select  class="form-control"  formControlName="workexperincees3" [ngClass]="{ 'is-invalid': checkednow && f.workexperincees3.errors }">
                   <option value="India">1</option>
                   <option value="Dhaka">2</option>
                   <option value="Dhaka">3</option>
@@ -379,52 +378,48 @@
                   <option value="Dhaka">>5</option>
                   
                 </select>
-               
+                <div style="color: red;" *ngIf="requerask4">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Was Latest ITR audited</label>
-                <select  class="form-control" >
+                <select  class="form-control" formControlName="irtes3"[ngClass]="{ 'is-invalid': checkednow && f.irtes3.errors }">
                   <option value="India">YES</option>
                   <option value="Dhaka">NO</option>
                 </select>
-               
+                <div style="color: red;" *ngIf="requerask5">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Applicant Type</label>
-                <select  class="form-control"  >
+                <select  class="form-control" formControlName="applicationtypees3" [ngClass]="{ 'is-invalid': checkednow && f.applicationtypees3.errors }">
                   <option value="India">Partner applying as an Individual </option>
                   <option value="Dhaka">Partnership</option>
                   <option value="Dhaka">Firm Proprietor</option>
                 </select>
-               
+                <div style="color: red;" *ngIf="requerask6">This field is required.</div>
               </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Was Latest ITR audited</label>
-                <select  class="form-control"  >
-                  <option value="India">YES</option>
-                  <option value="Dhaka">NO</option>
-                </select>
-               
-              </div>
+
               <div class="form-group">
                 <label for="exampleFormControlInput1">Latest Year's Depreciation</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="depreciationes3"[ngClass]="{ 'is-invalid': checkednow && f.depreciationes3.errors }">
+                <div style="color: red;" *ngIf="requerask7">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Latest Year's Profit After Tax</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1"placeholder="{{courency}}" formControlName="takehomeselarybuseness" (change)="disposableincome()">
-              </div>
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1"placeholder="{{courency}}" formControlName="takehomeselarybuseness" (change)="disposableincome()"[ngClass]="{ 'is-invalid': checkednow && f.takehomeselarybuseness.errors }">
+                <div style="color: red;" *ngIf="requerask8">This field is required.</div>
             </div>
+          </div>
 
 
             <div *ngIf="employmentsec4">
               <div class="form-group">
                 <label for="exampleFormControlInput1">Employer Name</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="emlomentnamees4"[ngClass]="{ 'is-invalid': checkednow && f.emlomentnamees4.errors }">
+                <div style="color: red;" *ngIf="requerask9">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Total Work Experience</label>
-                <select  class="form-control"  >
+                <select  class="form-control"  formControlName="workexperincees4" [ngClass]="{ 'is-invalid': checkednow && f.workexperincees4.errors }">
                   <option value="India">1</option>
                   <option value="Dhaka">2</option>
                   <option value="Dhaka">3</option>
@@ -432,45 +427,40 @@
                   <option value="Dhaka">>5</option>
                   
                 </select>
-               
+                <div style="color: red;" *ngIf="requerask10">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Was Latest ITR audited</label>
-                <select  class="form-control"  >
+                <select  class="form-control" formControlName="irtes4"[ngClass]="{ 'is-invalid': checkednow && f.irtes4.errors }">
                   <option value="India">YES</option>
                   <option value="Dhaka">NO</option>
                 </select>
-               
-              </div>
+                <div style="color: red;" *ngIf="requerask11">This field is required.</div>
+            </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Applicant Type</label>
-                <select  class="form-control"  >
+                <select  class="form-control" formControlName="applicationtypees4" [ngClass]="{ 'is-invalid': checkednow && f.applicationtypees4.errors }">
                   <option value="India">Partner applying as an Individual </option>
                   <option value="Dhaka">Partnership</option>
                   <option value="Dhaka">Firm Proprietor</option>
                 </select>
-               
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Was Latest ITR audited</label>
-                <select  class="form-control"  >
-                  <option value="India">YES</option>
-                  <option value="Dhaka">NO</option>
-                </select>
-               
-              </div>
+                <div style="color: red;" *ngIf="requerask12">This field is required.</div>
+            </div>
+
               <div class="form-group">
                 <label for="exampleFormControlInput1">Latest Year's Depreciation</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" >
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="depreciationes4"[ngClass]="{ 'is-invalid': checkednow && f.depreciationes4.errors }">
+                <div style="color: red;" *ngIf="requerask13">This field is required.</div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Latest Year's Profit After Tax</label>
-                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}" formControlName="takehomeselaryprofesonal" (change)="disposableincome()">
-              </div>
+                <input matInput type="Text" class="form-control" id="exampleFormControlInput1" placeholder="{{courency}}" formControlName="takehomeselaryprofesonal" (change)="disposableincome()"[ngClass]="{ 'is-invalid': checkednow && f.takehomeselaryprofesonal.errors }">
+                <div style="color: red;" *ngIf="requerask14">This field is required.</div>
             </div>
+          </div>
             <div>
               <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright" (click)="oktocheck()" matStepperNext>Next</button>
+              <button class="btn btn-success btnright" (click)="oktocheck(); emptyfiledcheck()" >Next</button>
             </div>
      
             
@@ -481,9 +471,9 @@
     </section>
   </mat-step>  
 
- 
 
-<!-- step 5 -->
+
+ <!-- step 5 -->
  <mat-step [stepControl]="monthlycost">
     <section class="se3 getstr">
       <div class="container con0 conw">
@@ -511,24 +501,18 @@
               <div  *ngIf="yeslon"  >
                 <div class="form-group" >
                   <label for="exampleFormControlSelect1">Total Outstanding Amount</label>
-                  <input formControlName="currentloan" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.currentloan.errors }" placeholder="{{courency}}">
-                  <div *ngIf="checkednow && this.monthlycost.controls.currentloan.errors" class="invalid-feedback">
-                  <div *ngIf="this.monthlycost.controls.currentloan.errors.required">This field is required</div>
-                  </div>
+                  <input formControlName="currentloan" type="Text" class="form-control" id="exampleFormControlInput1" value=""   placeholder="{{courency}}">
+                  <div *ngIf="requerask15" style="color: red;">This field is required</div>
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Total Number of EMI</label>
-                  <input  formControlName="numberofemi" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.numberofemi.errors }" >
-                  <div *ngIf="checkednow && this.monthlycost.controls.numberofemi.errors" class="invalid-feedback">
-                  <div *ngIf="this.monthlycost.controls.numberofemi.errors.required">This field is required</div>
-                  </div>
+                  <input  formControlName="numberofemi" type="Text" class="form-control" id="exampleFormControlInput1" value=""  >
+                  <div *ngIf="requerask16" style="color: red;">This field is required</div>
                 </div>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Total Amount of EMI</label>
-                  <input  formControlName="emiamount" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.emiamount.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
-                  <div *ngIf="checkednow && this.monthlycost.controls.emiamount.errors" class="invalid-feedback">
-                  <div *ngIf="this.monthlycost.controls.emiamount.errors.required">This field is required</div>
-                  </div>
+                  <input  formControlName="emiamount" type="Text" class="form-control" id="exampleFormControlInput1" value=""   placeholder="{{courency}}" (change)="monthlyexpencess()">
+                  <div *ngIf="requerask17" style="color: red;">This field is required</div>
                 </div>
 
               </div>
@@ -542,12 +526,11 @@
 
               <div class="form-group" *ngIf="renthome">
                 <label for="exampleFormControlSelect1">Monthly Rent</label>
-                <input   formControlName="mrent" type="Text" class="form-control" id="exampleFormControlInput1" value=""  [ngClass]="{ 'is-invalid': checkednow && this.monthlycost.controls.mrent.errors }" placeholder="{{courency}}" (change)="monthlyexpencess()">
-                <div *ngIf="checkednow && this.monthlycost.controls.mrent.errors" class="invalid-feedback">
-                <div *ngIf="this.monthlycost.controls.mrent.errors.required">This field is required</div>
-                </div>
+                <input   formControlName="mrent" type="Text" class="form-control" id="exampleFormControlInput1" value=""   placeholder="{{courency}}" (change)="monthlyexpencess()">
+                <div *ngIf="requerask18" style="color: red;">This field is required</div>
               </div>
               <p *ngIf="totalcostshow">Total Monthly Obligation: <span>{{monthlysendamountdispaly}}</span> {{courency}}</p>
+             
 
                <div class="alartse0">
               
@@ -564,7 +547,7 @@
              
             <div>
               <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright" (click)="oktocheck()"  matStepperNext>Next</button>
+              <button class="btn btn-success btnright" (click)="oktocheck(); checkfildvalidation()" matStepperNext >Next</button>
             </div>
      
             
@@ -574,6 +557,9 @@
       </div>
     </section>
   </mat-step>
+
+
+
 
 
 
@@ -589,7 +575,10 @@
             <ng-template matStepLabel>Vehicle Details</ng-template>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Car Model </label>
-                <input   formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
+                <input list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)">
+                <datalist id="carmodel">
+                  <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.name}}" value="{{keys?.name}}">
+                </datalist>
 
                 <div *ngIf="checkednow && this.therdFormGroup.controls.carmodel.errors" class="invalid-feedback">
                 <div *ngIf="this.therdFormGroup.controls.carmodel.errors.required">Car Model</div>
@@ -648,17 +637,26 @@
 
 
 
+
+
+
   <mat-step [stepControl]="Congratulation">
     <section class="se3 getstr">
       <div class="container con0 conw">
         <p class="toptitle">Eligibility Result</p>
-        <div class="fromse">
+        <div class="fromse" style="padding: 10px 50px 50px 50px;">
           <form [formGroup]=" Congratulation">
             <ng-template matStepLabel>Eligibility Result</ng-template>
-              <h5> Loan will be approved once your documents are verified.</h5>
+              <h5 style="text-align: center;"> Loan will be approved once your documents are verified.</h5>
               
-              <p>Car Model: <span>{{ this.therdFormGroup.value.carmodel }}</span></p>
-              <p>Dealer Offered Price: <span>{{disprice}} </span> {{courency}}</p>
+              <p  style="margin-top: 50px;">
+
+                <b>Car Model:</b><span>{{ this.therdFormGroup.value.carmodel }}</span><br>
+
+                <b>Dealer Offered Price:</b> <span>{{disprice}} </span> {{courency}}
+
+              </p>
+             
 
 
                 <fieldset class="form-group">
@@ -908,7 +906,6 @@
 
 
 
-
 <!-- step 6 -->
 
   <mat-step [stepControl]="AddressDetails">
@@ -1011,8 +1008,8 @@
                   <label>Use this address for all communication</label><br>
 
                 <mat-radio-group aria-label="Select an option"  formControlName="contactaddress"[ngClass]="{ 'is-invalid': checkednow && this.AddressDetails.controls.contactaddress.errors }">
-                  <mat-radio-button class="matitm" value="India">Residential Address</mat-radio-button><br>
-                  <mat-radio-button class="matitm" value="Myanmar">Office Address</mat-radio-button><br>
+                  <mat-radio-button class="matitm" value="Residential">Residential Address</mat-radio-button><br>
+                  <mat-radio-button class="matitm" value="Office">Office Address</mat-radio-button><br>
                 </mat-radio-group>
 
                 <div *ngIf="checkednow && this.AddressDetails.controls.contactaddress.errors" class="invalid-feedback">
@@ -1172,7 +1169,7 @@
              
             <div>
               <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright"  matStepperNext>Next</button>
+              <button class="btn btn-success btnright" (click)="submit()" matStepperNext>Next</button>
             </div>
      
             
@@ -1222,7 +1219,7 @@
             <tbody>
               <tr class="trcls">
                 <td class="titletd tc lp">Application Ref. No.</td>
-                <td class="datat lp tc" >DAL063198771</td>
+                <td class="datat lp tc" >{{this.applicationid}}</td>
               </tr>
               <tr class="trcls">
                 <td class="titletd tc lp">Loan Amount</td>

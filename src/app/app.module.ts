@@ -28,6 +28,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { AgmCoreModule } from '@agm/core';
 import { Ng5SliderModule } from 'ng5-slider';
 import { CodestoreComponent } from './codestore/codestore.component';
+import { StatusComponent } from './status/status.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CodestoreComponent } from './codestore/codestore.component';
     FooterComponent,
     TncComponent,
     TestComponent,
-    CodestoreComponent
+    CodestoreComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,

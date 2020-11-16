@@ -35,6 +35,14 @@ export class ApplyComponent implements OnInit {
   OfficeAddress: FormGroup;
   fileupload: FormGroup;
 
+chk;
+
+emi;
+full;
+interest;
+
+  
+brandVal:any;
 courency="MMK";
 numcode="+95";
 mmsg;
@@ -110,10 +118,32 @@ yeslon:any = false;
 nolona:any = false;
 totalcostshow:any = false;
 
+requerask:any = false;
+requerask2:any = false;
+requerask3:any = false;
+requerask4:any = false;
+requerask5:any = false;
+requerask6:any = false;
+requerask7:any = false;
+requerask8:any = false;
+requerask9:any = false;
+requerask10:any = false;
+requerask11:any = false;
+requerask12:any = false;
+requerask13:any = false;
+requerask14:any = false;
+
+
+requerask15:any = false;
+requerask16:any = false;
+requerask17:any = false;
+requerask18:any = false;
+
+
 
 
 gcode:any = Math.floor((Math.random() * 10000) + 99999);
-
+applicationid:any = Math.floor((Math.random() * 10000) + 99999);
 componentForm = {
   street_number: "short_name",
   route: "long_name",
@@ -128,103 +158,18 @@ componentForm = {
 
 
 
-// emical start here
-
-filters: any;
-  pemi = {
-    value: "25"
-  }
-  remi = {
-    value: "9.5"
-  }
-  temi = {
-    value: "20"
-  }
-  memi = {
-    value: "240"
-  }
-
-  query = {
-    amount: "",
-    interest: "",
-    tenureYr: "",
-    tenureMo: ""
-  }
-
-  result = {
-    emi: "",
-    interest: "",
-    total: ""
-  }
-  yrToggel: boolean;
-  poptions: Options = {
-    floor: 1,
-    ceil: 100,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>L</b>';
-        case LabelType.High:
-          return value + '<b>L</b>';
-        default:
-          return value + '<b>L</b>';
-      }
-    }
-  };
-  roptions: Options = {
-    floor: 5,
-    ceil: 20,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>%</b>';
-        case LabelType.High:
-          return value + '<b>%</b>';
-        default:
-          return value + '<b>%</b>';
-      }
-    }
-  };
-  toptions: Options = {
-    floor: 1,
-    ceil: 30,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>Yr</b>';
-        case LabelType.High:
-          return value + '<b>Yr</b>';
-        default:
-          return value + '<b>Yr</b>';
-      }
-    }
-  };
-  moptions: Options = {
-    floor: 1,
-    ceil: 360,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return value + '<b>Mo</b>';
-        case LabelType.High:
-          return value + '<b>Mo</b>';
-        default:
-          return value + '<b>Mo</b>';
-      }
-    }
-  };
 
   constructor(private _formBuilder: FormBuilder,private gs: GlobalService,private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) { 
-
-   this.yrToggel = true;  
-  }
+    private ngZone: NgZone) { }
 
   ngOnInit() {
      
     
 
+    
+
     this.firstFormGroup = this._formBuilder.group({
+      
       number: ['', Validators.required],
       numdic:[''],
       code: ['', Validators.required],
@@ -244,11 +189,23 @@ filters: any;
       city: ['', Validators.required],
       residencetype: ['', Validators.required],
       employmenttype: ['', Validators.required],
-      Employmentname: [''],
-      takehomeselary: [''],
-      takehomeselarybuseness: [''],
-      takehomeselaryprofesonal: [''],
 
+      employmentnamees1: [''],
+      takehomeselary: [''],
+
+      emlomentnamees3: [''],
+      workexperincees3: [''],
+      irtes3: [''],
+      applicationtypees3: [''],
+      depreciationes3: [''],
+      takehomeselarybuseness: [''],
+
+      emlomentnamees4: [''],
+      workexperincees4: [''],
+      irtes4: [''],
+      applicationtypees4: [''],
+      depreciationes4: [''],
+      takehomeselaryprofesonal: [''],
 
     });
     this.therdFormGroup = this._formBuilder.group({
@@ -256,7 +213,8 @@ filters: any;
       carprice: [''],
       cardelarprice: ['', Validators.required],
       rtocost:    ['', Validators.required],
-      insucost:    ['', Validators.required]
+      insucost:    ['', Validators.required],
+      
     });
     this.monthlycost = this._formBuilder.group({
 
@@ -267,11 +225,13 @@ filters: any;
       mexpense: ['', Validators.required],
       numberofemi: [''],
       dilaration:  ['', Validators.required],
+     
       
     });
     this.Congratulation = this._formBuilder.group({
       loanamount: ['', Validators.required],
-      yearreturn: ['', Validators.required]
+      yearreturn: ['', Validators.required],
+     
       
     });
 
@@ -313,7 +273,6 @@ filters: any;
           }
           for (const component of place.address_components as google.maps.GeocoderAddressComponent[]) {
             const addressType = component.types[0];
-             console.log(addressType);
             if (this.componentForm[addressType]) {
               const val = component[this.componentForm[addressType]];
               (document.getElementById(addressType) as HTMLInputElement).value = val;
@@ -324,7 +283,6 @@ filters: any;
       });
     });
 
-    this.update();
 
 
 
@@ -334,8 +292,14 @@ filters: any;
 
 
   }
-
-
+ 
+ searchBrand(value)
+ {
+   console.log(value);
+  this.gs.getCarBrand(value).subscribe((res)=>{
+     this.brandVal=res;
+  })
+ }
 
 
  otppagevarification(){
@@ -373,6 +337,10 @@ filters: any;
            }
 
  }
+
+
+
+
   sms(){
 
        let obj3= "Verification code for your application is "+ this.gcode +".This code only for your identity verification purposes.";
@@ -425,7 +393,7 @@ filters: any;
 
 ctes(){
   let fmvalu = this.secondFormGroup.value;
-    let employmenttype = fmvalu.employmenttype.toString();
+  let employmenttype = fmvalu.employmenttype.toString();
     
 
      if (employmenttype ==="Salaried"){
@@ -459,6 +427,211 @@ ctes(){
 
    
 }
+
+ emptyfiledcheck(){
+  let fmvalu = this.secondFormGroup.value;
+  let employmenttype = fmvalu.employmenttype.toString();
+  let employmentnamees1 = fmvalu.employmentnamees1;
+  let takehomeselary = fmvalu.takehomeselary;
+
+  let emlomentnamees3 = fmvalu.emlomentnamees3;
+  let workexperincees3 = fmvalu.workexperincees3;
+  let irtes3 = fmvalu.irtes3;
+  let applicationtypees3 = fmvalu.applicationtypees3;
+  let depreciationes3 = fmvalu.depreciationes3;
+  let takehomeselarybuseness = fmvalu.takehomeselarybuseness;
+
+
+  let emlomentnamees4 = fmvalu.emlomentnamees4;
+  let workexperincees4 = fmvalu.workexperincees4;
+  let irtes4 = fmvalu.irtes4;
+  let applicationtypees4 = fmvalu.applicationtypees4;
+  let depreciationes4 = fmvalu.depreciationes4;
+  let takehomeselaryprofesonal = fmvalu.takehomeselaryprofesonal;
+
+
+   
+    
+
+    if (employmenttype ==="Salaried"){
+
+
+      if(employmentnamees1==="" && takehomeselary===""){
+
+         this.requerask=true;
+         this.requerask2=true;
+      }else if(employmentnamees1===""){
+      
+         this.requerask=true;
+      }else if(takehomeselary===""){
+          this.requerask2=true;
+          this.requerask=false;
+      }else{
+         this.requerask=false;  
+         this.requerask2=false; 
+         this.next();
+
+      }
+
+   }else if (employmenttype ==="SelfEmployedbusiness"){
+
+    if(  emlomentnamees3==="" && workexperincees3==="" && irtes3==="" && applicationtypees3==="" && depreciationes3==="" && takehomeselarybuseness===""){
+
+         this.requerask3=true;
+         this.requerask4=true;
+         this.requerask5=true;
+         this.requerask6=true;
+         this.requerask7=true;
+         this.requerask8=true;
+      }else if(emlomentnamees3===""){
+      
+         this.requerask3=true;
+         this.requerask4=false;
+         this.requerask5=false;
+         this.requerask6=false;
+         this.requerask7=false;
+         this.requerask8=false;
+      }else if(workexperincees3===""){
+      
+         this.requerask4=true;
+         this.requerask3=false;
+         this.requerask5=false;
+         this.requerask6=false;
+         this.requerask7=false;
+         this.requerask8=false;
+      }else if(irtes3===""){
+      
+         this.requerask5=true;
+         this.requerask3=false;
+         this.requerask4=false;
+         this.requerask6=false;
+         this.requerask7=false;
+         this.requerask8=false;
+      }else if(applicationtypees3===""){
+      
+         this.requerask6=true;
+         this.requerask3=false;
+         this.requerask4=false;
+         this.requerask5=false;
+         this.requerask7=false;
+         this.requerask8=false;
+      }else if(depreciationes3===""){
+      
+         this.requerask7=true;
+         this.requerask3=false;
+         this.requerask4=false;
+         this.requerask5=false;
+         this.requerask6=false;
+         this.requerask8=false;
+      }else if(takehomeselarybuseness===""){
+          this.requerask8=true;
+          this.requerask3=false;
+         this.requerask4=false;
+         this.requerask5=false;
+         this.requerask6=false;
+         this.requerask7=false;
+          
+      }else{
+         this.requerask3=false;
+         this.requerask4=false;
+         this.requerask5=false;
+         this.requerask6=false;
+         this.requerask7=false;
+         this.requerask8=false;
+         this.next();
+
+      }
+      
+   }else if (employmenttype ==="SelfEmployedProfessional"){
+    if(  emlomentnamees4==="" && workexperincees4==="" && irtes4==="" && applicationtypees4==="" && depreciationes4==="" && takehomeselaryprofesonal===""){
+
+         this.requerask9=true;
+         this.requerask10=true;
+         this.requerask11=true;
+         this.requerask12=true;
+         this.requerask13=true;
+         this.requerask14=true;
+      }else if(emlomentnamees4===""){
+      
+         this.requerask9=true;
+
+         this.requerask10=false;
+         this.requerask11=false;
+         this.requerask12=false;
+         this.requerask13=false;
+         this.requerask14=false;
+         
+      }else if(workexperincees4===""){
+      
+         this.requerask10=true;
+         this.requerask9=false;
+         
+         this.requerask11=false;
+         this.requerask12=false;
+         this.requerask13=false;
+         this.requerask14=false;
+         
+      }else if(irtes4===""){
+      
+         this.requerask11=true;
+         this.requerask9=false;
+         this.requerask10=false;
+    
+         this.requerask12=false;
+         this.requerask13=false;
+         this.requerask14=false;
+        
+      }else if(applicationtypees4===""){
+      
+         this.requerask12=true;
+         this.requerask9=false;
+         this.requerask10=false;
+         this.requerask11=false;
+        
+         this.requerask13=false;
+         this.requerask14=false;
+         
+      }else if(depreciationes4===""){
+      
+         this.requerask13=true;
+         this.requerask9=false;
+         this.requerask10=false;
+         this.requerask11=false;
+         this.requerask12=false;
+      
+         this.requerask14=false;
+         
+      }else if(takehomeselaryprofesonal===""){
+        this.requerask14=true;
+        this.requerask9=false;
+         this.requerask10=false;
+         this.requerask11=false;
+         this.requerask12=false;
+         this.requerask13=false;
+        
+        
+          
+      }else{
+         this.requerask9=false;
+         this.requerask10=false;
+         this.requerask11=false;
+         this.requerask12=false;
+         this.requerask13=false;
+         this.requerask14=false;
+         this.next();
+
+      }
+
+   }else{
+      
+
+   }
+
+
+
+
+
+ }
 
 disposableincome(){
   let fmvalu = this.secondFormGroup.value;
@@ -535,6 +708,66 @@ getloninfo(){
   
 
    
+}
+
+checkfildvalidation(){
+  let loaninfo = this.monthlycost.value;
+  let loanstutas = loaninfo.lonarunning.toString();
+  let currentloan= loaninfo.currentloan;
+  let numberofemi= loaninfo.numberofemi;
+  let emiamount= loaninfo.emiamount;
+  let   mrent= loaninfo.mrent;
+
+
+  let fmvalu = this.secondFormGroup.value;
+  let residencetype = fmvalu.residencetype.toString();
+
+
+  if(residencetype==="Hostel" || residencetype==="Payingguest" ||residencetype==="Rentedstayingalone" ||residencetype==="entedwithfamily" || residencetype==="Rentedwithsfriends"){
+    this.renthome = true;
+    this.ownehome = false;
+   }
+  
+
+ if(loanstutas==="Yes"){
+
+
+      
+       if(currentloan==="" && numberofemi==="" && emiamount==="" ){
+
+         this.requerask15=true;
+         this.requerask16=true;
+         this.requerask17=true;
+      }else if(currentloan===""){
+      
+         this.requerask15=true;
+         this.requerask16=false;
+         this.requerask17=false; 
+      }else if(numberofemi===""){
+          this.requerask16=true;
+          this.requerask15=false;
+          this.requerask17=false; 
+         
+      }else if(emiamount===""){
+          this.requerask17=true;
+          this.requerask15=false;
+          this.requerask16=false;
+ 
+         
+      }else{
+         this.requerask15=false;
+         this.requerask16=false;
+         this.requerask17=false;
+         this.requerask18=false; 
+         this.next();
+
+      }
+     
+   }else{
+      
+       
+     
+   }
 }
 
 monthlyexpencess(){
@@ -635,14 +868,14 @@ emaicalculator() {
       var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
       var bottom = top - 1;
       var sp = top / bottom;
-      var emi = ((loanAmount * monthlyInterestRatio) * sp);
-      var full = numberOfMonths * emi;
-      var interest = full - loanAmount;
-      var int_pge = (interest / full) * 100;
-      this.finalemi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       this.emi = ((loanAmount * monthlyInterestRatio) * sp);
+       this.full = numberOfMonths * this.emi;
+       this.interest = this.full - loanAmount;
+      var int_pge = (this.interest / this.full) * 100;
+      this.finalemi = this.emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.totalamount = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.finalinterest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.totalamount = this.full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.finalinterest = this.interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.scalolation=true;
       
      }
@@ -663,7 +896,7 @@ finalamountcheck(){
      alert("The Loan amount exceeds the permissible limit.");
       
   }else{
-    console.log("kjbkjbk");
+    
      this.next();
     }
   
@@ -673,51 +906,7 @@ next(){
   this.stepper.next();
 }
 
-  tbupdate(id) {
-    if (id == 0) {
-      this.pemi.value = (Number(this.query.amount) / 100000).toString();
-    }
-    else if (id == 1) {
-      this.remi.value = this.query.interest;
-    }
-    else if (id == 2) {
-      this.temi.value = this.query.tenureYr;
-    }
-    else if (id == 3) {
-      this.memi.value = this.query.tenureMo;
-    }
-    this.update();
-  }
 
-  update() {
-
-    var loanAmount = Number(this.pemi.value) * 100000;
-    var numberOfMonths = (this.yrToggel) ? (Number(this.temi.value) * 12) : Number(this.memi.value);
-    var rateOfInterest = Number(this.remi.value);
-    var monthlyInterestRatio = (rateOfInterest / 100) / 12;
-
-    this.query.amount = loanAmount.toString();
-    this.query.interest = rateOfInterest.toString();
-    if (this.yrToggel) {
-      this.query.tenureYr = this.temi.value.toString();
-    }
-    else {
-      this.query.tenureMo = this.memi.value.toString();
-    }
-
-    var top = Math.pow((1 + monthlyInterestRatio), numberOfMonths);
-    var bottom = top - 1;
-    var sp = top / bottom;
-    var emi = ((loanAmount * monthlyInterestRatio) * sp);
-    var full = numberOfMonths * emi;
-    var interest = full - loanAmount;
-    var int_pge = (interest / full) * 100;
-
-    this.result.emi = emi.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    var loanAmount_str = loanAmount.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.result.total = full.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    this.result.interest = interest.toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
 
 
 
@@ -729,7 +918,7 @@ getfilename(){
 
   }else{
        this.disfileName = disfileName2.replace(/.*[\/\\]/, '');
-       this.upbuttext="Reupload";
+       this.upbuttext="Upload";
        this.uploadonce=true;
   }
   
@@ -739,6 +928,7 @@ getfilename(){
 
 
  get f() { return this.secondFormGroup.controls; }  
+
  oktocheck(){
   this.checkednow=true;
  }
@@ -747,14 +937,24 @@ getfilename(){
 
 
   submit(){
-      
+       let finalData = {};
        let obj2 = this.firstFormGroup.value;
-       
-      let obj = {
-        number:obj2.number
-      }
-      
-      this.gs.apply(obj).subscribe((res)=>{
+       finalData['personalDetails'] =this.secondFormGroup.value;
+       finalData['expenditureDetails'] =this.monthlycost.value;
+       finalData['vehicleDetails'] =this.therdFormGroup.value;
+       finalData['eligibilityResult'] =this.Congratulation.value;
+       finalData['addressDetails'] =this.AddressDetails.value;
+       finalData['number'] =obj2.number;
+       finalData['montyspendamount'] =this.monthlysendamount;
+       finalData['applicationid'] =this.applicationid;
+       finalData['mothyemi'] =this.finalemi;
+       finalData['fullamountreplay'] =this.totalamount;
+       finalData['totalinterest'] =this.finalinterest;
+       finalData['preapproveamount'] =this.preapproveamountforuser;
+       finalData['totalcarprice'] =this.totalcarprice;
+            
+      console.log(finalData);
+      this.gs.apply(finalData).subscribe((res)=>{
         console.log(res);
       });
       
