@@ -47,7 +47,7 @@ export class ApplyComponent implements OnInit {
   AddressDetails: FormGroup;
   OfficeAddress: FormGroup;
   fileupload: FormGroup;
-
+  carprice:any;
 chk;
 
 emi;
@@ -182,6 +182,7 @@ componentForm = {
     const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
     var nn = document.getElementById('carprice') as HTMLInputElement;
      nn.value = val;
+     this.carprice = val;
     
   }
 uploadSubmit(applicantType, documentType) {
@@ -348,7 +349,7 @@ uploadSubmit(applicantType, documentType) {
     });
     this.therdFormGroup = this._formBuilder.group({
       carmodel: ['', Validators.required],
-      carprice: [''],
+      carprice: [this.carprice || ''],
       cardelarprice: ['', Validators.required],
       rtocost:    ['', Validators.required],
       insucost:    ['', Validators.required],
@@ -1095,6 +1096,7 @@ getfilename(){
        finalData['totalcarprice'] =this.totalcarprice;
        finalData['applicationStatus'] ='New';
        finalData['documentStatus'] ='';
+       finalData['carprice'] =this.carprice;
             
       console.log(finalData);
       this.gs.apply(finalData).subscribe((res)=>{

@@ -32,7 +32,7 @@ const ApplySchema = new Schema({
   mexpense:{type: String},
   mrent:{type: String},
   numberofemi:{type: String},
-  Employmentnamees1:{type: String},
+  employmentnamees1:{type: String},
   applicationtypees3:{type: String},
   applicationtypees4:{type: String},
   city:{type: String},
