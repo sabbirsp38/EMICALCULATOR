@@ -1,17 +1,11 @@
 <div class="topbar">
   <img class="img-responsive img imglogo" src="assets/images/logo.png">
 </div>
- 
-
+               
+               
 <div>
 
 <mat-horizontal-stepper [linear]="isLinear"  labelPosition="bottom" #stepper>
-
-
-
-
-
-
 
 
 
@@ -575,10 +569,14 @@
             <ng-template matStepLabel>Vehicle Details</ng-template>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Car Model </label>
-                <input list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)">
+                <!-- <input list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)">
                 <datalist id="carmodel">
                   <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.name}}" value="{{keys?.name}}">
-                </datalist>
+                </datalist> -->
+                 <select formControlName="carmodel" (change)="appendPrice($event)" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
+                  <option value="">Select Car Model</option>
+                  <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.price}}" value="{{keys?.name}}">
+                </select>
 
                 <div *ngIf="checkednow && this.therdFormGroup.controls.carmodel.errors" class="invalid-feedback">
                 <div *ngIf="this.therdFormGroup.controls.carmodel.errors.required">Car Model</div>
@@ -586,7 +584,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Car  Price</label>
-                <input   formControlName="carprice" type="Text" class="form-control"  placeholder="1,000,000" disabled="true" value="1,000,000"  >
+                <input id="carprice"  formControlName="carprice" type="Text" class="form-control"  placeholder="000" disabled="true" >
               </div>
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Dealer Quoted Price</label>
@@ -1023,7 +1021,8 @@
              
             <div>
               <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright" (click)="oktocheck()"  matStepperNext>Next</button>
+              <!-- <button class="btn btn-success btnright" (click)="oktocheck()"  matStepperNext>Next</button> -->
+              <button class="btn btn-success btnright" (click)="submit()" matStepperNext>Next</button>
             </div>
      
             
@@ -1064,22 +1063,39 @@
 
                 <tbody>
                   <tr class="trcls">
+                   
                     <td class="titletd tc lp">
                       
-                      <select style="margin-left: -22%;font-size: 15px;padding: 5px;">
-                        <option value="1">Driving License</option>
-                        <option value="2">Passport</option>
-                        <option value="3">National ID Card</option>   
-                      </select>
+                      <div class="image-div">
+                     <label class="image-content">
+                    <div class="imagePreviewNew"><img  [src]="url_img1" alt=""  class="upload-image-size">
+                    <label id="name1"></label>
+                    </div>
+                    <input  type="file" id="file" name="file" ng2FileSelect
+                      accept=".png" [uploader]="uploader" [disabled]="hasProp(buttonstatus,'applicant','nid','disabelfile')" (change)="uploadSubmit('applicant','nid')" class="uploadFile img image-button" value="Upload Photo" class="hide-input-icon"><p class="img-label"> NID*</p>
+                    </label>
+                    </div>
+                      <div class="btn-dl-dw">
+                        <div *ngIf="hasProp(buttonstatus,'applicant','nid','deletenabel')" class="filebtnoptions"><span class="btn-danger btn" *ngIf="documentLock" (click)="removedocument('applicant','nid')"><i class="fa fa-trash " aria-hidden="true"></i></span> <span class="btn-danger btn"(click)="downloaddocument('applicant','nid','fileres')"> <i class="fa fa-download " aria-hidden="true"></i></span>
+
+                        </div>
+                      </div>
                     </td>
                     <td class="datatd tc lp" >
-                      <label for="upload" class="filelabel" style="">
-                        <input type="file" id="upload" formControlName="ufile" (change)="getfilename()" multiple>
-                       <i style="color: #1789ea;margin-left: 32%;" class="fa fa-plus fa-2x"></i>
+                      <div class="image-div">
+                       <label class="image-content">
+                      <div class="imagePreviewNew"><img   [src]="url_img2" alt=""  class="upload-image-size">
+                      <label id="name1"></label>
+                      </div>
+                      <input  type="file" id="file" name="file" ng2FileSelect
+                        accept=".png" [uploader]="uploader" [disabled]="hasProp(buttonstatus,'applicant','passport','disabelfile')" (change)="uploadSubmit('applicant','passport')" class="uploadFile img image-button" value="Upload Photo" class="hide-input-icon"><p class="img-label"> PASSPOT*</p>
                       </label>
-                    </td>
-                    <td class="datatd tc lp" >
-                      <button class="uplodbut" >{{upbuttext}}</button>
+                      </div>
+                        <div class="btn-dl-dw">
+                          <div *ngIf="hasProp(buttonstatus,'applicant','passport','deletenabel')" class="filebtnoptions"><span class="btn-danger btn" *ngIf="documentLock" (click)="removedocument('applicant','passport')"><i class="fa fa-trash " aria-hidden="true"></i></span> <span class="btn-danger btn"(click)="downloaddocument('applicant','passport','fileres')"> <i class="fa fa-download " aria-hidden="true"></i></span>
+
+                          </div>
+                        </div>
                     </td>
                   </tr>
                   
@@ -1169,7 +1185,8 @@
              
             <div>
               <button class="btn btn-success btnleft"  matStepperPrevious>Back</button>
-              <button class="btn btn-success btnright" (click)="submit()" matStepperNext>Next</button>
+             <!--  <button class="btn btn-success btnright" (click)="submit()" matStepperNext>Next</button> -->
+              <button class="btn btn-success btnright" (click)="oktocheck()"  matStepperNext>Next</button>
             </div>
      
             

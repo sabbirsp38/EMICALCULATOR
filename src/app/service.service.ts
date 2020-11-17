@@ -80,5 +80,16 @@ export class GlobalService {
   getCarBrand(name) {
     return this.http.get(`${this.url}/api/user/getCarBrand/${name}`);
   }
+   getBrand() {
+    return this.http.get(`${this.url}/api/user/getBrand`);
+  }
+
+  uploadFile(data: FormData): Observable<any> {
+    //debugger
+    return this.http.post<any>(`${this.url}/api/application/uploaddocumentsApply`, data);
+  }
+  removedocument(fileid) {
+    return this.http.get<any>(`${this.url}/api/application/removedocumentDealer/` + fileid);
+  }
 
 }
