@@ -4,10 +4,10 @@ import {GlobalService} from '../service.service';
 import * as $AB from 'jquery';
 declare var $: any ;
 import { MapsAPILoader } from '@agm/core';
- import { Options, LabelType } from 'ng5-slider';
-
- import { MatHorizontalStepper, MatStep } from '@angular/material';
-
+import { Options, LabelType } from 'ng5-slider';
+import Swal from 'sweetalert2';
+import { MatHorizontalStepper, MatStep } from '@angular/material';
+import { FileUploader } from "ng2-file-upload";
 
 
 @Component({
@@ -20,6 +20,27 @@ export class ApplyComponent implements OnInit {
 
   @ViewChild(MatHorizontalStepper, {static: true} ) stepper: MatHorizontalStepper;
   
+  public uploader: FileUploader = new FileUploader({
+    isHTML5: true
+  });
+
+
+  utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+
+  forcoma;
+  applicaionData: Object;
+  userId: any;
+  appid: any;
+  deletenabel = false;
+  buttonstatus: any;
+  url_img1: string = '';
+  url_img2: string = '';
+  url_img3: string = '';
+  url_img4: string = '';
+  url_img5: string = '';
+  url_img6: string = '';
+  applicationType: any;
+
   private geoCoder;   
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -34,7 +55,7 @@ export class ApplyComponent implements OnInit {
   AddressDetails: FormGroup;
   OfficeAddress: FormGroup;
   fileupload: FormGroup;
-
+  carprice:any;
 chk;
 
 emi;
@@ -162,9 +183,144 @@ componentForm = {
   constructor(private _formBuilder: FormBuilder,private gs: GlobalService,private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) { }
 
+
+  appendPrice(event) {
+   
+    const selectEl = (event.target as HTMLSelectElement);
+    const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
+    var nn = document.getElementById('carprice') as HTMLInputElement;
+     nn.value =  this.forcoma(val);
+     this.carprice = val;
+    
+  }
+uploadSubmit(applicantType, documentType) {
+
+    for (var i = 0; i < this.uploader.queue.length; i++) {
+      let fileItem = this.uploader.queue[i]._file;
+      if (fileItem.size > 2000000) {
+        Swal.fire(
+          'warning !',
+          'File should be less than 2 MB of size.',
+          'warning'
+        )
+
+        return;
+      }
+    }
+    for (var j = 0; j < this.uploader.queue.length; j++) {
+      let data = new FormData();
+      let fileItem = this.uploader.queue[j]._file;
+      data.append('applicationid', this.appid);
+     // data.append('applicationid', "this.appid");
+     // data.append('userid', this.userId._id);
+      data.append('userid', 'this.userId._id');
+      data.append('applicantType', applicantType);
+      data.append('documentType', documentType);
+      data.append('applicationType', this.applicationType);
+      data.append('deleteStatus', 'no');
+      data.append('file', fileItem);
+      data.append('fileSeq', 'seq' + j);
+
+      this.gs.uploadFile(data).subscribe((data) => {
+       
+       console.log(data);
+        if (documentType==='nid') 
+          this.url_img1 = data.Location as string;
+        else if(documentType==='passport')
+          this.url_img2 = data.Location as string;
+        else if(documentType==='dlisence')
+          this.url_img3 = data.Location as string;
+        else if(documentType==='nid_back')
+          this.url_img4 = data.Location as string;
+        else if(documentType==='passport_back')
+          this.url_img5 = data.Location as string;
+        else if(documentType==='dlisence_back')
+          this.url_img6 = data.Location as string;
+       this.deletenabel = true;
+
+      });
+    }
+    this.uploader.clearQueue();
+  }
+
+
+   hasProp(obj, applicantType, documentType, type) {
+    
+  }
+
+  downloaddocument(applicantType, documentType, type) {
+    // let obj = this.buttonstatus;
+
+    // if (obj.hasOwnProperty(applicantType)) {
+    //   if (obj[applicantType].hasOwnProperty(documentType)) {
+    //     if (obj[applicantType][documentType].hasOwnProperty(type)) {
+
+    //       if (obj[applicantType][documentType][type].hasOwnProperty('Location')) {
+
+    //          //console.log('output::', obj[applicantType][documentType][type]['Location']);
+    //          //return obj[applicantType][documentType][type]['Location'];
+    //          this.downloadfile(obj[applicantType][documentType][type]['Location']);
+    //       }
+    //     } 
+    //   } 
+    // }
+  }
+
+    previewdocument(applicantType,documentType,type) {
+    // if(documentType)
+    // return obj[applicantType][documentType][type]['Location'];
+   
+  }
+
+  downloadfile(filepath){
+    window.open(filepath, "_self");
+  }
+
+  removedocument(applicantType, documentType) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+       
+        this.gs.removedocument(this.buttonstatus[applicantType][documentType]['fileres'].documentId).subscribe((data) => {
+
+          this.buttonstatus[applicantType][documentType]['deletenabel'] = false;
+
+          this.buttonstatus[applicantType][documentType]['disabelfile'] = false;
+          this.previewdocument(applicantType, documentType, 'fileres');
+
+          // this.gs.documentStatus({ 'applicationid': this.appid, 'documentStatus': this.buttonstatus }).subscribe((data) => {
+           
+          // });
+          
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          this.deletenabel = false;
+          window.location.reload();
+          
+
+        })
+      }
+    })
+}
+
+
+
   ngOnInit() {
      
-    
+    this.forcoma= function(valutopass){
+     
+       return Number(valutopass).toFixed(0).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     
 
@@ -210,7 +366,7 @@ componentForm = {
     });
     this.therdFormGroup = this._formBuilder.group({
       carmodel: ['', Validators.required],
-      carprice: [''],
+      carprice: [this.carprice || ''],
       cardelarprice: ['', Validators.required],
       rtocost:    ['', Validators.required],
       insucost:    ['', Validators.required],
@@ -252,7 +408,13 @@ componentForm = {
     });
    
     this.fileupload = this._formBuilder.group({
-      ufile: ['']
+      url_img1:[''],
+      url_img2:[''],
+      url_img3:[''],
+      url_img4:[''],
+      url_img5:[''],
+      url_img6:[''],
+     
       
     });
     
@@ -284,7 +446,10 @@ componentForm = {
     });
 
 
-
+   this.gs.getBrand().subscribe((res)=>{
+     this.brandVal=res;
+     console.log(this.brandVal);
+  })
 
 
 
@@ -952,10 +1117,14 @@ getfilename(){
        finalData['totalinterest'] =this.finalinterest;
        finalData['preapproveamount'] =this.preapproveamountforuser;
        finalData['totalcarprice'] =this.totalcarprice;
+       finalData['applicationStatus'] ='New';
+       finalData['documentStatus'] ='';
+       finalData['carprice'] =this.carprice;
             
       console.log(finalData);
       this.gs.apply(finalData).subscribe((res)=>{
         console.log(res);
+        this.appid = res._id;
       });
       
   }

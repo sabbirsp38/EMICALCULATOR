@@ -10,7 +10,7 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-      "build": {
+        "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/apply",
@@ -133,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "apply"
+  "defaultProject": "apply",
+  "cli": {
+    "analytics": "5adab007-1f52-49e4-8040-0832ea98d521"
+  }
 }

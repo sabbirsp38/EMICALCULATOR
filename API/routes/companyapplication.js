@@ -24,6 +24,7 @@ let _handleError = (res,statusCode,err) => {
 		
 		   req.body.applicationType = 'Company';
 	       let application = await individualApplicationService.createApplication(req);
+           let application2 = await individualApplicationService.createApplication2(req);
 		   res.status(200).json(application);
 	 }
     catch(err){
@@ -34,6 +35,17 @@ let _handleError = (res,statusCode,err) => {
 router.put('/updateCompanyApplication',async function(req,res){
     try{
         let application = await individualApplicationService.updateCompanyApplicant(req);
+        if(req.query.reassign)
+        {
+            req.body.applicationType = 'Company';
+            let application2 = await individualApplicationService.createApplication2(req);
+        }
+        else if(req.query.remarkCA!='')
+        {
+            req.body.applicationType = 'Company';
+            let application2 = await individualApplicationService.createApplication2(req);
+        }
+
         res.status(201).json(application);
     }
     catch(err){

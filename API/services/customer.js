@@ -11,11 +11,11 @@ var moment = require('moment-timezone');
 (function(){
 
      this.createCustomer = async function(req){
-		 console.log("req.body:=",req.body);	
+		
 		//let refApplicationNumber = await getlastRequestId(); 
 		//refApplicationNumber = ('000000' + ( parseInt(refApplicationNumber) + 1)).slice(-6);  
 		let refApplicationNumber = await getRandomInt(999999);
-	    console.log("refApplicationNumber:=",refApplicationNumber);
+	  
 		let date = new Date(); 
 		let day = (date.getDate() < 10 ? '0' : '') + date.getDate()
 		let year = date.getFullYear().toString();
@@ -30,7 +30,7 @@ var moment = require('moment-timezone');
 		var timedata = moment.tz("Asia/Yangon").format('LLLL');
 		//var usertype= req.body.userType;
 		
-		console.log("timedata:=",timedata);
+		
 		if(req.body.selectOffer=='Home Loan'){
 		  var selectOffer = "I Don't Want 3 Months Principal Deferment";
 		}else{
@@ -51,7 +51,7 @@ var moment = require('moment-timezone');
 			remark:req.body.remarks,
 		}).save();
 		let emailstatus = await customeremail(newCustomer); 
-		console.log("emailstatus:=",emailstatus);	
+			
 		return newCustomer;
 		
 	}
@@ -65,7 +65,7 @@ var moment = require('moment-timezone');
 		
 		 //var formrequestdate = moment(customerDetails.submissionDate).format('LLLL');
 		 var formrequestdate = customerDetails.submissionDate;
-		 console.log("formrequestdate:=",formrequestdate);
+		
 		 
 		
 		 
@@ -97,7 +97,7 @@ var moment = require('moment-timezone');
             subject: "Customer Request", // Subject line
             html: `<table width="90%" border="0" cellspacing="5" cellpadding="5" align="center"  bgcolor="#e5e5e5">
 			 <tr>
-			  <td align="center"><img src="${siteurl}/assets/images/logo.png" /></td>
+			  <td align="center"><img src="${siteurl}/assets/images/logo.pn" alt="Company Logo" /></td>
 			 </tr>
 			 <tr>
 			  <td align="center"><h3>Hi Admin</h3>
@@ -133,7 +133,7 @@ var moment = require('moment-timezone');
 				  <td>Processing Location:</td><td>${customerDetails.processingLocation}</td>
 				 </tr>
 			 </table>
-			 <p>Sincerely ,<br>Loan Department</p>
+			 <p>Sincerely ,<br>Loan Dept.</p>
 			  </td>
 			 </tr>
 			</table>`
@@ -159,16 +159,15 @@ var moment = require('moment-timezone');
    }
    
    this.checkCustomer = async function(customerHPaccount,nric){	   
-	    console.log("customerHPaccount====",customerHPaccount);
-		console.log("nric====",nric);		 
+	    
 		let customerData = await Customer.findOne({'customerHPaccount':customerHPaccount,'nric':nric}).exec();
-		console.log("customerData====",customerData);
+		
 		if(customerData)
 		{
-			console.log("If Condition");
+			
 			return 200;
 		}else{
-			console.log("Else Condition");
+			
 		    return 700;
 		}
    }

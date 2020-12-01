@@ -12,11 +12,11 @@ let _handleError = (res,statusCode,err) => {
     res.status(objResp.statusCode).send(objResp);
 }
 router.get('/:masterName',async function(req,res){
-    console.log("here");
+ 
     try{
         let masterName = req.params.masterName;
         let result = await genericMaster.fetchMaster(masterName);
-        console.log(result);
+      
         res.send(result);
     }
     catch(err){

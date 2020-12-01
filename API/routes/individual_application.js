@@ -18,13 +18,14 @@ let _handleError = (res,statusCode,err) => {
         statusCode: statusCode || 500,
         errorCode: 0
     };
-    console.log(err);
+  
     res.status(objResp.statusCode).send(objResp);
 }
 
 router.post('/create',async function(req,res){
     try{
         let application = await individualApplicationService.createApplication(req);
+        let application2 = await individualApplicationService.createApplication2(req);
         res.status(201).json(application);
     }
     catch(err){
@@ -34,6 +35,15 @@ router.post('/create',async function(req,res){
 router.put('/updateIndividualApplication',async function(req,res){
     try{
         let application = await individualApplicationService.updateApplicant(req);
+        if(req.query.reassign)
+        {
+            req.body.applicationType = 'Company';
+            let application2 = await individualApplicationService.createApplication2(req);
+        }
+        else if(req.query.remarkCA!='')
+        {
+        	let application2 = await individualApplicationService.createApplication2(req);
+        }
         res.status(201).json(application);
     }
     catch(err){
@@ -65,10 +75,38 @@ router.get('/',async function(req,res){
     let limit = req.query.limit;
 });
 
+router.get('/auditTrail',async function(req,res){
+    try{
+        let result = await individualApplicationService.searchApplications2(req);
+        res.status(200).send(result);
+    }catch(err){
+        _handleError(res,500, err.message);
+    }
+  
+});
+
 
 router.get('/getreportdata',async function(req,res){
     try{
         let result = await individualApplicationService.reportApplications(req);
+		//console.log("result=====",result);	
+		if(result.code==200){
+			res.status(200).send(result.resarray);
+		}else{
+		    res.status(400).send({err:'No Record Found'});
+		}
+        
+    }catch(err){
+        _handleError(res,500, err.message);
+    }
+    let id = req.query.id;
+    let startDate = req.query.start;
+    let endDate = req.query.end;
+    let limit = req.query.limit;
+});
+router.get('/getreportdata2',async function(req,res){
+    try{
+        let result = await individualApplicationService.reportApplications2(req);
 		//console.log("result=====",result);	
 		if(result.code==200){
 			res.status(200).send(result.resarray);
@@ -142,8 +180,7 @@ router.get('/getUploadstatus/:applicationid',async function(req,res){
  router.get('/dealerStatus/:applicationid',async function(req,res){
    
     try{
-    	let id = req.params.applicationid;
-        let result = await individualApplicationService.getDealer(id);
+        let result = await individualApplicationService.getDealer(req);
         if(result){
 			if(result.documentStatus){
 				var documentStatus = JSON.parse(result.documentStatus);
@@ -153,13 +190,8 @@ router.get('/getUploadstatus/:applicationid',async function(req,res){
 			var statuskey ={
 					documentStatus:documentStatus,
 			    }
-				
-			
-			
-			
+							
 		    res.status(200).send(statuskey);
-			
-			
 			
 		}else{
 			var statuskey = result;
@@ -174,15 +206,14 @@ router.get('/getUploadstatus/:applicationid',async function(req,res){
 
 router.post('/uploadProfilePic', upload, async function (req, res) {
 	 try{
-		 console.log("req.body:",req.body);	 
-		 console.log("req.file:",req.file);	 
+			 
 		 if(req.body.userid)
          {
 			var maxsize = 2 * 1024 * 1024; 
 			var filesize = req.file.size;	
 			if(maxsize > filesize){
 				 let result = await uploadDocumentService.uploadProfilePicture(req);
-				 console.log("result=====",result);	 
+				 
 				 if(result){
 				   res.status(200).send(result);
 				 }else{
@@ -206,9 +237,9 @@ router.post('/uploaddocuments', upload, async function (req, res) {
 		 if(req.body.applicationid)
          {
 			var maxsize = 2 * 1024 * 1024; 
-			console.log("maxsize:",maxsize);	
+				
 			var filesize = req.file.size;
-			console.log("filesize:",filesize);	
+			
 			if(maxsize > filesize){
 				 let result = await uploadDocumentService.uploadApplicationDocuments(req);
 				 if(result){
@@ -231,17 +262,16 @@ router.post('/uploaddocuments', upload, async function (req, res) {
 
 router.post('/uploaddocumentsDealer', upload, async function (req, res) {
 	 try{
-		 console.log("req.body:",req.body);	 
-		 console.log("req.file:",req.file);	 
+		  
 		 if(req.body.applicationid)
          {
 			var maxsize = 2 * 1024 * 1024; 
-			console.log("maxsize:",maxsize);	
+			
 			var filesize = req.file.size;
-			console.log("filesize:",filesize);	
+				
 			if(maxsize > filesize){
 				 let result = await uploadDocumentService.uploadApplicationDocumentsDealer(req);
-				 console.log("result=====",result);	 
+					 
 				 if(result){
 				   res.status(200).send(result);
 				 }else{
@@ -261,12 +291,161 @@ router.post('/uploaddocumentsDealer', upload, async function (req, res) {
 }) 
 
 
-router.get('/removedocument/:docmentid',async function(req,res){
-	try{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/uploadFileappliacton', upload, async function (req, res) {
+	 try{
+		  
+		 if(req.body.applicationid)
+         {
+			var maxsize = 2 * 1024 * 1024; 
+			
+			var filesize = req.file.size;
+				
+			if(maxsize > filesize){
+				 let result = await uploadDocumentService.uploadallydoc(req);
+					 
+				 if(result){
+				   res.status(200).send(result);
+				 }else{
+				   res.status(400).send(result);
+				 }
+			}else{
+			   res.status(400).send('File must be smaller than 2MB');	
+			}
+		 }else{
+	       res.status(400).send('One or more required parameters are missing or invalid');
+         }
 		
-		console.log("req.params.docmentid:",req.params.docmentid);	
-		if(req.params.docmentid){
+		 
+	}catch(err){
+        _handleError(res,500, err.message);
+    }	 
+}) 
+
+ router.get('/getapplyid/:id',async function(req,res){
+     console.log(req.params);
+    try{
+        let result = await uploadDocumentService.getapplyid(req.params);
+        if(result){
+						
+		    res.status(200).send(result);
+			
+		}else{
+			var statuskey = result;
+			 res.status(400).send(statuskey);
+		}
+       
+    }catch(err){
+        _handleError(res,500, err.message);
+    }
+   
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/uploaddocumentsApply', upload, async function (req, res) {
+	 try{
+		  
+		 if(req.body.applicationid)
+         {
+			var maxsize = 2 * 1024 * 1024; 
+			
+			var filesize = req.file.size;
+				
+			if(maxsize > filesize){
+				 let result = await uploadDocumentService.uploadApplyDocuments(req);
+					 
+				 if(result){
+				   res.status(200).send(result);
+				 }else{
+				   res.status(400).send(result);
+				 }
+			}else{
+			   res.status(400).send('File must be smaller than 2MB');	
+			}
+		 }else{
+	       res.status(400).send('One or more required parameters are missing or invalid');
+         }
+		
+		 
+	}catch(err){
+        _handleError(res,500, err.message);
+    }	 
+}) 
+
+
+router.get('/removedocument/',async function(req,res){
+	try{
+		console.log(req.query);
+		if(req.query.docmentid){
 			 let result = await uploadDocumentService.removeApplicationDocuments(req);
+			 if(result){
+			   res.status(200).send(result);
+			 }else{
+			   res.status(400).send('Unable to delete document');
+			 }
+	    }else{
+			res.status(400).send('No Document Found');
+	    }		 
+	}catch(err){
+	  _handleError(res,500, err.message);
+	}
+})
+
+router.get('/removelogo/',async function(req,res){
+	try{
+		console.log(req.query);
+		if(req.query.docmentid){
+			 let result = await uploadDocumentService.removeLogo(req);
 			 if(result){
 			   res.status(200).send(result);
 			 }else{
@@ -283,7 +462,7 @@ router.get('/removedocument/:docmentid',async function(req,res){
 router.get('/removedocumentDealer/:docmentid',async function(req,res){
 	try{
 		
-		console.log("req.params.docmentid:",req.params.docmentid);	
+			
 		if(req.params.docmentid){
 			 let result = await uploadDocumentService.removeApplicationDocumentsDealer(req);
 			 if(result){

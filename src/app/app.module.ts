@@ -29,7 +29,7 @@ import { AgmCoreModule } from '@agm/core';
 import { Ng5SliderModule } from 'ng5-slider';
 import { CodestoreComponent } from './codestore/codestore.component';
 import { StatusComponent } from './status/status.component';
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -58,6 +58,7 @@ import { StatusComponent } from './status/status.component';
     MatSelectModule,
     MatCheckboxModule,
     MatIconModule,
+    FileUploadModule,
     HttpClientModule,
     GooglePlaceModule,
     Ng5SliderModule,
@@ -65,6 +66,10 @@ import { StatusComponent } from './status/status.component';
       apiKey: 'AIzaSyAcL7jXUnRiHYJUinnKyDAKpkZTQXWHxvU',
       libraries: ['places']
     })
+  ],
+  exports:[
+    FileUploadModule,
+    // FileSelectDirective
   ],
   providers: [],
   bootstrap: [AppComponent]

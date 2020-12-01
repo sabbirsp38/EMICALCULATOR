@@ -362,3 +362,14 @@ input[type=checkbox]:checked:before {
     margin-left: 31% !important;
 }
 }
+
+
+.imagePreviewNew
+{
+    width:200px;
+    height: 150px;
+}
+.upload-image-size{
+    width:200px;
+    height: 150px;
+}
