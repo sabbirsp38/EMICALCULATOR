@@ -54,6 +54,7 @@
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -63,6 +64,8 @@
 
 
 
+=======
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
   <mat-step [stepControl]="firstFormGroup">
 
     <section class="se0 getstr">
@@ -584,7 +587,11 @@
                 </datalist> -->
                  <select formControlName="carmodel" (change)="appendPrice($event)" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
                   <option value="">Select Car Model</option>
+<<<<<<< HEAD
                   <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.price}}" value="{{keys?.name}}">{{keys?.name}}</option>
+=======
+                  <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.price}}" value="{{keys?.name}}">
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
                 </select>
 
                 <div *ngIf="checkednow && this.therdFormGroup.controls.carmodel.errors" class="invalid-feedback">
@@ -1082,6 +1089,7 @@
                     <label id="name1"></label>
                     </div>
                     <input  type="file" id="file" name="file" ng2FileSelect
+<<<<<<< HEAD
                       accept=".png" [uploader]="uploader" [disabled]="hasProp(buttonstatus,'applicant','nid','disabelfile')" (change)="uploadSubmit('applicant','nid')" class="uploadFile img image-button" value="Upload Photo" class="hide-input-icon"><p class="img-label"> NRC Front*</p>
                     </label>
                     </div>
@@ -1109,6 +1117,48 @@
 
                         </div>
                       </div>
+=======
+                      accept=".png" [uploader]="uploader" [disabled]="hasProp(buttonstatus,'applicant','nid','disabelfile')" (change)="uploadSubmit('applicant','nid')" class="uploadFile img image-button" value="Upload Photo" class="hide-input-icon"><p class="img-label"> NID*</p>
+                    </label>
+                    </div>
+                      <div class="btn-dl-dw">
+                        <div *ngIf="hasProp(buttonstatus,'applicant','nid','deletenabel')" class="filebtnoptions"><span class="btn-danger btn" *ngIf="documentLock" (click)="removedocument('applicant','nid')"><i class="fa fa-trash " aria-hidden="true"></i></span> <span class="btn-danger btn"(click)="downloaddocument('applicant','nid','fileres')"> <i class="fa fa-download " aria-hidden="true"></i></span>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td class="datatd tc lp" >
+                      <div class="image-div">
+                       <label class="image-content">
+                      <div class="imagePreviewNew"><img   [src]="url_img2" alt=""  class="upload-image-size">
+                      <label id="name1"></label>
+                      </div>
+                      <input  type="file" id="file" name="file" ng2FileSelect
+                        accept=".png" [uploader]="uploader" [disabled]="hasProp(buttonstatus,'applicant','passport','disabelfile')" (change)="uploadSubmit('applicant','passport')" class="uploadFile img image-button" value="Upload Photo" class="hide-input-icon"><p class="img-label"> PASSPOT*</p>
+                      </label>
+                      </div>
+                        <div class="btn-dl-dw">
+                          <div *ngIf="hasProp(buttonstatus,'applicant','passport','deletenabel')" class="filebtnoptions"><span class="btn-danger btn" *ngIf="documentLock" (click)="removedocument('applicant','passport')"><i class="fa fa-trash " aria-hidden="true"></i></span> <span class="btn-danger btn"(click)="downloaddocument('applicant','passport','fileres')"> <i class="fa fa-download " aria-hidden="true"></i></span>
+
+                          </div>
+                        </div>
+                    </td>
+                    <td class="datatd tc lp" >
+                      <div class="image-div">
+                       <label class="image-content">
+                      <div class="imagePreviewNew"><img   [src]="url_img3" alt=""  class="upload-image-size">
+                      <label id="name1"></label>
+                      </div>
+                      <input  type="file" id="file" name="file" ng2FileSelect
+                        accept=".png" [uploader]="uploader" [disabled]="hasProp(buttonstatus,'applicant','dlisence','disabelfile')" (change)="uploadSubmit('applicant','dlisence')" class="uploadFile img image-button" value="Upload Photo" class="hide-input-icon"><p class="img-label"> DRIVING LINSENCE*</p>
+                      </label>
+                      </div>
+                        <div class="btn-dl-dw">
+                          <div *ngIf="hasProp(buttonstatus,'applicant','dlisence','deletenabel')" class="filebtnoptions"><span class="btn-danger btn" *ngIf="documentLock" (click)="removedocument('applicant','dlisence')"><i class="fa fa-trash " aria-hidden="true"></i></span> <span class="btn-danger btn"(click)="downloaddocument('applicant','dlisence','fileres')"> <i class="fa fa-download " aria-hidden="true"></i></span>
+
+                          </div>
+                        </div>
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
                     </td>
                     
 

@@ -23,11 +23,14 @@ export class ApplyComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
   });
+<<<<<<< HEAD
 
 
   utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 
   forcoma;
+=======
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
   applicaionData: Object;
   userId: any;
   appid: any;
@@ -36,9 +39,12 @@ export class ApplyComponent implements OnInit {
   url_img1: string = '';
   url_img2: string = '';
   url_img3: string = '';
+<<<<<<< HEAD
   url_img4: string = '';
   url_img5: string = '';
   url_img6: string = '';
+=======
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
   applicationType: any;
 
   private geoCoder;   
@@ -189,7 +195,11 @@ componentForm = {
     const selectEl = (event.target as HTMLSelectElement);
     const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
     var nn = document.getElementById('carprice') as HTMLInputElement;
+<<<<<<< HEAD
      nn.value =  this.forcoma(val);
+=======
+     nn.value = val;
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
      this.carprice = val;
     
   }
@@ -230,12 +240,15 @@ uploadSubmit(applicantType, documentType) {
           this.url_img2 = data.Location as string;
         else if(documentType==='dlisence')
           this.url_img3 = data.Location as string;
+<<<<<<< HEAD
         else if(documentType==='nid_back')
           this.url_img4 = data.Location as string;
         else if(documentType==='passport_back')
           this.url_img5 = data.Location as string;
         else if(documentType==='dlisence_back')
           this.url_img6 = data.Location as string;
+=======
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
        this.deletenabel = true;
 
       });

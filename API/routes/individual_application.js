@@ -272,6 +272,39 @@ router.post('/uploaddocumentsDealer', upload, async function (req, res) {
 			if(maxsize > filesize){
 				 let result = await uploadDocumentService.uploadApplicationDocumentsDealer(req);
 					 
+<<<<<<< HEAD
+=======
+				 if(result){
+				   res.status(200).send(result);
+				 }else{
+				   res.status(400).send(result);
+				 }
+			}else{
+			   res.status(400).send('File must be smaller than 2MB');	
+			}
+		 }else{
+	       res.status(400).send('One or more required parameters are missing or invalid');
+         }
+		
+		 
+	}catch(err){
+        _handleError(res,500, err.message);
+    }	 
+}) 
+
+router.post('/uploaddocumentsApply', upload, async function (req, res) {
+	 try{
+		  
+		 if(req.body.applicationid)
+         {
+			var maxsize = 2 * 1024 * 1024; 
+			
+			var filesize = req.file.size;
+				
+			if(maxsize > filesize){
+				 let result = await uploadDocumentService.uploadApplyDocuments(req);
+					 
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
 				 if(result){
 				   res.status(200).send(result);
 				 }else{
@@ -291,6 +324,7 @@ router.post('/uploaddocumentsDealer', upload, async function (req, res) {
 }) 
 
 
+<<<<<<< HEAD
 
 
 
@@ -423,6 +457,8 @@ router.post('/uploaddocumentsApply', upload, async function (req, res) {
 }) 
 
 
+=======
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
 router.get('/removedocument/',async function(req,res){
 	try{
 		console.log(req.query);

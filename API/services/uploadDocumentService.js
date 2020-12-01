@@ -127,6 +127,7 @@ let uploadApplyDocuments =  async (req, res) => {
 			applicationType: req.body.applicationType	
 		}).save();
 		console.log(newDocuments);   
+<<<<<<< HEAD
 	   var docid = newDocuments.id;
 	   let docData = await ApplicationDocuments.findById(docid);
 	   console.log(docData); 
@@ -190,6 +191,8 @@ let uploadallydoc =  async (req, res) => {
 			applicationType: req.body.applicationType	
 		}).save();
 		console.log(newDocuments);   
+=======
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
 	   var docid = newDocuments.id;
 	   let docData = await ApplicationDocuments.findById(docid);
 	   console.log(docData); 
@@ -212,6 +215,7 @@ let uploadallydoc =  async (req, res) => {
 }
 
 
+<<<<<<< HEAD
 
 
 
@@ -238,6 +242,8 @@ let uploadallydoc =  async (req, res) => {
 
 
 
+=======
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
 let getUserById = async (userId) =>{
 	 var appData = await Apply.findById(userId);
 	 return appData;
@@ -819,6 +825,10 @@ module.exports = {
    updateApplicationStatusDealer,
    updateDocumentStatusApplication,
    getProfilePic,
+<<<<<<< HEAD
    uploadApplyDocuments,
    getapplyid,
+=======
+   uploadApplyDocuments
+>>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
 }
