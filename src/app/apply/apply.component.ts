@@ -23,14 +23,11 @@ export class ApplyComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
   });
-<<<<<<< HEAD
 
 
   utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 
   forcoma;
-=======
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
   applicaionData: Object;
   userId: any;
   appid: any;
@@ -39,12 +36,9 @@ export class ApplyComponent implements OnInit {
   url_img1: string = '';
   url_img2: string = '';
   url_img3: string = '';
-<<<<<<< HEAD
   url_img4: string = '';
   url_img5: string = '';
   url_img6: string = '';
-=======
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
   applicationType: any;
 
   private geoCoder;   
@@ -166,7 +160,12 @@ requerask16:any = false;
 requerask17:any = false;
 requerask18:any = false;
 
-
+img1c:any = false;
+img2c:any = false;
+img3c:any = false;
+img4c:any = false;
+img5c:any = false;
+img6c:any = false;
 
 
 gcode:any = Math.floor((Math.random() * 10000) + 99999);
@@ -195,11 +194,7 @@ componentForm = {
     const selectEl = (event.target as HTMLSelectElement);
     const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
     var nn = document.getElementById('carprice') as HTMLInputElement;
-<<<<<<< HEAD
      nn.value =  this.forcoma(val);
-=======
-     nn.value = val;
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
      this.carprice = val;
     
   }
@@ -240,15 +235,12 @@ uploadSubmit(applicantType, documentType) {
           this.url_img2 = data.Location as string;
         else if(documentType==='dlisence')
           this.url_img3 = data.Location as string;
-<<<<<<< HEAD
         else if(documentType==='nid_back')
           this.url_img4 = data.Location as string;
         else if(documentType==='passport_back')
           this.url_img5 = data.Location as string;
         else if(documentType==='dlisence_back')
           this.url_img6 = data.Location as string;
-=======
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
        this.deletenabel = true;
 
       });
@@ -421,12 +413,12 @@ uploadSubmit(applicantType, documentType) {
     });
    
     this.fileupload = this._formBuilder.group({
-      url_img1:[''],
-      url_img2:[''],
-      url_img3:[''],
-      url_img4:[''],
-      url_img5:[''],
-      url_img6:[''],
+      img1: ['', Validators.required],
+      img2: ['', Validators.required],
+      img3: ['', Validators.required],
+      img4: ['', Validators.required],
+      img5: ['', Validators.required],
+      img6: ['', Validators.required],
      
       
     });
@@ -1086,7 +1078,74 @@ next(){
 
 
 
+doccheck(){
+  let fromfile = this.fileupload.value;
+   let im1=fromfile.img1;
+   let im2=fromfile.img2;
+   let im3=fromfile.img3;
+   let im4=fromfile.img4;
+   let im5=fromfile.img5;
+   let im6=fromfile.img6;
 
+   if(im1==="" && im2==="" && im3==="" && im4==="" && im5==="" && im6===""){
+      this.img1c=true;
+      this.img2c=true;
+      this.img3c=true;
+      this.img4c=true;
+      this.img5c=true;
+      this.img6c=true;
+  }else if(im1===""){
+      this.img1c=true;
+      this.img2c=false;
+      this.img3c=false;
+      this.img4c=false;
+      this.img5c=false;
+      this.img6c=false;
+  }else if(im2===""){
+      this.img1c=false;
+      this.img2c=true;
+      this.img3c=false;
+      this.img4c=false;
+      this.img5c=false;
+      this.img6c=false;
+  }else if(im3===""){
+      this.img1c=false;
+      this.img2c=false;
+      this.img3c=true;
+      this.img4c=false;
+      this.img5c=false;
+      this.img6c=false;
+  }else if(im4===""){
+      this.img1c=false;
+      this.img2c=false;
+      this.img3c=false;
+      this.img4c=true;
+      this.img5c=false;
+      this.img6c=false;
+  }else if(im5===""){
+      this.img1c=false;
+      this.img2c=false;
+      this.img3c=false;
+      this.img4c=false;
+      this.img5c=true;
+      this.img6c=false;
+  }else if(im6===""){
+      this.img1c=false;
+      this.img2c=false;
+      this.img3c=false;
+      this.img4c=false;
+      this.img5c=false;
+      this.img6c=true;
+  }else{
+      this.img1c=false;
+      this.img2c=false;
+      this.img3c=false;
+      this.img4c=false;
+      this.img5c=false;
+      this.img6c=false;
+
+  }
+}
 
 
 getfilename(){
