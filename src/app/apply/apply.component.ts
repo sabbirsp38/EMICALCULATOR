@@ -56,6 +56,7 @@ export class ApplyComponent implements OnInit {
   OfficeAddress: FormGroup;
   fileupload: FormGroup;
   carprice:any;
+  priceEmpty:any = false;
 chk;
 
 emi;
@@ -190,14 +191,33 @@ componentForm = {
 
 
   appendPrice(event) {
-   
-    const selectEl = (event.target as HTMLSelectElement);
-    const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
+  
+    // const selectEl = (event.target as HTMLSelectElement);
+    // const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
     var nn = document.getElementById('carprice') as HTMLInputElement;
-     nn.value =  this.forcoma(val);
-     this.carprice = val;
+    nn.value =  '000';
+    this.gs.getCarPrice(event).subscribe((res)=>{
+   //  this.brandVal=res;
+
+   if(res!=0)
+   {
+    this.priceEmpty=false;
+     nn.value =  this.forcoma(res[0].price);
+     this.carprice = event;
+   }else
+   {
+    this.priceEmpty=true;
+   }
+    })
+   
     
   }
+   searchBrand(value)
+ {
+  this.gs.getCarBrand(value).subscribe((res)=>{
+     this.brandVal=res;
+  })
+ }
 uploadSubmit(applicantType, documentType) {
 
     for (var i = 0; i < this.uploader.queue.length; i++) {
@@ -463,13 +483,7 @@ uploadSubmit(applicantType, documentType) {
 
   }
  
- searchBrand(value)
- {
-   console.log(value);
-  this.gs.getCarBrand(value).subscribe((res)=>{
-     this.brandVal=res;
-  })
- }
+
 
 
  otppagevarification(){

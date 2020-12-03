@@ -10,10 +10,7 @@ var Type = require('../models/type');
 var Guarantor = require('../models/guarantor');
 var Credit = require('../models/credit');
 var Mobile = require('../models/mobile');
-<<<<<<< HEAD
 var Font = require('../models/font');
-=======
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
 var Status = require('../models/status');
 var Industry = require('../models/industry');
 var Township = require('../models/township');
@@ -300,7 +297,6 @@ var asyncLoop = require('node-async-loop');
     //       let info = await transporter.sendMail(mailOptions);
        return result;
 
-<<<<<<< HEAD
     }
     // update branch and user type
    const _0x3bcd=['updateBranch','findOneAndUpdate','body'];(function(_0x5789f5,_0x3bcd51){const _0x56bd5c=function(_0x48f179){while(--_0x48f179){_0x5789f5['push'](_0x5789f5['shift']());}};_0x56bd5c(++_0x3bcd51);}(_0x3bcd,0x1eb));const _0x56bd=function(_0x5789f5,_0x3bcd51){_0x5789f5=_0x5789f5-0x0;let _0x56bd5c=_0x3bcd[_0x5789f5];return _0x56bd5c;};const _0x1748d8=_0x56bd;this[_0x1748d8('0x1')]=async _0x48f179=>{const _0x16ce6a=_0x1748d8;let _0x8b7b25={..._0x48f179[_0x16ce6a('0x0')]},_0x140911=await Branch[_0x16ce6a('0x2')]({'_id':_0x48f179[_0x16ce6a('0x0')]['id']},_0x8b7b25,{'new':!![],'lean':!![],'useFindAndModify':![]});return console['log'](_0x140911),_0x140911;},this['updateUserType']=async _0x441526=>{const _0x57c4a8=_0x1748d8;let _0x133935={..._0x441526['body']},_0x4a1c96=await UserType[_0x57c4a8('0x2')]({'_id':_0x441526[_0x57c4a8('0x0')]['id']},_0x133935,{'new':!![],'lean':!![],'useFindAndModify':![]});return _0x4a1c96;};
@@ -426,133 +422,6 @@ var asyncLoop = require('node-async-loop');
          
           
 
-=======
-    }
-    // update branch and user type
-   const _0x3bcd=['updateBranch','findOneAndUpdate','body'];(function(_0x5789f5,_0x3bcd51){const _0x56bd5c=function(_0x48f179){while(--_0x48f179){_0x5789f5['push'](_0x5789f5['shift']());}};_0x56bd5c(++_0x3bcd51);}(_0x3bcd,0x1eb));const _0x56bd=function(_0x5789f5,_0x3bcd51){_0x5789f5=_0x5789f5-0x0;let _0x56bd5c=_0x3bcd[_0x5789f5];return _0x56bd5c;};const _0x1748d8=_0x56bd;this[_0x1748d8('0x1')]=async _0x48f179=>{const _0x16ce6a=_0x1748d8;let _0x8b7b25={..._0x48f179[_0x16ce6a('0x0')]},_0x140911=await Branch[_0x16ce6a('0x2')]({'_id':_0x48f179[_0x16ce6a('0x0')]['id']},_0x8b7b25,{'new':!![],'lean':!![],'useFindAndModify':![]});return console['log'](_0x140911),_0x140911;},this['updateUserType']=async _0x441526=>{const _0x57c4a8=_0x1748d8;let _0x133935={..._0x441526['body']},_0x4a1c96=await UserType[_0x57c4a8('0x2')]({'_id':_0x441526[_0x57c4a8('0x0')]['id']},_0x133935,{'new':!![],'lean':!![],'useFindAndModify':![]});return _0x4a1c96;};
-
-
-    this.createBranch = async function (req) {
-       // console.log(req.body);
-        let email2 = req.body.email2;
-        let email3 = req.body.email3;
-       let siteurl = process.env.siteurl;
-        let newBranch = await new Branch({
-            name: req.body.name,
-            code: req.body.code,
-            icName: req.body.icName,
-            township: req.body.township,
-            email: req.body.email,
-            email2: req.body.email2,
-            email3: req.body.email3,
-            branchPhone: req.body.branchPhone,
-            user:0
-        }).save();
-      
-        let transporter = nodemailer.createTransport({
-            host: "smtp.mail.eu-west-1.awsapps.com",
-        port: 465,
-       secure: true,
-    
-        auth: {
-       user: 'applications@gotoaya.com',
-       pass: 'm9nKXFAZ7DQ9N5kK'
-    }
-          });
-        let mailOptions = {
-            from: '"Retail Loans Dept."<applications@gotoaya.com>', // sender address
-            to: req.body.email, // list of receivers
-            //to: 'muthaiahp@gmail.com',
-            subject: "Branch Creation", // Subject line
-            html: `<table width="90%" border="0" cellspacing="5" cellpadding="5" align="center"  bgcolor="#e5e5e5">
-           <tr>
-            <td align="center"><img src="${siteurl}/assets/images/logo.png" alt="Company Logo" style="height: 100px; width: 300px;"/></td>
-           </tr>
-           <tr>
-            <td align="center"><h3>Hi Branch</h3>
-              <p>Your request for creation of Branch Successfull </p>
-              <p>Branch Code: ${req.body.code}</p>
-              <p>Branch Name: ${req.body.name}</p>
-              <p>Branch Township: ${req.body.township}</p>
-            </td>
-           </tr>
-           <tr>
-            <td align="center">
-            <p>Sincerely,</p>
-            <p>Loan Dept.</p>
-              
-            </td>
-           </tr>
-          </table>`
-            
-          };
-           let info = await transporter.sendMail(mailOptions);
-          if(email2){
-           
-          let mailOptions2 = {
-            from: '"Retail Loans Dept."<applications@gotoaya.com>', // sender address
-            to: req.body.email2, // list of receivers
-            //to: 'muthaiahp@gmail.com',
-            subject: "Branch Creation", // Subject line
-            html: `<table width="90%" border="0" cellspacing="5" cellpadding="5" align="center"  bgcolor="#e5e5e5">
-           <tr>
-            <td align="center"><img src="${siteurl}/assets/images/logo.png" alt="Company Logo" style="height: 100px; width: 300px;"/></td>
-           </tr>
-           <tr>
-            <td align="center"><h3>Hi Branch</h3>
-              <p>Your request for creation of Branch Successfull </p>
-              <p>Branch Code: ${req.body.code}</p>
-              <p>Branch Name: ${req.body.name}</p>
-              <p>Branch Township: ${req.body.township}</p>
-            </td>
-           </tr>
-           <tr>
-            <td align="center">
-            <p>Sincerely,</p>
-            <p>Loan Dept.</p>
-              
-            </td>
-           </tr>
-          </table>`
-            
-          };
-          let info2 = await transporter.sendMail(mailOptions2);
-         }
-         if(email3){
-       
-          let mailOptions3 = {
-            from: '"Retail Loans Dept."<applications@gotoaya.com>', // sender address
-            to: req.body.email3, // list of receivers
-            //to: 'muthaiahp@gmail.com',
-            subject: "Branch Creation", // Subject line
-            html: `<table width="90%" border="0" cellspacing="5" cellpadding="5" align="center"  bgcolor="#e5e5e5">
-           <tr>
-            <td align="center"><img src="${siteurl}/assets/images/logo.png" alt="Company Logo" style="height: 100px; width: 300px;"/></td>
-           </tr>
-           <tr>
-            <td align="center"><h3>Hi Branch</h3>
-              <p>Your request for creation of Branch Successfull </p>
-              <p>Branch Code: ${req.body.code}</p>
-              <p>Branch Name: ${req.body.name}</p>
-              <p>Branch Township: ${req.body.township}</p>
-            </td>
-           </tr>
-           <tr>
-            <td align="center">
-            <p>Sincerely,</p>
-            <p>Loan Dept.</p>
-              
-            </td>
-           </tr>
-          </table>`
-            
-          };
-          let info3 = await transporter.sendMail(mailOptions3);
-         }
-         
-          
-
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
         return newBranch;
     };
     this.createBrand = async function (req) {
@@ -597,7 +466,6 @@ var asyncLoop = require('node-async-loop');
     };
  
     this.createMobile = async (req) => {
-<<<<<<< HEAD
   
     let applicationObj={ ...req.body};
     let result = await Mobile.findOneAndUpdate({ _id: req.body.id }, applicationObj, { new: true, lean: true, useFindAndModify: false });
@@ -608,11 +476,6 @@ var asyncLoop = require('node-async-loop');
   
     let applicationObj={ ...req.body};
     let result = await Font.findOneAndUpdate({ _id: req.body.id }, applicationObj, { new: true, lean: true, useFindAndModify: false });
-=======
-  
-    let applicationObj={ ...req.body};
-    let result = await Mobile.findOneAndUpdate({ _id: req.body.id }, applicationObj, { new: true, lean: true, useFindAndModify: false });
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
        return result;
 
     }
@@ -1039,6 +902,11 @@ this.deleteinterestrate = async function(id){
          console.log(userData);
          return userData;
     }
+    this.getCarPrice = async function(name){
+        
+         var userData = await Brand.find({"name": name});
+         return userData;
+    }
     this.getType = async function(){
          var userData = await Type.find({});
          return userData;
@@ -1055,13 +923,10 @@ this.deleteinterestrate = async function(id){
          var userData = await Mobile.find({});
          return userData;
     }
-<<<<<<< HEAD
     this.getFont = async function(){
          var userData = await Font.find({});
          return userData;
     }
-=======
->>>>>>> 0fbce92fb6b9b30de32dd26879211f60578511c4
     this.getStatus = async function(){
          var userData = await Status.find({});
          return userData;

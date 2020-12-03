@@ -80,6 +80,9 @@ export class GlobalService {
   getCarBrand(name) {
     return this.http.get(`${this.url}/api/user/getCarBrand/${name}`);
   }
+   getCarPrice(name) {
+    return this.http.get(`${this.url}/api/user/getCarPrice/${name}`);
+  }
    getBrand() {
     return this.http.get(`${this.url}/api/user/getBrand`);
   }

@@ -1,7 +1,7 @@
 <div class="topbar">
   <img class="img-responsive img imglogo" src="assets/images/logo.png">
 </div>
-               
+         
                
 <div>
 
@@ -563,14 +563,15 @@
             <ng-template matStepLabel>Vehicle Details</ng-template>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Car Model </label>
-                <!-- <input list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)">
+                <input autocomplete="off" list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)" (focusout)="appendPrice($event.target.value)">
                 <datalist id="carmodel">
-                  <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.name}}" value="{{keys?.name}}">
-                </datalist> -->
-                 <select formControlName="carmodel" (change)="appendPrice($event)" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
+                  <option *ngFor="let keys of brandVal" value="{{keys?.name}}">
+                </datalist>
+                <small *ngIf="priceEmpty" style="color: red; margin-left: 20px;">Please Select Car Model</small>
+                <!--  <select formControlName="carmodel" (change)="appendPrice($event)" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
                   <option value="">Select Car Model</option>
                   <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.price}}" value="{{keys?.name}}">{{keys?.name}}</option>
-                </select>
+                </select> -->
 
                 <div *ngIf="checkednow && this.therdFormGroup.controls.carmodel.errors" class="invalid-feedback">
                 <div *ngIf="this.therdFormGroup.controls.carmodel.errors.required">Car Model</div>

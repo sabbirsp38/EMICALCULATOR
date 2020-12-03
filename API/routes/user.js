@@ -798,6 +798,19 @@ router.get('/searchDealer',async function(req,res){
     }
    
 });
+  router.get('/getCarPrice/:name',async function(req,res){
+   
+    try{
+      let name = req.params.name;
+      console.log(name);
+        let result = await userService.getCarPrice(name);
+        res.send(result);
+    }catch(err){
+        _handleError(res,500, err.message);
+    }
+   
+});
+
  router.get('/getType',async function(req,res){
    
     try{
