@@ -1,7 +1,7 @@
 <div class="topbar">
   <img class="img-responsive img imglogo" src="assets/images/logo.png">
 </div>
-               
+         
                
 <div>
 
@@ -293,14 +293,14 @@
             <div class="form-group">
               <label for="exampleFormControlSelect1">Residence  Type</label>
               <select  class="form-control"  formControlName="residencetype" [ngClass]="{ 'is-invalid': checkednow && f.residencetype.errors }" (change)="cresidencetype()">
-                <option value="Companyprovided">Company Provided </option>
+                <option value="Company provided">Company Provided </option>
                 <option value="Hostel">Hostel</option>
-                <option value="Ownedbyparent">Owned By Parent/ sibling</option>
-                <option value="Ownedbyself">Owned By Self/ spouse</option>
-                <option value="Payingguest">Paying Guest</option>
-                <option value="Rentedstayingalone">Rented Staying alone</option>
-                <option value="entedwithfamily">Rented With Family</option>
-                <option value="Rentedwithsfriends">Rented With Friends</option>
+                <option value="Owned by parent">Owned By Parent/ sibling</option>
+                <option value="Owned by self">Owned By Self/ spouse</option>
+                <option value="Paying guest">Paying Guest</option>
+                <option value="Rented staying alone">Rented Staying alone</option>
+                <option value="rented with family">Rented With Family</option>
+                <option value="Rented with friends">Rented With Friends</option>
               </select>
               <div *ngIf="checkednow && f.residencetype.errors" class="invalid-feedback">
                 <div *ngIf="f.residencetype.errors.required">Residence  Type is required</div>
@@ -318,8 +318,8 @@
               <label for="exampleFormControlSelect1">Employment Type</label>
               <select matInput class="form-control" id="exampleFormControlSelect1"  formControlName="employmenttype" (change)="ctes()" [ngClass]="{ 'is-invalid': checkednow && f.employmenttype.errors }">
                 <option value="Salaried" class="form-control">Salaried</option>
-                <option value="SelfEmployedbusiness" class="form-control">Self Employed Business</option>
-                <option value="SelfEmployedProfessional" class="form-control">Self Employed Professional</option>
+                <option value="Self Employed business" class="form-control">Self Employed Business</option>
+                <option value="Self Employed Professional" class="form-control">Self Employed Professional</option>
               </select>
 
               <div *ngIf="checkednow && f.employmenttype.errors" class="invalid-feedback">
@@ -359,11 +359,11 @@
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Total Work Experience</label>
                 <select  class="form-control"  formControlName="workexperincees3" [ngClass]="{ 'is-invalid': checkednow && f.workexperincees3.errors }">
-                  <option value="India">1</option>
-                  <option value="Dhaka">2</option>
-                  <option value="Dhaka">3</option>
-                  <option value="Dhaka">4</option>
-                  <option value="Dhaka">>5</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">>5</option>
                   
                 </select>
                 <div style="color: red;" *ngIf="requerask4">This field is required.</div>
@@ -371,8 +371,8 @@
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Was Latest ITR audited</label>
                 <select  class="form-control" formControlName="irtes3"[ngClass]="{ 'is-invalid': checkednow && f.irtes3.errors }">
-                  <option value="India">YES</option>
-                  <option value="Dhaka">NO</option>
+                  <option value="Yes">YES</option>
+                  <option value="No">NO</option>
                 </select>
                 <div style="color: red;" *ngIf="requerask5">This field is required.</div>
               </div>
@@ -380,8 +380,8 @@
                 <label for="exampleFormControlSelect1">Applicant Type</label>
                 <select  class="form-control" formControlName="applicationtypees3" [ngClass]="{ 'is-invalid': checkednow && f.applicationtypees3.errors }">
                   <option value="India">Partner applying as an Individual </option>
-                  <option value="Dhaka">Partnership</option>
-                  <option value="Dhaka">Firm Proprietor</option>
+                  <option value="Partnership">Partnership</option>
+                  <option value="Firm Proprietor">Firm Proprietor</option>
                 </select>
                 <div style="color: red;" *ngIf="requerask6">This field is required.</div>
               </div>
@@ -408,11 +408,11 @@
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Total Work Experience</label>
                 <select  class="form-control"  formControlName="workexperincees4" [ngClass]="{ 'is-invalid': checkednow && f.workexperincees4.errors }">
-                  <option value="India">1</option>
-                  <option value="Dhaka">2</option>
-                  <option value="Dhaka">3</option>
-                  <option value="Dhaka">4</option>
-                  <option value="Dhaka">>5</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">>5</option>
                   
                 </select>
                 <div style="color: red;" *ngIf="requerask10">This field is required.</div>
@@ -420,8 +420,8 @@
               <div class="form-group">
                 <label for="exampleFormControlSelect1">Was Latest ITR audited</label>
                 <select  class="form-control" formControlName="irtes4"[ngClass]="{ 'is-invalid': checkednow && f.irtes4.errors }">
-                  <option value="India">YES</option>
-                  <option value="Dhaka">NO</option>
+                  <option value="Yes">YES</option>
+                  <option value="No">NO</option>
                 </select>
                 <div style="color: red;" *ngIf="requerask11">This field is required.</div>
             </div>
@@ -563,14 +563,15 @@
             <ng-template matStepLabel>Vehicle Details</ng-template>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Car Model </label>
-                <!-- <input list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)">
+                <input autocomplete="off" list="carmodel"  formControlName="carmodel" type="Text" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }" (input)="searchBrand($event.target.value)" (focusout)="appendPrice($event.target.value)">
                 <datalist id="carmodel">
-                  <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.name}}" value="{{keys?.name}}">
-                </datalist> -->
-                 <select formControlName="carmodel" (change)="appendPrice($event)" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
+                  <option *ngFor="let keys of brandVal" value="{{keys?.name}}">
+                </datalist>
+                <small *ngIf="priceEmpty" style="color: red; margin-left: 20px;">Please Select Car Model</small>
+                <!--  <select formControlName="carmodel" (change)="appendPrice($event)" class="form-control" id="exampleFormControlInput1"  [ngClass]="{ 'is-invalid': checkednow && this.therdFormGroup.controls.carmodel.errors }">
                   <option value="">Select Car Model</option>
                   <option *ngFor="let keys of brandVal" attr.data-sectionvalue="{{keys?.price}}" value="{{keys?.name}}">{{keys?.name}}</option>
-                </select>
+                </select> -->
 
                 <div *ngIf="checkednow && this.therdFormGroup.controls.carmodel.errors" class="invalid-feedback">
                 <div *ngIf="this.therdFormGroup.controls.carmodel.errors.required">Car Model</div>

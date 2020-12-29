@@ -56,6 +56,7 @@ export class ApplyComponent implements OnInit {
   OfficeAddress: FormGroup;
   fileupload: FormGroup;
   carprice:any;
+  priceEmpty:any = false;
 chk;
 
 emi;
@@ -190,14 +191,33 @@ componentForm = {
 
 
   appendPrice(event) {
-   
-    const selectEl = (event.target as HTMLSelectElement);
-    const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
+  
+    // const selectEl = (event.target as HTMLSelectElement);
+    // const val: any = selectEl.options[selectEl.selectedIndex].getAttribute('data-sectionvalue');
     var nn = document.getElementById('carprice') as HTMLInputElement;
-     nn.value =  this.forcoma(val);
-     this.carprice = val;
+    nn.value =  '000';
+    this.gs.getCarPrice(event).subscribe((res)=>{
+   //  this.brandVal=res;
+
+   if(res!=0)
+   {
+    this.priceEmpty=false;
+     nn.value =  this.forcoma(res[0].price);
+     this.carprice = event;
+   }else
+   {
+    this.priceEmpty=true;
+   }
+    })
+   
     
   }
+   searchBrand(value)
+ {
+  this.gs.getCarBrand(value).subscribe((res)=>{
+     this.brandVal=res;
+  })
+ }
 uploadSubmit(applicantType, documentType) {
 
     for (var i = 0; i < this.uploader.queue.length; i++) {
@@ -463,13 +483,7 @@ uploadSubmit(applicantType, documentType) {
 
   }
  
- searchBrand(value)
- {
-   console.log(value);
-  this.gs.getCarBrand(value).subscribe((res)=>{
-     this.brandVal=res;
-  })
- }
+
 
 
  otppagevarification(){
@@ -573,13 +587,13 @@ ctes(){
       this.employmentsec3=false;
       this.employmentsec4=false;
 
-   }else if (employmenttype ==="SelfEmployedbusiness"){
+   }else if (employmenttype ==="Self Employed business"){
       this.employmentsec1=false;
       this.employmentsec2=false;
       this.employmentsec3=true;
       this.employmentsec4=false;
 
-   }else if (employmenttype ==="SelfEmployedProfessional"){
+   }else if (employmenttype ==="Self Employed Professional"){
       this.employmentsec1=false;
       this.employmentsec2=false;
       this.employmentsec3=false;
@@ -643,7 +657,7 @@ ctes(){
 
       }
 
-   }else if (employmenttype ==="SelfEmployedbusiness"){
+   }else if (employmenttype ==="Self Employed business"){
 
     if(  emlomentnamees3==="" && workexperincees3==="" && irtes3==="" && applicationtypees3==="" && depreciationes3==="" && takehomeselarybuseness===""){
 
@@ -712,7 +726,7 @@ ctes(){
 
       }
       
-   }else if (employmenttype ==="SelfEmployedProfessional"){
+   }else if (employmenttype ==="Self Employed Professional"){
     if(  emlomentnamees4==="" && workexperincees4==="" && irtes4==="" && applicationtypees4==="" && depreciationes4==="" && takehomeselaryprofesonal===""){
 
          this.requerask9=true;
@@ -817,13 +831,13 @@ disposableincome(){
           this.monthlysalary=Number(takehomeselary);
          
 
-   }else if (employmenttype ==="SelfEmployedbusiness"){
+   }else if (employmenttype ==="Self Employed business"){
          let ysalary=takehomeselarybuseness/12;
           this.monthlysalary=Number(ysalary);
 
           
 
-   }else if (employmenttype ==="SelfEmployedProfessional"){
+   }else if (employmenttype ==="Self Employed Professional"){
           let ysalary=takehomeselaryprofesonal/12;
           this.monthlysalary=Number(ysalary);
 
@@ -838,10 +852,10 @@ disposableincome(){
 cresidencetype(){
   let fmvalu = this.secondFormGroup.value;
   let residencetype = fmvalu.residencetype.toString();
-  if(residencetype==="Companyprovided" || residencetype==="Ownedbyself" || residencetype==="Ownedbyparent"){
+  if(residencetype==="Company provided" || residencetype==="Owned by self" || residencetype==="Owned by parent"){
     this.renthome = false;
     this.ownehome = false;
-   }else if(residencetype==="Hostel" || residencetype==="Payingguest" ||residencetype==="Rentedstayingalone" ||residencetype==="entedwithfamily" || residencetype==="Rentedwithsfriends"){
+   }else if(residencetype==="Hostel" || residencetype==="Paying guest" ||residencetype==="Rented staying alone" ||residencetype==="rented with family" || residencetype==="Rented with friends"){
     this.renthome = true;
     this.ownehome = false;
    }
@@ -1192,6 +1206,7 @@ getfilename(){
        finalData['applicationStatus'] ='New';
        finalData['documentStatus'] ='';
        finalData['carprice'] =this.carprice;
+       finalData['subdate'] =this.utc;
             
       console.log(finalData);
       this.gs.apply(finalData).subscribe((res)=>{

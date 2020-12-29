@@ -17,7 +17,7 @@ export class GlobalService {
   masters = {};
   branchData = {};
  
-   url="https://api.bigbyteintl.net:3000"; //Sabbir
+   url="http://api.bigbyteintl.net:3000"; //Sabbir
   //url="http://localhost:3000";
   // url = "http://los.sitecare.org";
  // url="https://api.gotoaya.com"; //los bank infra
@@ -79,6 +79,9 @@ export class GlobalService {
   //   }
   getCarBrand(name) {
     return this.http.get(`${this.url}/api/user/getCarBrand/${name}`);
+  }
+   getCarPrice(name) {
+    return this.http.get(`${this.url}/api/user/getCarPrice/${name}`);
   }
    getBrand() {
     return this.http.get(`${this.url}/api/user/getBrand`);
